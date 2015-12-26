@@ -1,0 +1,11 @@
+{
+  "name": "Calendar",
+  "version": "0.0.1",
+  "authors": [
+    "Gijs Goudzwaard <gijs.goudzwaard@gmail.com>"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "bootstrap": "~3.3.6"
+  }
+}
