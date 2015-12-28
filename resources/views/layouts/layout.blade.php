@@ -2,15 +2,18 @@
 <html>
 	<head>
 		<meta charset="utf-8">
-		<title>Calendar{{ ($page != null) ? ' - ' . $page : '' }}</title>
+		<title>APPointment{{ ($page != null) ? ' - ' . $page : '' }}</title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-		<link rel="stylesheet" href="{{ url('/resources/assets/dist/all.css') }}">
+		<link href='https://fonts.googleapis.com/css?family=Roboto' rel='stylesheet' type='text/css'>
+		<link rel="stylesheet" href="{{ url('/assets/dist/all.css') }}">
 	</head>
 	<body>
 
 		@include('layouts.nav')
 
-		@yield('content')
+		<div id="content">
+			@yield('content')
+		</div>
 
 	</body>
 </html>

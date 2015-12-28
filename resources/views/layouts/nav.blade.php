@@ -7,6 +7,9 @@
 			<a href="{{ url('/') }}"><i class="material-icons">dashboard</i> Home</a>
 		</li>
 		<li>
+			<a href="{{ url('/environments') }}"><i class="material-icons">extension</i> Environments</a>
+		</li>
+		<li>
 			<a href="{{ url('/users') }}"><i class="material-icons">account_circle</i> Accounts</a>
 		</li>
 		<li>
