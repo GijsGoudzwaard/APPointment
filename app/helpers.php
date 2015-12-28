@@ -1,0 +1,2 @@
+<?php
+// Helper functions here
