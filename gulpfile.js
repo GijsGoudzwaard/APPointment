@@ -12,14 +12,17 @@ var elixir = require('laravel-elixir');
  */
 
  elixir(function(mix) {
-	//  Bower components
-	mix.styles(["resources/assets/bower_components/bootstrap/dist/css/bootstrap.css"]);
-	//  Our own files
+	//  Compile sass to css
 	mix.sass(["resources/assets/sass/**/*.scss"],
 		'resources/assets/css'
+	);
+	//  Concat css files and bower components
+	mix.styles(["../bower_components/**/*.css", "!../bower_components/**/*.min.css", "resources/assets/css/*.css"],
+		'resources/assets/dist/all.css'
 	);
 	// Scripts
 	mix.scripts(["resources/assets/**/*.js", "!resources/assets/**/*.min.js"],
 		'resources/assets/js'
 	);
+
  });

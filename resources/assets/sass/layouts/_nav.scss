@@ -1,8 +1,38 @@
 nav {
+	height: 100%;
+	width: 225px;
+	background-color: $primary-purple;
+
 	ul {
+		text-align: center;
+
 		li {
-			display: inline-block;
-			background-color: purple;
+			display: block;
+			margin-bottom: 15px;
+
+			&.sidebar-brand {
+				background-color: $purple;
+				height: 115px;
+				margin-bottom: 15px;
+			}
+
+			a {
+				color: $light-purple;
+
+				&:hover {
+					background: none !important;
+					color: #fff;
+
+					.material-icons {
+						color: #fff;
+					}
+				}
+
+				.material-icons {
+					margin-bottom: 10px;
+					display: block;
+				}
+			}
 		}
 	}
 }

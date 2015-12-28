@@ -5,5 +5,7 @@ Homestead.json
 .env
 resources/assets/bower_components*
 resources/assets/css*
+resources/assets/dist
 resources/assets/js*
 *.min.*
+config/database.php
