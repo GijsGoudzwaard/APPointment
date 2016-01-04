@@ -13,16 +13,21 @@ var elixir = require('laravel-elixir');
 
  elixir(function(mix) {
 	//  Compile sass to css
-	mix.sass(["resources/assets/sass/**/*.scss"],
+	mix.sass(["**/*.scss", "!/login.scss"],
 		'resources/assets/css'
 	);
+
+    // Compile login.scss to seperate file
+    mix.sass("/login.scss",
+        'public/assets/dist/login.css'
+    );
+
 	//  Concat css files and bower components
-	mix.styles(["../bower_components/**/*.css", "!../bower_components/**/*.min.css", "resources/assets/css/*.css"],
-		'resources/assets/dist/all.css'
+	mix.styles(["../bower_components/**/*.css", "!../bower_components/**/*.min.css", "*.css", "!login.css"],
+		'public/assets/dist/all.css'
 	);
 	// Scripts
-	mix.scripts(["resources/assets/**/*.js", "!resources/assets/**/*.min.js"],
-		'resources/assets/js'
+	mix.scripts(["assets/**/*.js", "!assets/**/*.min.js"],
+		'public/assets/js'
 	);
-
  });

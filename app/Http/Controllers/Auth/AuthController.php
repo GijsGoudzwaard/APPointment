@@ -33,6 +33,23 @@ class AuthController extends Controller
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
+    public function  showForm() {
+        return view('login');
+    }
+
+    /**
+     * Handle an authentication attempt.
+     *
+     * @return Response
+     */
+    public function authenticate()
+    {
+        if (Auth::attempt(['username' => $username, 'password' => $password]))
+        {
+            return redirect()->intended('dashboard');
+        }
+    }
+
     /**
      * Get a validator for an incoming registration request.
      *

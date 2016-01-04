@@ -11,8 +11,12 @@
 |
 */
 
-Route::get('/', 'PageController@dashboard');
-Route::get('/info', 'PageController@info');
+Route::get('/login', 'Auth\AuthController@showForm');
 
-// Environment
-Route::resource('/environments', 'EnvironmentController');
+Route::group(['middleware' => 'auth'], function() {
+    Route::get('/', 'PageController@dashboard');
+    Route::get('/info', 'PageController@info');
+
+    // Environment
+    Route::resource('/environments', 'EnvironmentController');
+});

@@ -1,0 +1,87 @@
+body {
+	background-color: #171717;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+::-webkit-input-placeholder {
+    color:    #777;
+}
+:-moz-placeholder {
+   color:    #777;
+   opacity:  1;
+}
+::-moz-placeholder {
+   color:    #777;
+   opacity:  1;
+}
+:-ms-input-placeholder {
+   color:    #777;
+}
+
+form {
+	width: 240px;
+	height: 250px;
+	position: absolute;
+	background-color: #fff;
+	top:0;bottom:0;
+	left:0;right:0;
+	margin: auto;
+	padding: 45px 35px 35px 35px;
+
+	> :nth-child(3) {
+	    margin: 30px 0;
+	}
+
+	input[required] {
+		border-top:none;
+		border-left:none;
+		border-right:none;
+		font-size: 16px;
+		padding: 10px 10px 10px 5px;
+		-webkit-appearance: none;
+		display: block;
+		background: #fff;
+		width: 225px;
+		border: none;
+		border-radius: 0;
+		border-bottom: 1px solid #d6d6d6;
+		letter-spacing: 1px;
+
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	label {
+		display: block;
+		color: #777;
+	    margin: 20px 0;
+
+		input {
+			border: 1px solid #d6d6d6;
+			border-radius:0;
+		}
+	}
+
+	button {
+	    padding: 14px 25px;
+	    margin: .3em 0 1em 0;
+	    width: 100%;
+	    color: #fff;
+	    font-size: 16px;
+	    line-height: 20px;
+	    text-align: center;
+	    letter-spacing: 1px;
+	    background: #2a3e61;
+	    border: 0;
+	    cursor: pointer;
+	    text-transform: uppercase;
+	    border-radius: 2px;
+
+		&:focus {
+			outline: 0;
+		}
+	}
+}

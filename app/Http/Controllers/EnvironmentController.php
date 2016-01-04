@@ -12,7 +12,6 @@ class EnvironmentController extends Controller {
 	 * @return Mixed
 	 */
 	public function index () {
-		dd(get_environment());
 		$environments = Environment::all();
 
 	    return view('pages.environment.index', [

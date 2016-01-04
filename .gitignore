@@ -3,9 +3,9 @@ node_modules/*
 Homestead.yaml
 Homestead.json
 .env
-public/assets/bower_components*
-public/assets/css*
-public/assets/dist
-public/assets/js*
+resources/assets/bower_components*
+resources/assets/css*
+public/assets/dist*
 *.min.*
 config/database.php
+composer.lock
