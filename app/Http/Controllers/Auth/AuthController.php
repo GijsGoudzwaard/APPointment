@@ -10,7 +10,8 @@ use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
 use Auth;
 
-class AuthController extends Controller {
+class AuthController extends Controller
+{
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -29,16 +30,18 @@ class AuthController extends Controller {
      *
      * @return void
      */
-    public function __construct() {
-        $this->middleware('guest', ['except' => 'getLogout']);
-    }
+    // public function __construct()
+	// {
+    //     $this->middleware('guest', ['except' => 'getLogout']);
+    // }
 
 	/**
 	 * Show the login form
 	 *
 	 * @return Response
 	 */
-    public function showForm() {
+    public function showForm()
+	{
         return view('login');
     }
 
@@ -47,7 +50,8 @@ class AuthController extends Controller {
      *
      * @return Response
      */
-    public function authenticate(Request $request) {
+    public function authenticate(Request $request)
+	{
         if (Auth::attempt(['email' => $request->email, 'password' => $request->password], (isset($request->remember) ? true : false))) {
             return redirect()->intended('/');
         }
@@ -61,7 +65,8 @@ class AuthController extends Controller {
      * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data) {
+    protected function validator(array $data)
+	{
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -75,7 +80,8 @@ class AuthController extends Controller {
      * @param  array $data
      * @return User
      */
-    protected function create(array $data) {
+    protected function create(array $data)
+	{
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
