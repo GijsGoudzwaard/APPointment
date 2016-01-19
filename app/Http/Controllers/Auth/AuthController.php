@@ -7,9 +7,10 @@ use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use Auth;
 
-class AuthController extends Controller
-{
+class AuthController extends Controller {
     /*
     |--------------------------------------------------------------------------
     | Registration & Login Controller
@@ -28,12 +29,16 @@ class AuthController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
+    public function __construct() {
         $this->middleware('guest', ['except' => 'getLogout']);
     }
 
-    public function  showForm() {
+	/**
+	 * Show the login form
+	 *
+	 * @return Response
+	 */
+    public function showForm() {
         return view('login');
     }
 
@@ -42,22 +47,21 @@ class AuthController extends Controller
      *
      * @return Response
      */
-    public function authenticate()
-    {
-        if (Auth::attempt(['username' => $username, 'password' => $password]))
-        {
-            return redirect()->intended('dashboard');
+    public function authenticate(Request $request) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], (isset($request->remember) ? true : false))) {
+            return redirect()->intended('/');
         }
+
+		return redirect()->back();
     }
 
     /**
      * Get a validator for an incoming registration request.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -68,11 +72,10 @@ class AuthController extends Controller
     /**
      * Create a new user instance after a valid registration.
      *
-     * @param  array  $data
+     * @param  array $data
      * @return User
      */
-    protected function create(array $data)
-    {
+    protected function create(array $data) {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],

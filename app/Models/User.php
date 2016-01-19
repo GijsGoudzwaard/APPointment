@@ -16,6 +16,15 @@ class User extends Model implements AuthenticatableContract,
 {
     use Authenticatable, Authorizable, CanResetPassword;
 
+	/**
+	 * Get the environment of the user
+	 *
+	 * @return Illuminate\Database\Eloquent\Model
+	 */
+	public function environment () {
+	    return $this->belongsTo('App\Models\Environment');
+	}
+
     /**
      * The database table used by the model.
      *

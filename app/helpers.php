@@ -1,9 +1,10 @@
 <?php
-// Helper functions here
 
+/**
+ * Get the environment based on the user that is logged in
+ *
+ * @return App\Models\Environment
+ */
 function get_environment() {
-	// $subdomain = explode('.', str_replace('www.', '', parse_url(url(), PHP_URL_HOST)))[0];
-	// $environment = App\Models\Environment::where('subdomain', '=', $subdomain)->get();
-
-	return $environment[0];
+	return User::find(Auth::user()->id)->environment;
 }

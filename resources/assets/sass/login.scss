@@ -79,6 +79,11 @@ form {
 	    cursor: pointer;
 	    text-transform: uppercase;
 	    border-radius: 2px;
+		transition: all .1s linear;
+
+		&:hover {
+			opacity: .9;
+		}
 
 		&:focus {
 			outline: 0;

@@ -11,12 +11,20 @@
 |
 */
 
-Route::get('/login', 'Auth\AuthController@showForm');
+Route::group(['middleware' => 'web'], function() {
 
-Route::group(['middleware' => 'auth'], function() {
+	Route::get('/login', 'Auth\AuthController@showForm');
+	Route::post('/login', 'Auth\AuthController@authenticate');
+
+});
+
+
+Route::group(['middleware' => ['subdomain', 'web', 'auth']], function() {
+
     Route::get('/', 'PageController@dashboard');
     Route::get('/info', 'PageController@info');
 
     // Environment
     Route::resource('/environments', 'EnvironmentController');
+
 });
