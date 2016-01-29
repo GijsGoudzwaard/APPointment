@@ -30,15 +30,29 @@ class Subdomain
 
 	/**
 	 * Set the domain, redirect to that url after we are done
+	 * At this moment we only support url's like this: subdomain.domain.com
 	 *
 	 * @param String $url
 	 * @return Responsel
 	 */
-	public function setSubdomain ($url)
+	public function setSubdomain (String $url = null)
 	{
-		$subdomain = get_environment()->subdomain;
+		$url = $url ?? url('');
+		$subdomain = Parser::getSubdomain($url);
+		$host = Parser::getHost($url, env('APP_DEBUG', false));
 
-		return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . $subdomain . '.' . Parser::getHost($url, env('APP_DEBUG', false)));
+		// Check if we already have a subdomain in the url
+		if($subdomain) {
+			// We do, replace it
+			// Replace the subdomain with the subdomain from the logged in user
+			$newUrl = str_replace($subdomain, get_environment()->subdomain, $host);
+
+			// Redirect to our new url
+			return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . $newUrl);
+		}
+
+		// We don't have a subdomain, set it
+		return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . get_environment()->subdomain . '.' . $host);
 	}
 
 }
