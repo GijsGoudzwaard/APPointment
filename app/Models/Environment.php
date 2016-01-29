@@ -18,7 +18,7 @@ class Environment extends Model {
      *
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'subdomain'];
 
     /**
      * The attributes excluded from the model's JSON form.

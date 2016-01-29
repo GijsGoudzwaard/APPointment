@@ -33,9 +33,6 @@ class AuthController extends Controller
 	 */
     public function showForm()
 	{
-		// if(url() == Parser::getHost(env('APP_DEBUG', false))) {
-		//
-		// }
         return view('login');
     }
 

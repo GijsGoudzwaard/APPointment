@@ -27,4 +27,4 @@
 		</table>
 	</div>
 
-@endsection
+@stop
