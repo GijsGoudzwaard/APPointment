@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Parser;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -25,16 +26,6 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @return void
-     */
-    // public function __construct()
-	// {
-    //     $this->middleware('guest', ['except' => 'getLogout']);
-    // }
-
 	/**
 	 * Show the login form
 	 *
@@ -42,6 +33,9 @@ class AuthController extends Controller
 	 */
     public function showForm()
 	{
+		// if(url() == Parser::getHost(env('APP_DEBUG', false))) {
+		//
+		// }
         return view('login');
     }
 

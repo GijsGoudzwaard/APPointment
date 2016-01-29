@@ -25,7 +25,20 @@ class Subdomain
 		}
 
 		// We can't set it.
-		return Parser::setSubdomain($request->fullUrl());
+		return $this->setSubdomain($request->fullUrl());
     }
+
+	/**
+	 * Set the domain, redirect to that url after we are done
+	 *
+	 * @param String $url
+	 * @return Responsel
+	 */
+	public function setSubdomain ($url)
+	{
+		$subdomain = get_environment()->subdomain;
+
+		return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . $subdomain . '.' . Parser::getHost($url, env('APP_DEBUG', false)));
+	}
 
 }
