@@ -2,7 +2,7 @@
 
 namespace App\Http\Requests;
 
-class Parser
+class UrlParser
 {
 	/**
 	 * Get the host of the given url

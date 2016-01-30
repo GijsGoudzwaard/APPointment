@@ -4,7 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Auth;
-use App\Http\Requests\Parser;
+use App\Http\Requests\UrlParser;
 
 class Subdomain
 {
@@ -19,7 +19,7 @@ class Subdomain
     {
 		// Check if we can get a subdomain from the url
 		// Also check if the subdomain is equal to your subdomain
-		if (Parser::getSubdomain($request->fullUrl()) == get_environment()->subdomain) {
+		if (UrlParser::getSubdomain($request->fullUrl()) == get_environment()->subdomain) {
 			// We can let them through
 			return $next($request);
 		}
@@ -38,8 +38,9 @@ class Subdomain
 	public function setSubdomain (String $url = null)
 	{
 		$url = $url ?? url('');
-		$subdomain = Parser::getSubdomain($url);
-		$host = Parser::getHost($url, env('APP_DEBUG', false));
+		$subdomain = UrlParser::getSubdomain($url);
+		$host = UrlParser::getHost($url, env('APP_DEBUG', false));
+		$scheme = parse_url($url, PHP_URL_SCHEME) . '://';
 
 		// Check if we already have a subdomain in the url
 		if($subdomain) {
@@ -48,11 +49,11 @@ class Subdomain
 			$newUrl = str_replace($subdomain, get_environment()->subdomain, $host);
 
 			// Redirect to our new url
-			return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . $newUrl);
+			return redirect($scheme . $newUrl);
 		}
 
 		// We don't have a subdomain, set it
-		return redirect(parse_url($url, PHP_URL_SCHEME) . '://' . get_environment()->subdomain . '.' . $host);
+		return redirect($scheme . get_environment()->subdomain . '.' . $host);
 	}
 
 }
