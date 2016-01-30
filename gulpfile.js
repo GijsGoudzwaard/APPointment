@@ -27,7 +27,7 @@ var elixir = require('laravel-elixir');
 		'public/assets/dist/all.css'
 	);
 	// Scripts
-	mix.scripts(["assets/**/*.js", "!assets/**/*.min.js"],
-		'public/assets/js'
+	mix.scripts(["../bower_components/**/*.min.js", "**/*.js"],
+		'public/assets/dist/all.js'
 	);
  });

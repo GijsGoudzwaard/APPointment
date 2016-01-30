@@ -4,19 +4,19 @@
 			<a href="{{ url('/') }}">Logo here</a>
 		</li>
 		<li>
-			<a href="{{ url('/') }}"><i class="material-icons">dashboard</i> Home</a>
+			<a href="{{ url('/') }}"><i class="material-icons">dashboard</i> <span>Dashboard</span></a>
 		</li>
 		<li>
-			<a href="{{ url('/environments') }}"><i class="material-icons">extension</i> Environments</a>
+			<a href="{{ url('appointments') }}"><i class="material-icons">description</i> <span>Appointments</span></a>
 		</li>
 		<li>
-			<a href="{{ url('/users') }}"><i class="material-icons">account_circle</i> Accounts</a>
+			<a href="{{ url('environments') }}"><i class="material-icons">extension</i> <span>Environments</span></a>
 		</li>
 		<li>
-			<a href="{{ url('/customers') }}"><i class="material-icons">book</i> Customers</a>
+			<a href="{{ url('users') }}"><i class="material-icons">account_circle</i> <span>Accounts</span></a>
 		</li>
 		<li>
-			<a href="{{ url('/info') }}"><i class="material-icons">info</i> Info</a>
+			<a href="{{ url('customers') }}"><i class="material-icons">book</i> <span>Customers</span></a>
 		</li>
 	</ul>
 </nav>

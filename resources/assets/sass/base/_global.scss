@@ -1,8 +1,16 @@
 body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 400;
+	background-color: #eee;
 }
 
 #content {
-	margin-left: 250px;
+	margin-left: 275px;
+	margin-top: 160px;
+	padding-right: 50px;
+	transition: margin .1s linear;
+
+	&.toggle {
+		margin-left: 150px;
+	}
 }

@@ -21,7 +21,6 @@ Route::group(['middleware' => 'web'], function () {
 Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
     Route::get('/', 'PageController@dashboard');
-    Route::get('info', 'PageController@info');
 
     // Environment
     Route::resource('environments', 'EnvironmentController');

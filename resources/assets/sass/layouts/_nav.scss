@@ -2,6 +2,15 @@ nav {
 	height: 100%;
 	width: 225px;
 	background-color: $primary-purple;
+	transition: width .1s linear;
+
+	&.toggle {
+		width: 100px;
+
+		a span {
+			display: none;
+		}
+	}
 
 	ul {
 		text-align: center;
@@ -19,7 +28,7 @@ nav {
 			a {
 				color: $light-purple;
 
-				&:hover {
+				&:hover, &:focus {
 					background: none !important;
 					color: #fff;
 
@@ -33,6 +42,31 @@ nav {
 					display: block;
 				}
 			}
+		}
+	}
+}
+
+.topbar {
+	height: 115px;
+	background-color: #fff;
+	width: calc(100% - 225px);
+	position: fixed;
+	right: 0;
+	top: 0;
+	transition: width .1s linear;
+
+	&.toggle {
+		width: calc(100% - 100px);
+	}
+
+	.hamburger-menu {
+		color: $grey;
+		position: relative;
+		top: 40px;
+		left: 50px;
+
+		i {
+			font-size: 32px;
 		}
 	}
 }

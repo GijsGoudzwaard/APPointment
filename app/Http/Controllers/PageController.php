@@ -13,13 +13,4 @@ class PageController extends Controller {
 	    return view('pages.dashboard');
 	}
 
-	/**
-	 * Show the info page
-	 *
-	 * @return Mixed
-	 */
-	public function info () {
-	    return view('pages.info');
-	}
-
 }
