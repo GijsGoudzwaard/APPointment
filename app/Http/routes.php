@@ -25,4 +25,9 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
     // Environment
     Route::resource('environments', 'EnvironmentController');
 
+	// Appointments
+	Route::resource('appointments', 'AppointmentController');
+
+	Route::get('logout', 'Auth\Authcontroller@logout');
+
 });

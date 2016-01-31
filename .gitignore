@@ -9,3 +9,4 @@ public/assets/dist*
 *.min.*
 config/database.php
 composer.lock
+.DS_Store

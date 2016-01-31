@@ -27,6 +27,7 @@ nav {
 
 			a {
 				color: $light-purple;
+				transition: all .1s linear;
 
 				&:hover, &:focus {
 					background: none !important;
@@ -64,9 +65,20 @@ nav {
 		position: relative;
 		top: 40px;
 		left: 50px;
+		transition: all .1s linear;
+
+		&:hover {
+			color: $light-purple;
+		}
 
 		i {
 			font-size: 32px;
 		}
+	}
+
+	.user {
+		position: absolute;
+		right: 50px;
+		top: 40px;
 	}
 }
