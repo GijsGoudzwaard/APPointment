@@ -18,5 +18,8 @@
 		<li>
 			<a href="{{ url('customers') }}"><i class="material-icons">book</i> <span>Customers</span></a>
 		</li>
+		<li>
+			<a href="{{ url('company') }}"><i class="material-icons">settings</i> <span>Company</span></a>
+		</li>
 	</ul>
 </nav>

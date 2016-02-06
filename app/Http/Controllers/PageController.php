@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-class PageController extends Controller {
-
+class PageController extends Controller
+{
 	/**
 	 * Show the dashboard
 	 *
-	 * @return Mixed
+	 * @return Response
 	 */
-	public function dashboard () {
+	public function dashboard() {
 	    return view('pages.dashboard');
 	}
 

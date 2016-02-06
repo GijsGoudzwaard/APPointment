@@ -9,6 +9,7 @@
 				<tr>
 					<th>Name</th>
 					<th>Subdomain</th>
+					<th>Accounts</th>
 					<th>Actions</th>
 				</tr>
 			</thead>
@@ -17,6 +18,7 @@
 					<tr>
 						<td>{{ $environment->name }}</td>
 						<td>{{ $environment->subdomain }}</td>
+						<td><a href="{{ url('/environments/' . $environment->id . '/users') }}" class="btn btn-default">Accounts</a></td>
 						<td>
 							<a href="{{ url('/environments/' . $environment->id . '/edit') }}"><i class="material-icons">edit</i></a>
 							<a href="{{ url('/environments/' . $environment->id . '/delete') }}"><i class="material-icons">delete</i></a>

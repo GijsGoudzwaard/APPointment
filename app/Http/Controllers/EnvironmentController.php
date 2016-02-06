@@ -11,9 +11,9 @@ class EnvironmentController extends Controller
 	/**
 	 * Show the index
 	 *
-	 * @return Mixed
+	 * @return Response
 	 */
-	public function index ()
+	public function index()
 	{
 		$environments = Environment::all();
 
@@ -22,18 +22,31 @@ class EnvironmentController extends Controller
 		]);
 	}
 
-	public function edit ($id)
+	/**
+	 * Show the edit form
+	 *
+	 * @param  Int $environment_id
+	 * @return Response
+	 */
+	public function edit($environment_id)
 	{
-		$environment = Environment::find($id);
+		$environment = Environment::find($environment_id);
 
 		return view('pages.environment.edit', [
 			'environment' => $environment
 		]);
 	}
 
-	public function update (Request $request, $id)
+	/**
+	 * Update the environment based on the $environment_id
+	 *
+	 * @param  Request $request
+	 * @param  Int $environment_id
+	 * @return Response
+	 */
+	public function update(Request $request, $environment_id)
 	{
-		$environment = Environment::find($id);
+		$environment = Environment::find($environment_id);
 		$environment->fill($request->all());
 		$environment->save();
 

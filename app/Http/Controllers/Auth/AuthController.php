@@ -85,7 +85,7 @@ class AuthController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function logout ()
+	public function logout()
 	{
 		Auth::logout();
 

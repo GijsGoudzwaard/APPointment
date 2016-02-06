@@ -4,11 +4,12 @@ if(getCookie('smallMenu')) {
 
 $(".hamburger-menu").on("click", function() {
 	$("nav, .topbar, #content").toggleClass("toggle");
+
 	if(getCookie('smallMenu')) {
-		deleteCookie('smallMenu');
-	} else {
-		createCookie('smallMenu', true, 365)
+		return deleteCookie('smallMenu');
 	}
+
+	return createCookie('smallMenu', true, 365);
 });
 
 

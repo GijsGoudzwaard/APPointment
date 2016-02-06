@@ -7,7 +7,7 @@ class AppointmentController extends Controller
 	 *
 	 * @return Response
 	 */
-	public function index ()
+	public function index()
 	{
 		return view('pages.appointment.index');
 	}
