@@ -4,7 +4,11 @@
 
 	<h1>Modify company '{{ $company->name ?? get_environment()->name }}'</h1>
 
-	{{ Form::open(['url' => action('CompanyController@update', $company), 'method' => 'put']) }}
+	@if (!empty($company))
+		{{ Form::open(['url' => action('CompanyController@update', $company->id), 'method' => 'put', 'files' => true]) }}
+	@else
+		{{ Form::open(['url' => action('CompanyController@store'), 'method' => 'post', 'files' => true]) }}
+	@endif
 
 		<div class="form-group">
 			<label for="name">Name</label>
@@ -28,7 +32,7 @@
 
 		<div class="form-group">
 			<label for="logo">Logo</label>
-			<input type="file" class="form-control" id="file" name="file">
+			<input type="file" class="form-control" id="logo" name="logo">
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>

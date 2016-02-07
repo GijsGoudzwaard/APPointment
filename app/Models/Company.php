@@ -18,7 +18,7 @@ class Company extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'subdomain'];
+    protected $fillable = ['name', 'email', 'address', 'phonenumber'];
 
     /**
      * The attributes excluded from the model's JSON form.

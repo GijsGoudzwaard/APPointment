@@ -6,6 +6,7 @@ Homestead.json
 resources/assets/bower_components*
 resources/assets/css*
 public/assets/dist*
+public/uploads*
 *.min.*
 config/database.php
 composer.lock

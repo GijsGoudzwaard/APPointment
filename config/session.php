@@ -135,6 +135,7 @@ return [
     |
     */
 
+    // 'domain' => '.example.com',
     'domain' => null,
 
     /*

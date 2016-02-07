@@ -1,7 +1,7 @@
 <nav class="navbar navbar-fixed-top" id="sidebar-wrapper" role="navigation">
 	<ul class="nav sidebar-nav">
-		<li class="sidebar-brand">
-			<a href="{{ url('/') }}">Logo here</a>
+		<li class="sidebar-brand" style="background-image:url({{ get_environment()->company->logo ?? '' }});">
+			<a href="{{ url('/') }}"></a>
 		</li>
 		<li>
 			<a href="{{ url('/') }}"><i class="material-icons">dashboard</i> <span>Dashboard</span></a>

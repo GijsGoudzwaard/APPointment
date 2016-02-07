@@ -4,8 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Environment extends Model {
-
+class Environment extends Model
+{
     /**
      * The database table used by the model.
      *
@@ -26,4 +26,15 @@ class Environment extends Model {
      * @var array
      */
     protected $hidden = [];
+
+	/**
+	 * A has one relation
+	 *
+	 * @return App\Models\Company
+	 */
+	public function company()
+	{
+		return $this->hasOne('App\Models\Company');
+	}
+
 }
