@@ -17,9 +17,7 @@ class CompanyController extends Controller
 	{
 		$company = get_environment()->company;
 
-		return view('pages.company.index', [
-			'company' => $company ?? null
-		]);
+		return view('pages.company.index', compact('company'));
 	}
 
 	/**
@@ -77,6 +75,7 @@ class CompanyController extends Controller
 	public function upload($request, $name)
 	{
 		$logo = $request->file($name);
+
 		if ($logo->isValid()) {
 			$filename = $logo->getClientOriginalName() . '.' . $logo->getClientOriginalExtension();
 			$url = 'uploads/' . Carbon::now()->format('m-d') . '/';
