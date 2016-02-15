@@ -135,8 +135,7 @@ return [
     |
     */
 
-    // 'domain' => '.example.com',
-    'domain' => null,
+    'domain' => \App\Http\Requests\UrlParser::getHost(),
 
     /*
     |--------------------------------------------------------------------------

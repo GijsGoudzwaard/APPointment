@@ -34,6 +34,10 @@
 			<label for="logo">Logo</label>
 			<input type="file" class="form-control" id="logo" name="logo">
 		</div>
+	
+		@if (isset($company->logo))
+			<img src="{{ url($company->logo) }}" alt="{{ $company->name }}" class="logo">
+		@endif
 
 		<button type="submit" class="btn btn-default">Submit</button>
 
