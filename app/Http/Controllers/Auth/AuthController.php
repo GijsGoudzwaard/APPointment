@@ -6,6 +6,7 @@ use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Parser;
+use App\Http\Requests\UrlParser;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Http\Request;
@@ -33,6 +34,13 @@ class AuthController extends Controller
 	 */
     public function showForm()
 	{
+		if (UrlParser::getSubdomain()) {
+			// Get the url without the subdomain + the dot
+			$url = str_replace(UrlParser::getSubdomain() . '.', '', url(''));
+
+			return redirect($url);
+		}
+
         return view('login');
     }
 
