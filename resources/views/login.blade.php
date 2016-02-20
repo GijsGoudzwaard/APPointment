@@ -10,8 +10,15 @@
 <body>
 
 	{!! Form::open() !!}
-		<input type="email" name="email" placeholder="E-mail" required autofocus />
-		<input type="password" name="password" placeholder="Password" required />
+		<input type="email" name="email" placeholder="E-mail" class="{{ (session('error')) ? 'error' : '' }}" required autofocus />
+		@if (session('error'))
+			<small>{{ session('error') }}</small>
+		@endif
+		<input type="password" name="password" placeholder="Password"  class="{{ (session('error')) ? 'error' : '' }}" required />
+		@if (session('error'))
+			<small>{{ session('error') }}</small>
+		@endif
+
 		<label for="remember">Remember me
 			<input type="checkbox" name="remember">
 		</label>

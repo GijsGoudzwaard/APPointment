@@ -1,3 +1,7 @@
+$error: #DB4437;
+$purple: #2a3e61;
+$grey: #777;
+
 html {
 	height: 100%;
 	width: 100%;
@@ -12,18 +16,18 @@ body {
 }
 
 ::-webkit-input-placeholder {
-    color:    #777;
+    color:    $grey;
 }
 :-moz-placeholder {
-   color:    #777;
+   color:    $grey;
    opacity:  1;
 }
 ::-moz-placeholder {
-   color:    #777;
+   color:    $grey;
    opacity:  1;
 }
 :-ms-input-placeholder {
-   color:    #777;
+   color:    $grey;
 }
 
 form {
@@ -55,9 +59,18 @@ form {
 		border-bottom: 1px solid #d6d6d6;
 		letter-spacing: 1px;
 
+		&.error {
+			border-bottom: 2px solid $error !important;
+		}
+
 		&:focus {
 			outline: 0;
 		}
+	}
+
+	small {
+		color: $error;
+		font-size: 11px;
 	}
 
 	label {
@@ -80,7 +93,7 @@ form {
 	    line-height: 20px;
 	    text-align: center;
 	    letter-spacing: 1px;
-	    background: #2a3e61;
+	    background: $purple;
 	    border: 0;
 	    cursor: pointer;
 	    text-transform: uppercase;
