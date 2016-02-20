@@ -62,7 +62,7 @@ class CompanyController extends Controller
 
 		$company->save();
 
-		return redirect('company');
+		return redirect('company')->with('message', 'Successfully stored');
 	}
 
 	/**

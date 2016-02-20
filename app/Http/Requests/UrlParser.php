@@ -12,7 +12,7 @@ class UrlParser
 	 * @param Boolean $getUrlScheme
 	 * @return String
 	 */
-	public static function getHost (String $url = null, Bool $getPort = false, Bool $getUrlScheme = false)
+	public static function getHost(String $url = null, Bool $getPort = false, Bool $getUrlScheme = false)
 	{
 		$url = $url ?? url('');
 		// Retrieve the host of the url
@@ -38,7 +38,7 @@ class UrlParser
 	 * @param  String $url
 	 * @return Boolean
 	 */
-	 public static function getSubdomain (String $url = null)
+	 public static function getSubdomain(String $url = null)
 	 {
 		$arr = explode('.', self::getHost($url ?? url('')));
 

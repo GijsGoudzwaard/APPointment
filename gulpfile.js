@@ -11,23 +11,28 @@ var elixir = require('laravel-elixir');
  |
  */
 
- elixir(function(mix) {
+var excluded_paths = [
+	'!../bower_components/**/bootstrap-theme.css'
+];
+
+elixir(function(mix) {
 	//  Compile sass to css
 	mix.sass(["**/*.scss", "!/login.scss"],
 		'resources/assets/css'
 	);
 
-    // Compile login.scss to seperate file
-    mix.sass("/login.scss",
-        'public/assets/dist/login.css'
-    );
+	// Compile login.scss to seperate file
+	mix.sass("/login.scss",
+	    'public/assets/dist/login.css'
+	);
 
 	//  Concat css files and bower components
-	mix.styles(["../bower_components/**/*.css", "!../bower_components/**/*.min.css", "*.css", "!login.css"],
+	mix.styles(["../bower_components/**/*.css", "!../bower_components/**/*.min.css", "*.css", excluded_paths.join(", ")],
 		'public/assets/dist/all.css'
 	);
+
 	// Scripts
 	mix.scripts(["../bower_components/**/*.min.js", "**/*.js"],
 		'public/assets/dist/all.js'
 	);
- });
+});
