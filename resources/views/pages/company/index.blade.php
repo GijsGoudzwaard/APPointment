@@ -4,13 +4,6 @@
 
 	<h1>Modify company '{{ $company->name ?? get_environment()->name }}'</h1>
 
-	@if (session('message'))
-		<div class="alert alert-success" role="alert">
-			<strong>Success</strong>
-			{{ session('message') }}
-		</div>
-	@endif
-
 	@if (!empty($company))
 		{{ Form::open(['url' => action('CompanyController@update', $company->id), 'method' => 'put', 'files' => true]) }}
 	@else

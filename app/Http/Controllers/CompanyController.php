@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\File;
 use App\Models\Company;
 use Illuminate\Http\Request;
 use Carbon\Carbon;
@@ -57,35 +58,11 @@ class CompanyController extends Controller
 		$company->environment_id = get_environment()->id;
 
 		if ($request->hasFile('logo')) {
-			$company->logo = $this->upload($request, 'logo') ?? $company->logo;
+			$company->logo = File::upload($request, 'logo') ?? $company->logo;
 		}
 
 		$company->save();
 
-		return redirect('company')->with('message', 'Successfully stored');
-	}
-
-	/**
-	 * Upload a file
-	 *
-	 * @param  Request $request
-	 * @param  String $name
-	 * @return String|null
-	 */
-	public function upload($request, $name)
-	{
-		$logo = $request->file($name);
-
-		if ($logo->isValid()) {
-			$filename = $logo->getClientOriginalName() . '.' . $logo->getClientOriginalExtension();
-			$url = 'uploads/' . Carbon::now()->format('m-d') . '/';
-
-			$logo->move($url, $filename);
-
-			// Return the url so we can save it in the db
-			return $url . $filename;
-		}
-
-		return null;
+		return redirect('company')->with('success', 'Successfully stored');
 	}
 }

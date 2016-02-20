@@ -12,6 +12,14 @@
 		@include('layouts.topbar')
 
 		<div id="content">
+			<?php $message = session('success') ?? session('error') ?>
+
+			@if ($message)
+				<div class="alert alert-{{ (session('success')) ? 'success' : 'danger' }}" role="alert">
+					{{ $message }}
+				</div>
+			@endif
+
 			@yield('content')
 		</div>
 
