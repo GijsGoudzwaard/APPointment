@@ -34,8 +34,8 @@ nav {
 			}
 
 			a {
-				color: $light-purple;
 				transition: all .1s linear;
+				color: $light-purple;
 
 				&:hover, &:focus {
 					background: none !important;

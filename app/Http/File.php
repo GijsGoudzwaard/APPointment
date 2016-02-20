@@ -19,7 +19,7 @@ class File
 		$logo = $request->file($name);
 
 		if ($logo->isValid()) {
-			$filename = $logo->getClientOriginalName() . '.' . $logo->getClientOriginalExtension();
+			$filename = str_replace(' ', '_', $logo->getClientOriginalName()) . '.' . $logo->getClientOriginalExtension();
 			$url = 'uploads/' . Carbon::now()->format('m-d') . '/';
 
 			$logo->move($url, $filename);

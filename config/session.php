@@ -135,7 +135,8 @@ return [
     |
     */
 
-    'domain' => \App\Http\Requests\UrlParser::getHost(),
+	// Set the domain without the subdomain
+    'domain' => str_replace(\App\Http\Requests\UrlParser::getSubdomain() . '.', '', url('')),
 
     /*
     |--------------------------------------------------------------------------

@@ -45,7 +45,7 @@ function createCookie(name, value, days) {
 /**
  * Delete cookie by name
  *
- * @param  {String} name
+ * @param {String} name
  */
 function deleteCookie(name) {
 	document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';

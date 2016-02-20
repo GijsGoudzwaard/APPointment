@@ -35,7 +35,7 @@ class CompanyController extends Controller
 		$company->environment_id = get_environment()->id;
 
 		if ($request->hasFile('logo')) {
-			$company->logo = $this->upload($request, 'logo') ?? $company->logo;
+			$company->logo = File::upload($request, 'logo') ?? $company->logo;
 		}
 
 		$company->save();
@@ -63,6 +63,6 @@ class CompanyController extends Controller
 
 		$company->save();
 
-		return redirect('company')->with('success', 'Successfully stored');
+		return redirect('company')->with('success', 'Successfully updated');
 	}
 }
