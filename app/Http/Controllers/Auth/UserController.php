@@ -6,11 +6,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
+use Validator;
 
 class UserController extends Controller
 {
 	/**
-	 * @param App\Models\Environment|null
+	 * @var Int|null
 	 */
 	private $environment_id = null;
 
@@ -74,6 +75,44 @@ class UserController extends Controller
 		$user->save();
 
 		return redirect()->back()->with('success', 'Successfully updated');
+	}
+
+	/**
+	 * Show the create form
+	 *
+	 * @return Response
+	 */
+	public function create()
+	{
+		return view('pages.users.create');
+	}
+
+	/**
+	 * Create a new user
+	 *
+	 * @param Request $request
+	 * @return Response
+	 */
+	public function store(Request $request)
+	{
+		$validator = Validator::make($request->all(), [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'required|min:6',
+        ]);
+
+		if ($validator->fails()) {
+			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
+		}
+
+		$user = new User;
+		$user->fill($request->all());
+		$user->environment_id = $this->environment_id ?? get_environment()->id;
+		$user->password = bcrypt($request->get('password'));
+
+		$user->save();
+
+		return redirect('users/' . $user->id . '/edit')->with('success', 'Successfully created');
 	}
 
 	/**

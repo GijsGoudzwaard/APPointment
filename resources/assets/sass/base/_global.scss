@@ -12,18 +12,26 @@ h1 {
 #content {
 	margin-left: 275px;
 	margin-top: 160px;
-	padding-right: 50px;
+	margin-right: 50px;
 	transition: margin .1s linear;
+	position: relative;
 
 	&.toggle {
 		margin-left: 150px;
 	}
 }
 
-.material-icons {
+table .material-icons {
 	color: $light-purple;
 
 	&:hover {
 		color: $purple;
 	}
+}
+
+.btn.create {
+	float:right;
+	margin-top: 20px;
+    position: absolute;
+    right: 0;
 }

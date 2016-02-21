@@ -36,11 +36,12 @@ class UrlParser
 	 * Check if we can find a subdomain in the given url
 	 *
 	 * @param  String $url
+	 * @param  Bool $getPort
 	 * @return Boolean
 	 */
-	 public static function getSubdomain(String $url = null)
+	 public static function getSubdomain(String $url = null, Bool $getPort = false)
 	 {
-		$arr = explode('.', self::getHost($url ?? url('')));
+		$arr = explode('.', self::getHost($url ?? url(''), $getPort));
 
 		// Check if we we can find a subdomain
 		if (count($arr) > 2 && count($arr) < 4) {

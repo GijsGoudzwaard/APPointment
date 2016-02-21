@@ -1,7 +1,8 @@
 @extends('layouts.layout', ['page' => 'Environments'])
-
 @section('content')
 
+
+	<a href="{{ url('users/create') }}" class="btn btn-default create">Create new account</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
 			<h1>Accounts</h1>

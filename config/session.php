@@ -135,8 +135,9 @@ return [
     |
     */
 
-	// Set the domain without the subdomain
-    'domain' => str_replace(\App\Http\Requests\UrlParser::getSubdomain() . '.', '', url('')),
+	// Set the domain
+	// In the authcontroller we remove the subdomain so there is no need to remove it here aswell
+	'domain' => \App\Http\Requests\UrlParser::getHost(),
 
     /*
     |--------------------------------------------------------------------------
