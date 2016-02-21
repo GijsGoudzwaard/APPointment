@@ -1,15 +1,15 @@
-if(getCookie('smallMenu')) {
+if(getCookie("smallMenu")) {
 	$("nav, .topbar, #content").toggleClass("toggle");
 }
 
 $(".hamburger-menu").on("click", function() {
 	$("nav, .topbar, #content").toggleClass("toggle");
 
-	if(getCookie('smallMenu')) {
-		return deleteCookie('smallMenu');
+	if(getCookie("smallMenu")) {
+		return deleteCookie("smallMenu");
 	}
 
-	return createCookie('smallMenu', true, 365);
+	return createCookie("smallMenu", true, 365);
 });
 
 
@@ -48,5 +48,5 @@ function createCookie(name, value, days) {
  * @param {String} name
  */
 function deleteCookie(name) {
-	document.cookie = name + '=;expires=Thu, 01 Jan 1970 00:00:01 GMT;';
+	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
 }
