@@ -64,6 +64,10 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, $user_id)
 	{
+		$validator = $this->validator($request->all());
+		if ($validator->fails()) {
+			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
+		}
 
 		$user = User::find($user_id);
 		$user->fill($request->all());
@@ -95,12 +99,7 @@ class UserController extends Controller
 	 */
 	public function store(Request $request)
 	{
-		$validator = Validator::make($request->all(), [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|min:6',
-        ]);
-
+		$validator = $this->validator($request->all());
 		if ($validator->fails()) {
 			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
 		}
@@ -113,6 +112,21 @@ class UserController extends Controller
 		$user->save();
 
 		return redirect('users/' . $user->id . '/edit')->with('success', 'Successfully created');
+	}
+
+	/**
+	 * Create a new Validor instance
+	 *
+	 * @param  Request $request
+	 * @return Validator
+	 */
+	public function validator($request)
+	{
+		return Validator::make($request, [
+            'name' => 'required|max:255',
+            'email' => 'required|email|max:255|unique:users',
+            'password' => 'min:6',
+        ]);
 	}
 
 	/**

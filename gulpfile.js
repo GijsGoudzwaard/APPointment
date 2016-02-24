@@ -12,7 +12,7 @@ var elixir = require('laravel-elixir');
  */
 
 var excluded_paths = [
-	'!../bower_components/**/bootstrap-theme.css'
+	"!../bower_components/**/bootstrap-theme.css"
 ];
 
 elixir(function(mix) {

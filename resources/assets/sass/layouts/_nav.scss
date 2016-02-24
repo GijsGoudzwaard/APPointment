@@ -63,6 +63,7 @@ nav {
 	right: 0;
 	top: 0;
 	transition: width .1s linear;
+	z-index: 3;
 
 	&.toggle {
 		width: calc(100% - 100px);

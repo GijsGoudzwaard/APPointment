@@ -8,6 +8,6 @@ if (!function_exists('get_environment')) {
 	*/
 	function get_environment()
 	{
-		return App\Models\User::find(Auth::user()->id)->environment;
+		return Auth::user()->environment;
 	}
 }

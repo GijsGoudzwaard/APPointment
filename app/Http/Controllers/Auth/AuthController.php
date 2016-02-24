@@ -35,10 +35,7 @@ class AuthController extends Controller
     public function showForm()
 	{
 		if (UrlParser::getSubdomain()) {
-			// Get the url without the subdomain + the dot
-			$url = str_replace(UrlParser::getSubdomain() . '.', '', url(''));
-
-			return redirect($url);
+			return redirect(UrlParser::getHost(null, true, true, false));
 		}
 
         return view('login');

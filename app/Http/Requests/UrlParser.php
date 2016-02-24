@@ -10,14 +10,25 @@ class UrlParser
 	 * @param String $url
 	 * @param Boolean $getPort
 	 * @param Boolean $getUrlScheme
+	 * @param Boolean $getSubdomain
 	 * @return String
 	 */
-	public static function getHost(String $url = null, Bool $getPort = false, Bool $getUrlScheme = false)
+	public static function getHost(String $url = null, Bool $getPort = false, Bool $getUrlScheme = false, Bool $getSubdomain = true)
 	{
 		$url = $url ?? url('');
+
 		// Retrieve the host of the url
 		// Remove 'www.' if it is set
 		$host = str_replace('www.', '', parse_url($url, PHP_URL_HOST));
+
+		if (!$getSubdomain && self::getSubdomain($host)) {
+			$arr = explode('.', $host);
+			// Since the subdomain is always the first, unset it
+			unset($arr[0]);
+
+			// Set the new $host
+			$host = implode('.', $arr);
+		}
 
 		// Check if we need to get the port aswell
 		if ($getPort) {
@@ -34,14 +45,21 @@ class UrlParser
 
 	/**
 	 * Check if we can find a subdomain in the given url
+	 * If we can, return it otherwise return false
 	 *
 	 * @param  String $url
 	 * @param  Bool $getPort
-	 * @return Boolean
+	 * @return String|Boolean
 	 */
 	 public static function getSubdomain(String $url = null, Bool $getPort = false)
 	 {
-		$arr = explode('.', self::getHost($url ?? url(''), $getPort));
+		 // Check if the url starts with http
+		 if ($url && substr($url, 0, 4) == 'http') {
+			 // Remove it
+			 $url = preg_replace("(^https?://)", "", $url);
+		 }
+
+		$arr = explode('.', $url ?? self::getHost($url, $getPort));
 
 		// Check if we we can find a subdomain
 		if (count($arr) > 2 && count($arr) < 4) {
@@ -59,7 +77,7 @@ class UrlParser
 	 * @param String $url
 	 * @return Response
 	 */
-	public static function setSubdomain (String $url = null)
+	public static function setSubdomain(String $url = null)
 	{
 		$url = $url ?? url('');
 		$subdomain = self::getSubdomain($url);

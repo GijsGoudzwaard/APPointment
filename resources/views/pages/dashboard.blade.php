@@ -2,6 +2,6 @@
 
 @section('content')
 
-hai
+<h1>Hallo {{ Auth::user()->name }}!</h1>
 
 @endsection

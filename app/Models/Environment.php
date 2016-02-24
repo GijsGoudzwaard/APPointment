@@ -4,6 +4,8 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
+use App\Models\Company;
+
 class Environment extends Model
 {
     /**
@@ -34,7 +36,7 @@ class Environment extends Model
 	 */
 	public function company()
 	{
-		return $this->hasOne('App\Models\Company');
+		return $this->hasOne(Company::class);
 	}
 
 }
