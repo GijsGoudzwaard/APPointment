@@ -11,7 +11,6 @@ class PageController extends Controller
 	 */
 	public function dashboard()
 	{
-		// dd(\App\Http\Requests\UrlParser::getHost(null, false, false, false));
 	    return view('pages.dashboard');
 	}
 

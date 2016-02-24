@@ -35,7 +35,12 @@ class CompanyController extends Controller
 		$company->environment_id = get_environment()->id;
 
 		if ($request->hasFile('logo')) {
-			$company->logo = File::upload($request, 'logo') ?? $company->logo;
+			$path = File::upload($request, 'logo');
+			if (is_array($path)) {
+				return redirect()->back()->with('errors', $path)->withInput();
+			}
+
+			$company->logo = $path ?? $company->logo;
 		}
 
 		$company->save();
@@ -58,7 +63,12 @@ class CompanyController extends Controller
 		$company->environment_id = get_environment()->id;
 
 		if ($request->hasFile('logo')) {
-			$company->logo = File::upload($request, 'logo') ?? $company->logo;
+			$path = File::upload($request, 'logo');
+			if (is_array($path)) {
+				return redirect()->back()->with('errors', $path)->withInput();
+			}
+
+			$company->logo = $path ?? $company->logo;
 		}
 
 		$company->save();
