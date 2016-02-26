@@ -22,6 +22,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
+		<a href="{{ url('users') }}" class="btn btn-default">Back</a>
 
 	{{ Form::close() }}
 

@@ -1,4 +1,4 @@
-@extends('layouts.layout', ['page' => 'Environments'])
+@extends('layouts.layout', ['page' => 'Accounts'])
 @section('content')
 
 	<a href="{{ url('users/create') }}" class="btn btn-default create">Create new account</a>

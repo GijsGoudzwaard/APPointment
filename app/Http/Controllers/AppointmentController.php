@@ -1,4 +1,8 @@
 <?php
+
+namespace App\Http\Controllers;
+
+
 class AppointmentController extends Controller
 {
 
@@ -9,7 +13,7 @@ class AppointmentController extends Controller
 	 */
 	public function index()
 	{
-		return view('pages.appointment.index');
+		return view('pages.appointments.index');
 	}
 
 }

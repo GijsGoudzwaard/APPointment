@@ -16,8 +16,16 @@ h1 {
 	transition: margin .1s linear;
 	position: relative;
 
+	&.calendar {
+	    margin: 135px 0 0 225px;
+	}
+
 	&.toggle {
 		margin-left: 150px;
+
+		&.calendar {
+			margin: 135px 0 0 100px;
+		}
 	}
 }
 
@@ -26,6 +34,12 @@ table .material-icons {
 
 	&:hover {
 		color: $purple;
+	}
+}
+
+.table {
+	th, td, hr, thead, tbody, .fc-row {
+		background: transparent !important;
 	}
 }
 

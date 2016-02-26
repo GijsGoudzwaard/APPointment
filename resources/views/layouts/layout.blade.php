@@ -4,14 +4,13 @@
 		<meta charset="utf-8">
 		<title>APPointment{{ ($page != null) ? ' - ' . $page : '' }}</title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto" rel="stylesheet">
-		<link rel="stylesheet" href="{{ url('assets/dist/all.css') }}">
+		<link rel="stylesheet" href="{{ asset('assets/dist/all.css') }}">
 	</head>
 	<body>
 
 		@include('layouts.nav')
 		@include('layouts.topbar')
-
-		<div id="content">
+		<div id="content" class="{{ (strtolower($page) == 'appointments') ? 'calendar' : '' }}">
 			<?php $message = session('success') ?? session('errors') ?>
 
 			@if ($message)
@@ -31,6 +30,7 @@
 			@yield('content')
 		</div>
 
-		<script src="{{ url('assets/dist/all.js') }}"></script>
+		<script src="{{ asset('assets/dist/all.js') }}"></script>
+		@yield('js')
 	</body>
 </html>
