@@ -1,5 +1,7 @@
 <?php
 
+use \App\Http\Requests\UrlParser;
+
 return [
 
     /*
@@ -135,7 +137,7 @@ return [
     |
     */
 
-	'domain' => \App\Http\Requests\UrlParser::getHost(null, false, false, false),
+	'domain' => UrlParser::getHost(null, false, false, false),
 
     /*
     |--------------------------------------------------------------------------

@@ -1,9 +1,5 @@
-if(getCookie("smallMenu")) {
-	$("nav, .topbar, #content").toggleClass("toggle");
-}
-
 $(".hamburger-menu").on("click", function() {
-	$("nav, .topbar, #content").toggleClass("toggle");
+	$("nav, .topbar, #content").toggleClass("expanded");
 
 	if(getCookie("smallMenu")) {
 		return deleteCookie("smallMenu");
@@ -39,7 +35,7 @@ function createCookie(name, value, days) {
     date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));
     expires = "; expires=" + date.toGMTString();
 
-    document.cookie = name + "=" + value + expires + "; path=/";
+    document.cookie = name + "=" + value + expires + "; domain=" + getHost();
 }
 
 /**
@@ -48,5 +44,16 @@ function createCookie(name, value, days) {
  * @param {String} name
  */
 function deleteCookie(name) {
-	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; path=/";
+	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=" + getHost();
+}
+
+/**
+ * Get the host without the subdomain
+ *
+ * @return {String}
+ */
+function getHost() {
+	var host = window.location.hostname;
+
+	return host.split('.').splice(1).join('.');
 }

@@ -7,7 +7,6 @@ use Validator;
 
 class File
 {
-
 	/**
 	 * Upload a file
 	 *

@@ -1,4 +1,4 @@
-<div class="topbar">
+<div class="topbar {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
 
 	<a href="javascript:;" class="hamburger-menu"><i class="material-icons">menu</i></a>
 

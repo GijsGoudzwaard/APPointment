@@ -4,7 +4,7 @@ nav {
 	background-color: $primary-purple;
 	transition: width .1s linear;
 
-	&.toggle {
+	&.expanded {
 		width: 100px;
 
 		a span {
@@ -65,7 +65,7 @@ nav {
 	transition: width .1s linear;
 	z-index: 6;
 
-	&.toggle {
+	&.expanded {
 		width: calc(100% - 100px);
 	}
 

@@ -10,7 +10,7 @@
 
 		@include('layouts.nav')
 		@include('layouts.topbar')
-		<div id="content" class="{{ (strtolower($page) == 'appointments') ? 'calendar' : '' }}">
+		<div id="content" class="{{ (strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
 			<?php $message = session('success') ?? session('errors') ?>
 
 			@if ($message)
