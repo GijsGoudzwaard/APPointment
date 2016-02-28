@@ -9,7 +9,7 @@
 	<body>
 
 		@include('layouts.nav')
-		@include('layouts.topbar')
+		@include('layouts.header')
 		<div id="content" class="{{ (strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
 			<?php $message = session('success') ?? session('errors') ?>
 

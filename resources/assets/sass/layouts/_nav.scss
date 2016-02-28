@@ -88,6 +88,57 @@ nav {
 	.user {
 		position: absolute;
 		right: 50px;
-		top: 40px;
+		top: 32px;
+
+		&:hover ul {
+			display: block;
+		}
+
+		.avatar {
+			width: 50px;
+			height: 50px;
+			background-size: cover;
+		    background-repeat: no-repeat;
+		    background-position: center;
+			border-radius: 100%;
+			display: inline-block;
+		}
+
+		span {
+			vertical-align: 20px;
+			display: inline-block;
+			margin-left: 12px;
+		}
+
+		ul {
+			display: none;
+			background-color: #fff;
+			box-shadow: 3px 3px 4px #ccc;
+		    padding: 0;
+			position: relative;
+		    top: 28px;
+
+			> :first-child {
+				border-bottom: 1px solid rgba(#eee, 0.4);
+			}
+
+			li {
+				list-style-type: none;
+
+				&:hover {
+					background-color: rgba(#eee, 0.4);
+				}
+
+				a {
+					color: #000;
+					display: block;
+					padding: 12px;
+
+					&:hover {
+						text-decoration: none;
+					}
+				}
+			}
+		}
 	}
 }

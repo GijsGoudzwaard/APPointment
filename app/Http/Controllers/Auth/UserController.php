@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\File;
 use Illuminate\Http\Request;
 use App\Models\User;
 use Auth;
@@ -64,16 +65,26 @@ class UserController extends Controller
 	 */
 	public function update(Request $request, $user_id)
 	{
-		$validator = $this->validator($request->all());
+		$user = User::find($user_id);
+		$validator = $this->validator($request->all(), $user);
+
 		if ($validator->fails()) {
 			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
 		}
 
-		$user = User::find($user_id);
 		$user->fill($request->all());
 
 		if ($request->get('password')) {
 			$user->password = bcrypt($request->get('password'));
+		}
+
+		if ($request->hasFile('avatar')) {
+			$path = File::upload($request, 'avatar');
+			if (is_array($path)) {
+				return redirect()->back()->with('errors', $path)->withInput();
+			}
+
+			$user->avatar = $path ?? $user->avatar;
 		}
 
 		$user->save();
@@ -118,13 +129,14 @@ class UserController extends Controller
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request
+	 * @param  User|null $user
 	 * @return Validator
 	 */
-	public function validator($request)
+	public function validator($request, $user = null)
 	{
 		return Validator::make($request, [
             'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
+            'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email']) ? '' : '|unique:users',
             'password' => 'min:6',
         ]);
 	}
