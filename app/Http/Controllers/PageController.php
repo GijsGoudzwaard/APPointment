@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UrlParser;
+
 class PageController extends Controller
 {
 	/**

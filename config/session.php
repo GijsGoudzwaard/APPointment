@@ -138,7 +138,7 @@ return [
     */
 
 	// Check if UrlParser exists before using it so the php artisan commands won't break
-	'domain' => (class_exists('UrlParser')) ? UrlParser::getHost(null, false, false, false) : null,
+	'domain' => (class_exists('App\Http\Requests\UrlParser')) ? UrlParser::getHost(null, false, false, false) : null,
 
     /*
     |--------------------------------------------------------------------------

@@ -5,7 +5,6 @@ namespace App\Http\Controllers\Auth;
 use App\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Parser;
 use App\Http\Requests\UrlParser;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
@@ -29,6 +28,7 @@ class AuthController extends Controller
 
 	/**
 	 * Show the login form
+	 * If we are already on a subdomain, redirect to the host
 	 *
 	 * @return Response
 	 */
