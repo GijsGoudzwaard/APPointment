@@ -22,6 +22,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
     Route::get('/', 'PageController@dashboard');
 
+	// This middleware is to prevent people from getting into the restricted area's
 	Route::group(['middleware' => 'admin'], function() {
 	    // Environment
 	    Route::resource('environments', 'EnvironmentController');
@@ -31,9 +32,12 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
 	// Appointments
 	Route::resource('appointments', 'AppointmentController');
+	Route::resource('appointmenttypes', 'AppointmentTypeController');
 
 	// Users
 	Route::resource('users', 'Auth\UserController');
+
+	Route::resource('staff', 'StaffController');
 
 	Route::resource('company', 'CompanyController', ['only' => [
 		'index', 'store', 'update'

@@ -45,7 +45,7 @@ class CompanyController extends Controller
 
 		$company->save();
 
-		return redirect('company');
+		return redirect('company')->with('success', 'Successfully updated');
 	}
 
 	/**

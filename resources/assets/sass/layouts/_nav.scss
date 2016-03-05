@@ -3,6 +3,7 @@ nav {
 	width: 225px;
 	background-color: $primary-purple;
 	transition: width .1s linear;
+	overflow: auto;
 
 	&.expanded {
 		width: 100px;

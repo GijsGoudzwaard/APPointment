@@ -9,6 +9,9 @@
 		<li>
 			<a href="{{ url('appointments') }}"><i class="material-icons">description</i> <span>Appointments</span></a>
 		</li>
+		<li>
+			<a href="{{ url('appointmenttypes') }}"><i class="material-icons">subject</i> <span>Appointment types</span></a>
+		</li>
 		@if (Auth::user()->role == 1)
 			<li>
 				<a href="{{ url('environments') }}"><i class="material-icons">extension</i> <span>Environments</span></a>
@@ -16,6 +19,9 @@
 		@endif
 		<li>
 			<a href="{{ url('users') }}"><i class="material-icons">account_circle</i> <span>Accounts</span></a>
+		</li>
+		<li>
+			<a href="{{ url('staff') }}"><i class="material-icons">supervisor_account</i> <span>Staff</span></a>
 		</li>
 		<li>
 			<a href="{{ url('customers') }}"><i class="material-icons">book</i> <span>Customers</span></a>

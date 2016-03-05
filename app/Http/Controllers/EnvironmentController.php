@@ -56,7 +56,7 @@ class EnvironmentController extends Controller
 		$environment->fill($request->all());
 		$environment->save();
 
-		return redirect('environments');
+		return redirect()->back()->with('success', 'Successfully updated');
 	}
 
 	/**
@@ -93,7 +93,6 @@ class EnvironmentController extends Controller
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request
-	 * @param  User|null $user
 	 * @return Validator
 	 */
 	public function validator($request)

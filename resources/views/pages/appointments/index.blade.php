@@ -23,7 +23,7 @@
 					right: 'today'
 				},
 				defaultView: 'agendaWeek',
-				height: $(window).height() - $('.topbar').height() - 20,
+				height: $(window).height() - $('.topbar').height() - 20 {{ env('APP_DEBUG', false) ? ' - 30' : '' }},
 				views: {
 			        week: {
 						titleFormat: 'MMM DD'
