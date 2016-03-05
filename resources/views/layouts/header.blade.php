@@ -3,7 +3,7 @@
 	<a href="javascript:;" class="hamburger-menu"><i class="material-icons">menu</i></a>
 
 	<div class="user">
-		<div class="avatar" style="background-image: url({{ url(Auth::user()->avatar) }})"></div>
+		<div class="avatar" style="background-image: url({{ url(Auth::user()->avatar ?: 'assets/img/default_avatar.png') }})"></div>
 		<span>{{ Auth::user()->name }}</span>
 		<ul>
 			<li><a href="{{ url('users/' . Auth::user()->id . '/edit') }}">Account settings</a></li>

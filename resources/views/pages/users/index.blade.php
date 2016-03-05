@@ -7,6 +7,7 @@
 			<h1>Accounts</h1>
 			<thead>
 				<tr>
+					<th>Avatar</th>
 					<th>Name</th>
 					<th>Email</th>
 					{!! ($environment_id) ? '<th>Login</th>' : '' !!}
@@ -17,6 +18,9 @@
 			<tbody>
 				@foreach($users as $user)
 					<tr>
+						<td>
+							<div class="avatar" style="background-image: url({{ url($user->avatar ?: 'assets/img/default_avatar.png') }})"></div>
+						</td>
 						<td>{{ $user->name }}</td>
 						<td>{{ $user->email }}</td>
 						{!! ($environment_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$environment_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}

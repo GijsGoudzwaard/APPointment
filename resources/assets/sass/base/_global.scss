@@ -42,6 +42,19 @@ table .material-icons {
 		background: transparent !important;
 	}
 }
+.table > tbody > tr > td {
+	vertical-align: middle;
+}
+
+.avatar {
+	width: 50px;
+	height: 50px;
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center;
+	border-radius: 100%;
+	display: inline-block;
+}
 
 .btn.create {
 	float:right;
