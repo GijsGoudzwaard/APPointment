@@ -22,10 +22,12 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
     Route::get('/', 'PageController@dashboard');
 
-    // Environment
-    Route::resource('environments', 'EnvironmentController');
-    Route::resource('environments/{environment_id}/users', 'Auth\UserController');
-	Route::get('/environment/{environment_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
+	Route::group(['middleware' => 'admin'], function() {
+	    // Environment
+	    Route::resource('environments', 'EnvironmentController');
+	    Route::resource('environments/{environment_id}/users', 'Auth\UserController');
+		Route::get('/environment/{environment_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
+	});
 
 	// Appointments
 	Route::resource('appointments', 'AppointmentController');

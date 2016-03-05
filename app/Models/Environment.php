@@ -39,6 +39,11 @@ class Environment extends Model
 		return $this->hasOne(Company::class);
 	}
 
+	/**
+	 * A has many relation
+	 *
+	 * @return App\Models\User
+	 */
 	public function users()
 	{
 		return $this->hasMany(User::class, 'company_id');
