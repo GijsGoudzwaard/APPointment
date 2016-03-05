@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Models\User;
 use App\Models\Company;
 
 class Environment extends Model
@@ -37,6 +37,11 @@ class Environment extends Model
 	public function company()
 	{
 		return $this->hasOne(Company::class);
+	}
+
+	public function users()
+	{
+		return $this->hasMany(User::class, 'company_id');
 	}
 
 }

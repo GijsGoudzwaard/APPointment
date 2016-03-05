@@ -2,13 +2,18 @@
 
 @section('content')
 
-	<h1>Modify user '{{ $user->name }}'</h1>
+	<h1>Modify user '{{ $user->firstname . ' ' . $user->surname }}'</h1>
 
 	{{ Form::open(['url' => action('Auth\UserController@update', $user), 'method' => 'put', 'files' => true]) }}
 
 		<div class="form-group">
-			<label for="name">Name *</label>
-			<input type="text" class="form-control" id="name" name="name" value="{{ $user->name }}" placeholder="Name" autofocus required>
+			<label for="firstname">Firstname *</label>
+			<input type="text" class="form-control" id="firstname" name="firstname" value="{{ $user->firstname }}" placeholder="Firstname" autofocus required>
+		</div>
+
+		<div class="form-group">
+			<label for="surname">Surname *</label>
+			<input type="text" class="form-control" id="surname" name="surname" value="{{ $user->surname }}" placeholder="Firstname" required>
 		</div>
 
 		<div class="form-group">
@@ -28,7 +33,7 @@
 
 		@if (isset($user->avatar) && $user->avatar != '')
 			<div class="form-group">
-				<img src="{{ url($user->avatar) }}" alt="{{ $user->name }}" class="avatar">
+				<img src="{{ url($user->avatar) }}" alt="{{ $user->name }}">
 			</div>
 		@endif
 

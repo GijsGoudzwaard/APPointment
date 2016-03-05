@@ -1,7 +1,5 @@
 <?php
 
-use \App\Http\Requests\UrlParser;
-
 return [
 
     /*
@@ -137,8 +135,8 @@ return [
     |
     */
 
-	// Check if UrlParser exists before using it so the php artisan commands won't break
-	'domain' => (class_exists('App\Http\Requests\UrlParser')) ? UrlParser::getHost(null, false, false, false) : null,
+	// Get the current host, add a '@' to prevent errors when using php artisan commands
+	'domain' => @parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST),
 
     /*
     |--------------------------------------------------------------------------

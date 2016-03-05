@@ -26,4 +26,14 @@ class Company extends Model {
      * @var array
      */
     protected $hidden = [];
+
+	/**
+	 * Get user
+	 *
+	 * @return Model
+	 */
+	public function user()
+	{
+		return $this->hasOne('users');
+	}
 }

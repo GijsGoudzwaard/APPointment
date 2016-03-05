@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\File;
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Company;
+use App\Models\Environment;
 use Auth;
 use Validator;
 
@@ -35,7 +37,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$environment_id = $this->environment_id ?? get_environment()->id;
-		$users = User::where('environment_id', '=', $environment_id)->get();
+		$users = Environment::find($environment_id)->users;
 
 		return view('pages.users.index', [
 			'users' => $users,
@@ -80,6 +82,7 @@ class UserController extends Controller
 
 		if ($request->hasFile('avatar')) {
 			$path = File::upload($request, 'avatar');
+
 			if (is_array($path)) {
 				return redirect()->back()->with('errors', $path)->withInput();
 			}
@@ -135,7 +138,8 @@ class UserController extends Controller
 	public function validator($request, $user = null)
 	{
 		return Validator::make($request, [
-            'name' => 'required|max:255',
+            'firstname' => 'required|max:255',
+            'surname' => 'required|max:255',
             'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email']) ? '' : '|unique:users',
             'password' => 'min:6',
         ]);

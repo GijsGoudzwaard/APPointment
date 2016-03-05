@@ -9,6 +9,7 @@ use Illuminate\Foundation\Auth\Access\Authorizable;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
+use App\Models\Company;
 use App\Models\Environment;
 
 class User extends Model implements AuthenticatableContract,
@@ -22,7 +23,7 @@ class User extends Model implements AuthenticatableContract,
      *
      * @var array
      */
-    protected $fillable = ['name', 'email'];
+    protected $fillable = ['firstname', 'surname', 'email'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -38,6 +39,16 @@ class User extends Model implements AuthenticatableContract,
 	 */
 	public function environment()
 	{
-		return $this->belongsTo(Environment::class);
+		return $this->belongsTo(Environment::class, 'company_id');
+	}
+
+	/**
+	 * Get the company of the user
+	 *
+	 * @return Illuminate\Database\Eloquent\Model
+	 */
+	public function company()
+	{
+		return $this->belongsTo(Company::class, 'company_id');
 	}
 }
