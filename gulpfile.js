@@ -17,7 +17,7 @@ var excluded_paths = [
 
 elixir(function(mix) {
 	//  Compile sass to css
-	mix.sass(["**/*.scss", "!/login.scss"],
+	mix.sass(["/app.scss", "!/login.scss"],
 		'resources/assets/css'
 	);
 
