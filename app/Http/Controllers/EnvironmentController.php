@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Company;
 use App\Models\Environment;
 use Illuminate\Http\Request;
 use Validator;
@@ -85,6 +86,11 @@ class EnvironmentController extends Controller
 		$environment = new Environment;
 		$environment->fill($request->all());
 		$environment->save();
+
+		$company = new Company;
+		$company->name = $request->get('name');
+		$company->environment_id = $environment->id;
+		$company->save();
 
 		return redirect('environments/' . $environment->id . '/edit')->with('success', 'Successfully created');
 	}
