@@ -1,5 +1,7 @@
 <?php
 
+use \App\Http\Requests\UrlParser;
+
 return [
 
     /*
@@ -135,8 +137,7 @@ return [
     |
     */
 
-	// Get the current host, add a '@' to prevent errors when using php artisan commands
-	'domain' => @parse_url($_SERVER['HTTP_HOST'], PHP_URL_HOST),
+	'domain' => app()->runningInConsole() ? null : UrlParser::getHost(null, false, false, false),
 
     /*
     |--------------------------------------------------------------------------
