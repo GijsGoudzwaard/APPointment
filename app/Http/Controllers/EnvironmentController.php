@@ -72,6 +72,7 @@ class EnvironmentController extends Controller
 
 	/**
 	 * Create a new environment
+	 * Also create a new company that goes with it
 	 *
 	 * @param  Request $request
 	 * @return Response

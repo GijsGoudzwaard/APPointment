@@ -12,8 +12,8 @@ $(".hamburger-menu").on("click", function() {
 /**
  * Get cookie by name
  *
- * @param String name
- * @return String
+ * @param {String} name
+ * @return {String}
  */
 function getCookie(name) {
 	var value = "; " + document.cookie;
@@ -24,9 +24,9 @@ function getCookie(name) {
 /**
  * Create a cookie
  *
- * @param String name
- * @param String value
- * @param Int days
+ * @param {String} name
+ * @param {String} value
+ * @param {Int} days
  */
 function createCookie(name, value, days) {
     var date, expires;

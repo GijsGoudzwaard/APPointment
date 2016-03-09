@@ -31,6 +31,17 @@
 		</div>
 
 		<div class="form-group">
+			<h3>Opening hours</h3>
+			<label for="monday">Monday</label>
+			<div class="input-group date form-group" id="monday">
+                <input type="text" class="form-control" id="monday" name="monday" />
+                <span class="input-group-addon">
+                    <span class="glyphicon glyphicon-calendar"></span>
+                </span>
+            </div>
+		</div>
+
+		<div class="form-group">
 			<label for="logo">Logo</label>
 			<input type="file" class="form-control" id="logo" name="logo">
 		</div>
@@ -43,4 +54,16 @@
 
 	{{ Form::close() }}
 
+@stop
+
+@section('js')
+	<script type="text/javascript">
+        $(function () {
+            $('.date').datetimepicker({
+				 format: 'HH:mm',
+				 defaultDate: moment()
+			});
+			console.log(moment().tz('Europe/Amsterdam').toString());
+        });
+    </script>
 @stop
