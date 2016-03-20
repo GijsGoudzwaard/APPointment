@@ -2,6 +2,7 @@
 <html>
 	<head>
 		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
 		<title>APPointment{{ ($page != null) ? ' - ' . $page : '' }}</title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('assets/dist/all.css') }}">

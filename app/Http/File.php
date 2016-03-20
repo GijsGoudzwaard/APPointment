@@ -16,9 +16,9 @@ class File
 	 */
 	public static function upload($request, String $name)
 	{
-		$logo = $request->file($name);
+		$file = $request->file($name);
 
-		if ($logo->isValid()) {
+		if ($file->isValid()) {
 			$validator = Validator::make($request->all(), [
 				$name => 'image'
 			]);
@@ -27,10 +27,10 @@ class File
 				return $validator->errors()->all();
 			}
 
-			$filename = str_replace(' ', '_', $logo->getClientOriginalName()) . '.' . $logo->getClientOriginalExtension();
+			$filename = str_replace(' ', '_', $file->getClientOriginalName()) . '.' . $file->getClientOriginalExtension();
 			$url = 'uploads/' . Carbon::now()->format('m-d') . '/';
 
-			$logo->move($url, $filename);
+			$file->move($url, $filename);
 
 			// Return the url so we can save it in the db
 			return $url . $filename;

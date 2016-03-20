@@ -1,4 +1,4 @@
-var elixir = require('laravel-elixir');
+var elixir = require("laravel-elixir");
 
 /*
  |--------------------------------------------------------------------------
@@ -15,32 +15,38 @@ var excluded_css = [
 	"!../bower_components/**/bootstrap-theme.min.css"
 ];
 
+var css = [
+	"../bower_components/**/*.min.css",
+	"*.css"
+];
+
 var excluded_js = [
-	"!../bower_components/jquery/dist/jquery.slim.min.js"
+	"!../bower_components/jquery/dist/jquery.slim.min.js",
+	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
+	"!../bower_components/moment-timezone/builds/moment-timezone.min.js"
+];
+
+var js = [
+	"../bower_components/jquery/dist/jquery.min.js",
+	"../bower_components/moment/min/moment.min.js",
+	"../bower_components/**/*.min.js",
+	"**/*.js"
 ];
 
 elixir(function(mix) {
 	//  Compile sass to css
 	mix.sass(["/app.scss", "!/login.scss"],
-		'resources/assets/css'
+		"resources/assets/css"
 	);
 
 	// Compile login.scss to seperate file
 	mix.sass("/login.scss",
-	    'public/assets/dist/login.css'
+	    "public/assets/dist/login.css"
 	);
 
 	//  Concat css files and bower components
-	mix.styles(["../bower_components/**/*.min.css", "*.css", excluded_css.join(", ")],
-		'public/assets/dist/all.css'
-	);
+	mix.styles(excluded_css.concat(css), "public/assets/dist/all.css");
 
 	// Scripts
-	mix.scripts([
-		"../bower_components/jquery/dist/jquery.min.js",
-		"../bower_components/moment/min/moment.min.js",
-		"../bower_components/**/*.min.js",
-		"**/*.js",
-		excluded_js.join(", ")
-	], 'public/assets/dist/all.js');
+	mix.scripts(excluded_js.concat(js), "public/assets/dist/all.js");
 });

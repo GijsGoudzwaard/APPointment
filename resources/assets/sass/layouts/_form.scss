@@ -4,3 +4,18 @@ form {
 	    width: 300px;
 	}
 }
+
+.form-inline.datetimepicker {
+	label:first-of-type {
+		margin: 0;
+		width: 75px;
+	}
+
+	input[type='checkbox'] {
+		margin: 0 8px;
+	}
+
+	label {
+		margin: 0 8px;
+	}
+}
