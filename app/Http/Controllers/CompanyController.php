@@ -58,8 +58,17 @@ class CompanyController extends Controller
 	public function update(Request $request, $company_id)
 	{
 		$company = Company::find($company_id);
+		$opening_hours = [];
+
+		foreach ($request->get('from') as $key => $from) {
+			$opening_hours[$key] = [
+				'from' => $from,
+				'to' => $request->get('to')[$key]
+			];
+		}
 
 		$company->fill($request->all());
+		$company->opening_hours = json_encode($opening_hours);
 		$company->environment_id = get_environment()->id;
 
 		if ($request->hasFile('logo')) {

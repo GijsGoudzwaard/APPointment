@@ -33,30 +33,21 @@
 		<div class="form-group">
 			<h3>Opening hours</h3>
 			<div class="form-inline datetimepicker">
-				<?php $days = [
-					'mo' => 'Monday',
-					'tu' => 'Tuesday',
-					'we' => 'Wednesday',
-					'thu' => 'Thursday',
-					'fr' => 'Friday',
-					'sa' => 'Saturday',
-					'su' => 'Sunday'
-				]; ?>
-				@foreach($days as $key => $day)
+				@foreach($company->openingHours() as $key => $day)
 					<div class="{{ $key }}">
 						<label for="from[{{ $key }}]">
-							{{ $day }}
+							{{ get_day_name($key) }}
 						</label>
 						<input type="checkbox" name="enabled[{{ $key }}]" checked />
 						<div class="input-group date form-group">
-			                <input type="text" class="form-control picker from" id="from[{{ $key }}]" name="from[{{ $key }}]" />
+			                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ $day->from ?? '' }}" name="from[{{ $key }}]" />
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>
 			            </div>
 						<label for="to[{{ $key }}]">To</label>
 						<div class="input-group date form-group">
-			                <input type="text" class="form-control picker to" id="to[{{ $key }}]" name="to[{{ $key }}]" />
+			                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ $day->to ?? '' }}" name="to[{{ $key }}]" />
 			                <span class="input-group-addon">
 			                    <span class="glyphicon glyphicon-calendar"></span>
 			                </span>

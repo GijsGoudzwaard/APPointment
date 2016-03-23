@@ -30,6 +30,21 @@ class Company extends Model {
     protected $hidden = [];
 
 	/**
+	 * All the days of the week
+	 *
+	 * @var Array
+	 */
+	public $days = [
+		'mo' => 'Monday',
+		'tu' => 'Tuesday',
+		'we' => 'Wednesday',
+		'thu' => 'Thursday',
+		'fr' => 'Friday',
+		'sa' => 'Saturday',
+		'su' => 'Sunday'
+	];
+
+	/**
 	 * Get user
 	 *
 	 * @return Model
@@ -47,5 +62,15 @@ class Company extends Model {
 	public function appointmentTypes()
 	{
 		return $this->hasMany(AppointmentType::class);
+	}
+
+	/**
+	 * Decode the json array
+	 *
+	 * @return Object
+	 */
+	public function openingHours()
+	{
+		return json_decode($this->opening_hours) ?? $this->days;
 	}
 }

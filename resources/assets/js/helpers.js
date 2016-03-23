@@ -55,5 +55,5 @@ function getHost() {
  * @return {Object}
  */
 function elem(selector, context) {
-    return document.querySelectorAll((context ? context + ' ' : '') + selector);
+    return document.querySelectorAll((context + ' ' + selector) || selector);
 }

@@ -12,7 +12,7 @@ class File
 	 *
 	 * @param  Request $request
 	 * @param  String $name
-	 * @return String|null
+	 * @return Array|String|null
 	 */
 	public static function upload($request, String $name)
 	{

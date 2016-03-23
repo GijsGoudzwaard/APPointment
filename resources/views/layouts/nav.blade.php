@@ -21,9 +21,6 @@
 			<a href="{{ url('users') }}" title="Accounts"><i class="material-icons">account_circle</i> <span>Accounts</span></a>
 		</li>
 		<li>
-			<a href="{{ url('staff') }}" title="Staff"><i class="material-icons">supervisor_account</i> <span>Staff</span></a>
-		</li>
-		<li>
 			<a href="{{ url('customers') }}" title="Customers"><i class="material-icons">book</i> <span>Customers</span></a>
 		</li>
 		<li>
