@@ -4,7 +4,7 @@ $('.datetimepicker input[type="checkbox"]').on("click", function() {
 	for (var i = 0; i < picker.length; i++) {
 		var attr = picker[i].getAttribute("disabled");
 
-		if (attr) {
+		if (attr || attr === '') {
 			picker[i].removeAttribute("disabled");
 		} else {
 			picker[i].setAttribute("disabled", true);
@@ -14,7 +14,7 @@ $('.datetimepicker input[type="checkbox"]').on("click", function() {
 
 $('.date .from').datetimepicker({
 	format: 'HH:mm',
-	defaultDate: moment('08:00', 'HH:mm')
+	defaultDate: /* moment($('.date .from').val(), 'HH:mm') || */ moment('08:00', 'HH:mm')
 });
 
 $('.date .to').datetimepicker({

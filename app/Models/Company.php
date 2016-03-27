@@ -56,6 +56,7 @@ class Company extends Model {
 
 	/**
 	 * A hasMany relationship
+	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function appointmentTypes()
@@ -70,6 +71,6 @@ class Company extends Model {
 	 */
 	public function openingHours()
 	{
-		return json_decode($this->opening_hours) ?? $this->days;
+		return json_decode($this->opening_hours) ?? (object) $this->days;
 	}
 }

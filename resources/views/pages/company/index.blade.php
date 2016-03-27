@@ -50,21 +50,21 @@
 			<div id="opening-hours" class="tab-pane">
 				<div class="form-group">
 					<div class="form-inline datetimepicker">
-						@foreach($company->openingHours() as $key => $day)
+						@foreach($company->days as $key => $day)
 							<div class="{{ $key }}">
 								<label for="from[{{ $key }}]">
 									{{ get_day_name($key) }}
 								</label>
-								<input type="checkbox" name="enabled[{{ $key }}]" checked />
+								<input type="checkbox" name="enabled[{{ $key }}]" {{ (isset($company->openingHours()->$key)) ? 'checked' : '' }} />
 								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ $day->from ?? '' }}" name="from[{{ $key }}]" />
+					                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ $day->from ?? '' }}" name="from[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
 								<label for="to[{{ $key }}]">To</label>
 								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ $day->to ?? '' }}" name="to[{{ $key }}]" />
+					                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ $day->to ?? '' }}" name="to[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
