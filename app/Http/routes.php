@@ -40,7 +40,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 	Route::resource('staff', 'StaffController');
 
 	Route::resource('company', 'CompanyController', ['only' => [
-		'index', 'store', 'update'
+		'index', 'update'
 	]]);
 
 	Route::get('logout', 'Auth\Authcontroller@logout');

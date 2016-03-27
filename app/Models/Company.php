@@ -32,7 +32,7 @@ class Company extends Model {
 	/**
 	 * All the days of the week
 	 *
-	 * @var Array
+	 * @var array
 	 */
 	public $days = [
 		'mo' => 'Monday',
@@ -56,8 +56,7 @@ class Company extends Model {
 
 	/**
 	 * A hasMany relationship
-	 *
-	 * @return App\Models\AppointmentType
+	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
 	 */
 	public function appointmentTypes()
 	{
