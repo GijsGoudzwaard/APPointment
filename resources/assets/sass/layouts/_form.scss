@@ -23,3 +23,17 @@ form {
 .tab-content {
 	padding-top: 20px;
 }
+
+.nav-tabs > li > a {
+	border-bottom: 3px solid transparent;
+}
+.nav-tabs > li.active > a {
+	border-bottom: 3px solid $light-purple !important;
+}
+
+.nav-tabs > li, .nav-tabs > li.active {
+	> a, > a:focus, > a:hover {
+		background-color: transparent;
+		border: none;
+	}
+}
