@@ -47,7 +47,7 @@ class Company extends Model {
 	/**
 	 * Get user
 	 *
-	 * @return Model
+	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
 	 */
 	public function user()
 	{

@@ -57,14 +57,14 @@
 								</label>
 								<input type="checkbox" name="enabled[{{ $key }}]" {{ (isset($company->openingHours()->$key)) ? 'checked' : '' }} />
 								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ $day->from ?? '' }}" name="from[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
+					                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ $company->openingHours()->$key->from ?? '' }}" name="from[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
 								<label for="to[{{ $key }}]">To</label>
 								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ $day->to ?? '' }}" name="to[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
+					                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ $company->openingHours()->$key->to ?? '' }}" name="to[{{ $key }}]" {{ (!isset($company->openingHours()->$key)) ? 'disabled' : '' }} />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>

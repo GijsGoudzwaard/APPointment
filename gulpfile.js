@@ -23,12 +23,14 @@ var css = [
 var excluded_js = [
 	"!../bower_components/jquery/dist/jquery.slim.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
+	"!../bower_components/moment-timezone/builds/moment-timezone-with-data.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone.min.js"
 ];
 
 var js = [
 	"../bower_components/jquery/dist/jquery.min.js",
-	"../bower_components/moment/min/moment.min.js",
+	"../bower_components/moment/min/moment-with-locales.min.js",
+	"../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
 	"../bower_components/**/*.min.js",
 	"**/*.js"
 ];
