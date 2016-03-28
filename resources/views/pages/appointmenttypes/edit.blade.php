@@ -16,6 +16,11 @@
 			<input type="text" class="form-control" id="time" name="time" value="{{ old('time') ?? $appointment_type->time }}" placeholder="Time" required>
 		</div>
 
+		<div class="form-group">
+			<label for="price">Price *</label>
+			<input type="text" class="form-control" id="price" name="price" value="{{ old('price') ?? $appointment_type->price }}" placeholder="Price" required>
+		</div>
+
 		<button type="submit" class="btn btn-default">Submit</button>
 		<a href="{{ url('appointmenttypes') }}" class="btn btn-default">Back</a>
 

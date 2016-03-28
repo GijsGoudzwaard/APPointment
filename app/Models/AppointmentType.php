@@ -19,7 +19,7 @@ class AppointmentType extends Model {
      *
      * @var array
      */
-    protected $fillable = ['name', 'time'];
+    protected $fillable = ['name', 'time', 'price'];
 
     /**
      * The attributes excluded from the model's JSON form.
