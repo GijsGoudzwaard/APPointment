@@ -29,7 +29,7 @@ var excluded_js = [
 
 var js = [
 	"../bower_components/jquery/dist/jquery.min.js",
-	"../bower_components/moment/min/moment-with-locales.min.js",
+	"../bower_components/moment/min/moment.min.js",
 	"../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
 	"../bower_components/**/*.min.js",
 	"**/*.js"
