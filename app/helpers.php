@@ -2,23 +2,11 @@
 use Carbon\Carbon;
 use App\Models\Company;
 
-if (!function_exists('get_environment')) {
-	/**
-	* Get the environment based on the user that is logged in
-	*
-	* @return App\Models\Environment
-	*/
-	function get_environment()
-	{
-		return Auth::user()->environment;
-	}
-}
-
 if (!function_exists('get_company')) {
 	/**
 	* Get the company based on the user that is logged in
 	*
-	* @return App\Models\Environment
+	* @return App\Models\Company
 	*/
 	function get_company()
 	{
@@ -38,5 +26,20 @@ if (!function_exists('get_day_name')) {
 		$days = (new Company)->days;
 
 		return $days[$day] ?? Carbon::parse()->format('l');
+	}
+}
+
+if (!function_exists('clean_string')) {
+	/**
+	 * Remove all special characters so it'll be friendly to us in the subdomain
+	 *
+	 * @param  String $string
+	 * @return String
+	 */
+	function clean_string($string)
+	{
+		$string = str_replace(' ', '-', $string);
+
+		return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
 	}
 }

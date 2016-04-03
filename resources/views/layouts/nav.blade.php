@@ -1,6 +1,6 @@
 <nav class="navbar navbar-fixed-top {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}" id="sidebar-wrapper" role="navigation">
 	<ul class="nav sidebar-nav">
-		<li class="sidebar-brand" style="background-image:url({{ url(get_environment()->company->logo ?? '') }});">
+		<li class="sidebar-brand" style="background-image:url({{ url(get_company()->logo ?? '') }});">
 			<a href="{{ url('/') }}"></a>
 		</li>
 		<li>
@@ -14,7 +14,7 @@
 		</li>
 		@if (Auth::user()->role == 1)
 			<li>
-				<a href="{{ url('environments') }}" title="Environments"><i class="material-icons">extension</i> <span>Environments</span></a>
+				<a href="{{ url('companies') }}" title="Companies"><i class="material-icons">extension</i> <span>Companies</span></a>
 			</li>
 		@endif
 		<li>

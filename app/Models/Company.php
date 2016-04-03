@@ -45,13 +45,13 @@ class Company extends Model {
 	];
 
 	/**
-	 * Get user
+	 * Get users
 	 *
 	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
 	 */
-	public function user()
+	public function users()
 	{
-		return $this->hasOne(User::class);
+		return $this->hasMany(User::class);
 	}
 
 	/**

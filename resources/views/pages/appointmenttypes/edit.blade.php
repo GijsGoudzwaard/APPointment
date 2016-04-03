@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h1>Modify environment '{{ $appointment_type->name }}'</h1>
+	<h1>Modify appointment type '{{ $appointment_type->name }}'</h1>
 
 	{{ Form::open(['url' => action('AppointmentTypeController@update', $appointment_type), 'method' => 'put']) }}
 

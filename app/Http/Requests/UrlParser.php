@@ -88,13 +88,13 @@ class UrlParser
 		if($subdomain) {
 			// We do, replace it
 			// Replace the subdomain with the subdomain from the logged in user
-			$newUrl = str_replace($subdomain, get_environment()->subdomain, $host);
+			$newUrl = str_replace($subdomain, get_company()->subdomain, $host);
 
 			// Redirect to our new url
 			return redirect($scheme . $newUrl);
 		}
 
 		// We don't have a subdomain, set it
-		return redirect($scheme . get_environment()->subdomain . '.' . $host);
+		return redirect($scheme . get_company()->subdomain . '.' . $host);
 	}
 }

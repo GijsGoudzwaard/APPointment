@@ -24,10 +24,11 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
 	// This middleware is to prevent people from getting into the restricted area's
 	Route::group(['middleware' => 'admin'], function() {
-	    // Environment
-	    Route::resource('environments', 'EnvironmentController');
-	    Route::resource('environments/{environment_id}/users', 'Auth\UserController');
-		Route::get('/environment/{environment_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
+	    Route::resource('companies', 'CompanyController');
+	    Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
+			'show'
+		]]);
+		Route::get('companies/{company_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
 	});
 
 	// Appointments

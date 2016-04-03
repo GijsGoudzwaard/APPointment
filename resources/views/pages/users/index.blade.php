@@ -10,7 +10,7 @@
 					<th>Avatar</th>
 					<th>Name</th>
 					<th>Email</th>
-					{!! ($environment_id) ? '<th>Login</th>' : '' !!}
+					{!! ($company_id) ? '<th>Login</th>' : '' !!}
 					<th>Company</th>
 					<th>Actions</th>
 				</tr>
@@ -23,7 +23,7 @@
 						</td>
 						<td>{{ $user->firstname . ' ' . $user->surname }}</td>
 						<td>{{ $user->email }}</td>
-						{!! ($environment_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$environment_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
+						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
 						<td>{{ $user->company->name }}</td>
 						<td>
 							<a href="{{ url('/users/' . $user->id . '/edit') }}"><i class="material-icons">edit</i></a>

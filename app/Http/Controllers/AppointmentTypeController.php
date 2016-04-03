@@ -100,7 +100,7 @@ class AppointmentTypeController extends Controller
 		return Validator::make($request, [
 			'name' => 'required|max:255',
 			'time' => 'required|integer',
-			'price' => 'required'
+			'price' => 'required|integer'
 		]);
 	}
 }

@@ -19,7 +19,7 @@ class Subdomain
     {
 		// Check if we can get a subdomain from the url
 		// Also check if the subdomain is equal to your subdomain
-		if (UrlParser::getSubdomain($request->fullUrl()) == get_environment()->subdomain) {
+		if (UrlParser::getSubdomain($request->fullUrl()) == get_company()->subdomain) {
 			// We can let them through
 			return $next($request);
 		}

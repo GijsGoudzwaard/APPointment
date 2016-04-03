@@ -7,7 +7,6 @@ use App\Http\File;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Company;
-use App\Models\Environment;
 use Auth;
 use Validator;
 
@@ -16,32 +15,32 @@ class UserController extends Controller
 	/**
 	 * @var Int|null
 	 */
-	private $environment_id = null;
+	private $company_id = null;
 
 	/**
-	 * Set the environment variable so we know only to get the users based on the current environment
+	 * Set the company variable so we know only to get the users based on the current company
 	 *
 	 * @param Request $request
 	 */
 	public function __construct(Request $request)
 	{
-		$this->environment_id = $request->environment_id ?? null;
+		$this->company_id = $request->company_id ?? null;
 	}
 
 	/**
 	 * Show the index
-	 * Only get the users based on the given environment_id or the current environment
+	 * Only get the users based on the given company_id or by the company of the logged in user
 	 *
 	 * @return Response
 	 */
 	public function index()
 	{
-		$environment_id = $this->environment_id ?? get_environment()->id;
-		$users = Environment::find($environment_id)->users;
+		$company_id = $this->company_id ?? get_company()->id;
+		$users = Company::find($company_id)->users;
 
 		return view('pages.users.index', [
 			'users' => $users,
-			'environment_id' => $this->environment_id
+			'company_id' => $this->company_id
 		]);
 	}
 
@@ -120,7 +119,7 @@ class UserController extends Controller
 
 		$user = new User;
 		$user->fill($request->all());
-		$user->environment_id = $this->environment_id ?? get_environment()->id;
+		$user->company_id = $this->company_id ?? get_company()->id;
 		$user->password = bcrypt($request->get('password'));
 
 		$user->save();
@@ -148,11 +147,11 @@ class UserController extends Controller
 	/**
 	 * Login using the $user_id
 	 *
-	 * @param  Int $environment_id
+	 * @param  Int $company_id
 	 * @param  Int $user_id
 	 * @return Response
 	 */
-	public function loginUsingId($environment_id, $user_id)
+	public function loginUsingId($company_id, $user_id)
 	{
 		Auth::loginUsingId((int) $user_id);
 		return redirect('/');
