@@ -2,12 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use Validator;
 use App\Http\File;
+use App\Jobs\Verify;
 use App\Models\Company;
 use Illuminate\Http\Request;
-use Validator;
 
-class CompanyController extends Controller
+class CompanyController extends Verify
 {
 	/**
 	 * Show the company of the logged in user
@@ -28,6 +29,11 @@ class CompanyController extends Controller
 		]);
 	}
 
+	/**
+	 * Show the create form
+	 *
+	 * @return mixed
+	 */
 	public function create()
 	{
 		return view('pages.company.create', [
@@ -35,11 +41,18 @@ class CompanyController extends Controller
 		]);
 	}
 
+	/**
+	 * Create a new company
+	 *
+	 * @param  Request $request
+	 * @return mixed
+	 */
 	public function store(Request $request)
 	{
-		$validator = $this->validator($request->all());
-		if ($validator->fails()) {
-			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
+		$validator = $this->verify($request->all());
+
+		if ($validator) {
+			return $validator;
 		}
 
 		$company = new Company;
@@ -58,6 +71,7 @@ class CompanyController extends Controller
 
 		if ($request->hasFile('logo')) {
 			$path = File::upload($request, 'logo');
+
 			if (is_array($path)) {
 				return redirect()->back()->with('errors', $path)->withInput();
 			}
@@ -70,9 +84,16 @@ class CompanyController extends Controller
 		return redirect('companies/' . $company->id . '/edit')->with('success', 'Successfully created');
 	}
 
+	/**
+	 * Show the edit form
+	 *
+	 * @param int $company_id
+	 * @return mixed
+	 */
 	public function edit($company_id, Request $request)
 	{
 		$company = Company::find($company_id);
+
 		if (strpos($request->path(), 'companies') !== false) {
 			$allowed = true;
 		}
@@ -84,19 +105,19 @@ class CompanyController extends Controller
 	}
 
 	/**
-	 * Update a App\Models\Company by its $id
+	 * Update a company by its $id
 	 *
 	 * @param  Request $request
-	 * @param  Int $company_id
+	 * @param  int $company_id
 	 * @return mixed
 	 */
 	public function update(Request $request, $company_id)
 	{
 		$company = Company::find($company_id);
-		$validator = $this->validator($request->all(), $company);
+		$validator = $this->verify($request->all(), $company);
 
-		if ($validator->fails()) {
-			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
+		if ($validator) {
+			return $validator;
 		}
 
 		if (strpos($request->path(), 'companies') !== false) {
@@ -122,6 +143,7 @@ class CompanyController extends Controller
 
 		if ($request->hasFile('logo')) {
 			$path = File::upload($request, 'logo');
+
 			if (is_array($path)) {
 				return redirect()->back()->with('errors', $path)->withInput();
 			}
@@ -144,7 +166,7 @@ class CompanyController extends Controller
 	{
 		return Validator::make($request, [
 			'name' => 'required|max:255',
-			'subdomain' => 'required|max:255',
+			'subdomain' => (request()->path() == 'companies' ? 'required' : '') . '|max:255',
 			'email' => 'required|email|' . (isset($company) && $company->email == $request['email']) ? '' : '|unique:users' . '|max:255',
 			'address' => 'required',
 			'phonenumber' => 'required'

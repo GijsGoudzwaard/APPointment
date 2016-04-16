@@ -12,7 +12,7 @@ class AppointmentTypeController extends Controller
 	/**
 	 * Show the calendar
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function index()
 	{
@@ -24,8 +24,8 @@ class AppointmentTypeController extends Controller
 	/**
 	 * Show the edit form
 	 *
-	 * @param Int $appointment_type_id
-	 * @return Response
+	 * @param int $appointment_type_id
+	 * @return mixed
 	 */
 	public function edit($appointment_type_id)
 	{
@@ -38,8 +38,8 @@ class AppointmentTypeController extends Controller
 	 * Update the appointment_type
 	 *
 	 * @param  Request $request
-	 * @param  Int $appointment_type_id
-	 * @return Response
+	 * @param  int $appointment_type_id
+	 * @return mixed
 	 */
 	public function update(Request $request, $appointment_type_id)
 	{
@@ -59,7 +59,7 @@ class AppointmentTypeController extends Controller
 	/**
 	 * Show the create form
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function create()
 	{
@@ -70,7 +70,7 @@ class AppointmentTypeController extends Controller
 	 * Create a new appointment_type
 	 *
 	 * @param  Request $request
-	 * @return Response
+	 * @return mixed
 	 */
 	public function store(Request $request)
 	{
