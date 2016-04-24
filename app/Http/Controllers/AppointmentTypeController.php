@@ -88,7 +88,6 @@ class AppointmentTypeController extends Controller
 		return redirect('appointmenttypes/' . $appointment_type->id . '/edit')->with('success', 'Successfully updated');
 	}
 
-
 	/**
 	 * Create a new Validor instance
 	 *

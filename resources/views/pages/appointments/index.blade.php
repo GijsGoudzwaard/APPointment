@@ -9,18 +9,10 @@
 	<script type="text/javascript">
 		$(function() {
 			$('#calendar').fullCalendar({
-				customButtons: {
-			        provider: {
-			            text: 'custom!',
-			            click: function() {
-			                alert('clicked the custom button!');
-			            }
-			        }
-			    },
 				header: {
-					left: 'provider,month,agendaWeek,agendaDay',
-					center: 'prev, title, next',
-					right: 'today'
+					left: 'prev, today, next',
+					center: 'title',
+					right: 'agendaDay, agendaWeek, month'
 				},
 				defaultView: 'agendaWeek',
 				height: $(window).height() - $('.topbar').height() - 20 {{ env('APP_DEBUG', false) ? ' - 30' : '' }},
@@ -31,7 +23,10 @@
 			        agendaDay: {
 						titleFormat: 'dddd DD'
 			        }
-			    }
+			    },
+				dayClick: function(date, jsEvent, view) {
+					window.location.href = "{{ url('appointments/create?date=') }}" + moment(date).unix();
+				}
 			});
 		});
 	</script>

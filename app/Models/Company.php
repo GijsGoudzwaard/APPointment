@@ -2,12 +2,12 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
 use App\Models\AppointmentType;
+use Illuminate\Database\Eloquent\Model;
 
-class Company extends Model {
-
+class Company extends Model
+{
     /**
      * The database table used by the model.
      *
