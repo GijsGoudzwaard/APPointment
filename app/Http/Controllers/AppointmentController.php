@@ -30,6 +30,7 @@ class AppointmentController extends Verify
 		$start = date('Y-m-d H:i:s', $request->get('start'));
 		$end = date('Y-m-d H:i:s', $request->get('end'));
 		$appointments = get_company()->appointments([$start, $end]);
+
 		return $appointments->map(function($appointment) {
 			return collect($appointment, $appointment->appointmentType);
 		});

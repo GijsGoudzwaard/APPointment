@@ -30,7 +30,7 @@
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
-		<a href="{{ url('appointmenttypes') }}" class="btn btn-default">Back</a>
+		<a href="{{ url('appointments') }}" class="btn btn-default">Back</a>
 
 	{{ Form::close() }}
 
