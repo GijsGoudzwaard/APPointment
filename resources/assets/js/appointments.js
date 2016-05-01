@@ -23,6 +23,8 @@ $(function() {
 			window.location.href = "/appointments/" + date.id + "/edit";
 		},
 		viewRender: function(view, element) {
+			// Remove all events so we won't get any duplicates
+			calendar.fullCalendar('removeEvents');
 			getAppointments(moment(view.start).unix(), moment(view.end).unix());
 		}
 	});
