@@ -40,7 +40,7 @@
 	<script type="text/javascript">
 		$('#scheduled_at').datetimepicker({
 			format: 'YYYY-MM-DD HH:mm',
-			defaultDate: "{{ date('m/d/Y H:i', strtotime($date)) }}"
+			defaultDate: moment("{{ date('m/d/Y H:i', strtotime($date)) }}", 'MM/DD/YYYY HH:mm')
 		});
 	</script>
 @stop
