@@ -31,6 +31,7 @@
 
 		<button type="submit" class="btn btn-default">Submit</button>
 		<a href="{{ url('appointments') }}" class="btn btn-default">Back</a>
+		<a href="{{ url('appointments/' . $appointment->id . '/delete') }}" class="btn btn-danger right">Remove</a>
 
 	{{ Form::close() }}
 

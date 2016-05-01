@@ -107,6 +107,14 @@ class AppointmentController extends Verify
 		return redirect()->back()->with('success', 'Successfully updated');
 	}
 
+	public function delete($id)
+	{
+		$appointment = Appointment::find($id);
+		$appointment->delete();
+
+		return redirect('appointments')->with('success', 'Successfully deleted');
+	}
+
 	/**
 	 * Create a new Validor instance
 	 *

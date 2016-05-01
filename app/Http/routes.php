@@ -32,8 +32,13 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 	});
 
 	// Appointments
-	Route::resource('appointments', 'AppointmentController', ['except' => ['show']]);
+	Route::resource('appointments', 'AppointmentController', ['except' => [
+		'show', 'destroy'
+	]]);
 	Route::get('appointments/get', 'AppointmentController@get');
+	Route::get('appointments/{id}/delete', 'AppointmentController@delete');
+
+	// Appointment types
 	Route::resource('appointmenttypes', 'AppointmentTypeController');
 
 	// Users
