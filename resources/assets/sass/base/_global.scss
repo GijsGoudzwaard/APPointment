@@ -61,3 +61,31 @@ table .material-icons {
     position: absolute;
     right: 0;
 }
+
+#loader {
+	width: 100%;
+	height: 100%;
+	position: fixed;
+	background-color: rgba(#000, .5);
+	top:0;bottom:0;
+	left:0;right:0;
+	z-index: 10000;
+	display: none;
+
+	.container {
+		width: 350px;
+		height: 175px;
+		background-color: #fff;
+		border-radius: 8px;
+		position: fixed;
+		top:0;bottom:0;
+		left:0;right:0;
+		margin: auto;
+		text-align: center;
+		padding-top: 50px;
+
+		img {
+		    padding-bottom: 20px;
+		}
+	}
+}

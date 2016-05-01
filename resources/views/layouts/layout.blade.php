@@ -9,6 +9,13 @@
 	</head>
 	<body>
 
+		<div id="loader">
+			<div class="container">
+				<img src="{{ asset('assets/img/loading.svg') }}" alt="loader" />
+				<p>Loading...</p>
+			</div>
+		</div>
+
 		@include('layouts.nav')
 		@include('layouts.header')
 

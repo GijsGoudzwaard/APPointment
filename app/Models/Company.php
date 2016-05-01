@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\User;
+use App\Models\Appointment;
 use App\Models\AppointmentType;
 use Illuminate\Database\Eloquent\Model;
 
@@ -73,4 +74,21 @@ class Company extends Model
 	{
 		return json_decode($this->opening_hours) ?? (object) $this->days;
 	}
+
+    /**
+     * A hasManyThrough relationship
+     *
+     * @param array $between
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function appointments($between = [])
+    {
+        $appointments = $this->hasManyThrough(Appointment::class, AppointmentType::class);
+
+        if (! empty($between)) {
+            $appointments->whereBetween('scheduled_at', $between);
+        }
+
+        return $appointments->get();
+    }
 }

@@ -4,9 +4,12 @@ namespace App\Models;
 
 use App\Models\AppointmentType;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Appointment extends Model
 {
+    use SoftDeletes;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -19,7 +22,7 @@ class Appointment extends Model
      *
      * @var array
      */
-    protected $hidden = [];
+    protected $hidden = ['deleted_at'];
 
 	/**
 	 * A belongsTo relation

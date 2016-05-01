@@ -2,7 +2,7 @@
 use Carbon\Carbon;
 use App\Models\Company;
 
-if (!function_exists('get_company')) {
+if (! function_exists('get_company')) {
 	/**
 	* Get the company based on the user that is logged in
 	*
@@ -14,7 +14,7 @@ if (!function_exists('get_company')) {
 	}
 }
 
-if (!function_exists('get_day_name')) {
+if (! function_exists('get_day_name')) {
 	/**
 	 * Get the full day name by the short day name
 	 *
@@ -29,7 +29,7 @@ if (!function_exists('get_day_name')) {
 	}
 }
 
-if (!function_exists('clean_string')) {
+if (! function_exists('clean_string')) {
 	/**
 	 * Remove all special characters so it'll be friendly to us in the subdomain
 	 *

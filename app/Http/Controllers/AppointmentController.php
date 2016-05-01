@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Validator;
 use App\Jobs\Verify;
-
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -21,6 +20,22 @@ class AppointmentController extends Verify
 	}
 
 	/**
+	 * Get all appointments from your company
+	 *
+	 * @param Request $request
+	 * @return array
+	 */
+	public function get(Request $request)
+	{
+		$start = date('Y-m-d H:i:s', $request->get('start'));
+		$end = date('Y-m-d H:i:s', $request->get('end'));
+		$appointments = get_company()->appointments([$start, $end]);
+		return $appointments->map(function($appointment) {
+			return collect($appointment, $appointment->appointmentType);
+		});
+	}
+
+	/**
 	 * Show the create form
 	 *
 	 * @param  Request $request
@@ -29,7 +44,7 @@ class AppointmentController extends Verify
 	public function create(Request $request)
 	{
 		$date = date('Y-m-d H:i:s', $request->get('date'));
-		$appointment_types = get_company()->appointmentTypes->lists('name', 'id');
+		$appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
 
 		return view('pages.appointments.create', compact(['date', 'appointment_types']));
 	}
@@ -64,7 +79,7 @@ class AppointmentController extends Verify
 	public function edit($id)
 	{
 		$appointment = Appointment::find($id);
-		$appointment_types = get_company()->appointmentTypes->lists('name', 'id');
+		$appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
 
 		return view('pages.appointments.edit', compact(['appointment', 'appointment_types']));
 	}
