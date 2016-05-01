@@ -85,9 +85,28 @@ table .material-icons {
 		padding-top: 50px;
 
 		img {
-		    padding-bottom: 20px;
+			-webkit-animation: spin .9s infinite linear;
+			-moz-animation: spin .9s infinite linear;
+			animation: spin .9s infinite linear;
+		}
+
+		p {
+			padding-top: 20px;
 		}
 	}
+}
+
+@-moz-keyframes spin {
+    from { -moz-transform: rotate(0deg); }
+    to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+    from { -webkit-transform: rotate(0deg); }
+    to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+    from { transform:rotate(0deg); }
+    to { transform:rotate(360deg); }
 }
 
 .fc-time-grid-event {
