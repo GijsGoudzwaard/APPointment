@@ -2,9 +2,6 @@
 
 namespace App\Models;
 
-use App\Models\User;
-use App\Models\Appointment;
-use App\Models\AppointmentType;
 use Illuminate\Database\Eloquent\Model;
 
 class Company extends Model

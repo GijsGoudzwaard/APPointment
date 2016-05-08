@@ -2,8 +2,9 @@
 
 namespace App\Http;
 
-use Carbon\Carbon;
+use Illuminate\Http\Request;
 use Validator;
+use Carbon\Carbon;
 
 class File
 {
@@ -14,7 +15,7 @@ class File
 	 * @param  String $name
 	 * @return Array|String|null
 	 */
-	public static function upload($request, String $name)
+	public static function upload(Request $request, String $name)
 	{
 		$file = $request->file($name);
 

@@ -145,7 +145,9 @@ return [
 
 		Collective\Html\HtmlServiceProvider::class,
 
-		Barryvdh\Debugbar\ServiceProvider::class
+		Barryvdh\Debugbar\ServiceProvider::class,
+
+		Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 
 	],
 

@@ -10,7 +10,8 @@
         "doctrine/dbal": "^2.5",
         "laravelcollective/html": "5.2.4",
         "nesbot/carbon": "^1.21",
-        "barryvdh/laravel-debugbar": "^2.2"
+        "barryvdh/laravel-debugbar": "^2.2",
+        "barryvdh/laravel-ide-helper": "^2.1"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -37,6 +38,7 @@
     "scripts": {
         "post-install-cmd": [
             "php artisan clear-compiled",
+            "php artisan ide-helper:generate",
             "php artisan optimize"
         ],
         "pre-update-cmd": [

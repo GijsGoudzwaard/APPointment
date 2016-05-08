@@ -10,6 +10,7 @@
     "font-awesome": "fontawesome#~4.5.0",
     "fullcalendar": "~2.6.1",
     "eonasdan-bootstrap-datetimepicker": "^4.17.37",
-    "jquery": "^2.2.1"
+    "jquery": "^2.2.1",
+    "Chart.js": "^2.1.1"
   }
 }

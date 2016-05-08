@@ -107,6 +107,12 @@ class AppointmentController extends Verify
 		return redirect()->back()->with('success', 'Successfully updated');
 	}
 
+	/**
+	 * Delete an appointment
+	 *
+	 * @param  int $id
+	 * @return mixed
+	 */
 	public function delete($id)
 	{
 		$appointment = Appointment::find($id);

@@ -13,6 +13,7 @@ class CompanyController extends Verify
 	/**
 	 * Show the company of the logged in user
 	 *
+	 * @param Request $request
 	 * @return mixed
 	 */
 	public function index(Request $request)
@@ -88,6 +89,7 @@ class CompanyController extends Verify
 	 * Show the edit form
 	 *
 	 * @param int $company_id
+	 * @param Request $request
 	 * @return mixed
 	 */
 	public function edit($company_id, Request $request)
@@ -125,7 +127,6 @@ class CompanyController extends Verify
 		}
 
 		$opening_hours = [];
-
 		foreach ($request->get('from') as $key => $from) {
 			$opening_hours[$key] = [
 				'from' => $from,
@@ -160,6 +161,7 @@ class CompanyController extends Verify
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request
+	 * @param  Company $company
 	 * @return Validator
 	 */
 	public function validator($request, $company = null)

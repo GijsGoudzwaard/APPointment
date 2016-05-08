@@ -15,7 +15,7 @@ function getCookie(name) {
  *
  * @param {String} name
  * @param {String} value
- * @param {Int} days
+ * @param {int} days
  */
 function createCookie(name, value, days) {
     var date, expires;
@@ -55,5 +55,19 @@ function getHost() {
  * @return {Object}
  */
 function elem(selector, context) {
-    return document.querySelectorAll((context + ' ' + selector) || selector);
+    var query;
+
+    if (context) {
+        query = context + ' ' + selector;
+    } else {
+        query = selector;
+    }
+
+    var element = document.querySelectorAll(query);
+
+    if (element.length == 1) {
+        return element[0];
+    }
+
+    return element;
 }
