@@ -71,3 +71,44 @@ function elem(selector, context) {
 
     return element;
 }
+
+/**
+ * An ajax request helper function
+ *
+ * @param {Object} options
+ * @param {Function} callback
+ * @returns {Function}
+ */
+function ajax(options, callback) {
+    // Set the load animation
+    if (options.loader) {
+        elem('#loader').className = 'active';
+    }
+
+    var xhr = new XMLHttpRequest();
+    xhr.open(options.method, options.destination, true);
+    xhr.send();
+
+    // After request is done remove the loader
+    if (options.loader) {
+        elem('#loader').className = '';
+    }
+
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4) {
+            return callback(xhr.response);
+        }
+    }
+}
+
+/**
+ * List an element from the array
+ *
+ * @param {string} element
+ * @returns {Array}
+ */
+Array.prototype.list = function(element) {
+    return this.map(function(ctx) {
+        return ctx[element];
+    });
+};

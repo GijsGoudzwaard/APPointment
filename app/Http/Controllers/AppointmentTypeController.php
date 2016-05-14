@@ -102,4 +102,30 @@ class AppointmentTypeController extends Controller
 			'price' => 'required|integer'
 		]);
 	}
+
+    /**
+     * Get all the appointment types for the doughnut chart
+     *
+     * @return mixed
+     */
+	public function getStats()
+	{
+	    $appointment_types = get_company()->appointmentTypes;
+
+        return collect($appointment_types->map([$this, 'getAppointments']));
+	}
+
+    /**
+     * Count all the appointments associated with the appointment type
+     *
+     * @param AppointmentType $appointment_type
+     * @return array
+     */
+    public function getAppointments($appointment_type)
+    {
+        return [
+            'name' => $appointment_type->name,
+            'amount' => $appointment_type->appointments->count()
+        ];
+    }
 }

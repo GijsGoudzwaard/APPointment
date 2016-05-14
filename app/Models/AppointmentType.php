@@ -30,11 +30,21 @@ class AppointmentType extends Model
 
 	/**
 	 * A belongsTo relation
-	 *
-	 * @return App\Models\Company
+     *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function company()
 	{
 		return $this->belongsTo(Company::class);
 	}
+
+    /**
+     * A hasMany relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function appointments()
+    {
+        return $this->hasMany(Appointment::class);
+    }
 }

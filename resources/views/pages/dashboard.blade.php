@@ -4,7 +4,7 @@
 
 	<h1>Hello {{ Auth::user()->firstname }}!</h1>
 
-    <div class="col-md-3">
+    <div class="col-md-3 col-sm-3">
         <canvas id="doughnut" width="400" height="400"></canvas>
     </div>
 
@@ -14,31 +14,61 @@
     <script>
         var data = {
             labels: [
-                "Red",
-                "Green",
-                "Yellow"
+                "data"
             ],
             datasets: [
                 {
-                    data: [300, 50, 100],
-                    backgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ],
-                    hoverBackgroundColor: [
-                        "#FF6384",
-                        "#36A2EB",
-                        "#FFCE56"
-                    ]
+                    data: [100],
+//                    backgroundColor: [
+//                        "#FF6384",
+//                        "#36A2EB",
+//                        "#FFCE56"
+//                    ],
+//                    hoverBackgroundColor: [
+//                        "#FF6384",
+//                        "#36A2EB",
+//                        "#FFCE56"
+//                    ]
                 }]
         };
 
-        console.log(elem('#doughnut'));
-        var myDoughnutChart = new Chart(elem('#doughnut'), {
+        var doughnutChart = new Chart(elem('#doughnut'), {
             type: 'doughnut',
             data: data,
-//            options: options
+            animation: {
+                animateScale: false
+            }
         });
+
+        ajax({
+            method: 'GET',
+            destination: '/api/appointmenttypes',
+            loader: false,
+        }, function(res) {
+            setDoughnut(JSON.parse(res));
+        });
+
+        function setDoughnut(data) {
+            doughnutChart.config.data = {
+                labels: data.list('name'),
+                datasets: [
+                    {
+                        data: data.list('amount'),
+                        backgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ],
+                        hoverBackgroundColor: [
+                            "#FF6384",
+                            "#36A2EB",
+                            "#FFCE56"
+                        ]
+                    }
+                ]
+            }
+            doughnutChart.update();
+        }
+
     </script>
 @stop
