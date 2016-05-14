@@ -12,29 +12,12 @@
 
 @section('js')
     <script>
-        var data = {
-            labels: [
-                "data"
-            ],
-            datasets: [
-                {
-                    data: [100],
-//                    backgroundColor: [
-//                        "#FF6384",
-//                        "#36A2EB",
-//                        "#FFCE56"
-//                    ],
-//                    hoverBackgroundColor: [
-//                        "#FF6384",
-//                        "#36A2EB",
-//                        "#FFCE56"
-//                    ]
-                }]
-        };
-
         var doughnutChart = new Chart(elem('#doughnut'), {
             type: 'doughnut',
-            data: data,
+            data: {
+                labels: ["data"],
+                datasets: [{data: [100]}]
+            },
             animation: {
                 animateScale: false
             }
