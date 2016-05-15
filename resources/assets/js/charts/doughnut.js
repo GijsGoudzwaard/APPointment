@@ -3,9 +3,6 @@ var doughnutChart = new Chart(elem('#doughnut'), {
     data: {
         labels: ["data"],
         datasets: [{data: [100]}]
-    },
-    animation: {
-        animateScale: false
     }
 });
 
