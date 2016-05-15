@@ -4,54 +4,16 @@
 
 	<h1>Hello {{ Auth::user()->firstname }}!</h1>
 
-    <div class="col-md-3 col-sm-3">
-        <canvas id="doughnut" width="400" height="400"></canvas>
+    <div class="charts">
+        <div class="item col-md-8"></div>
+
+        <div class="item col-md-4 col-sm-4">
+            <canvas id="doughnut" width="400" height="400"></canvas>
+        </div>
     </div>
 
 @stop
 
 @section('js')
-    <script>
-        var doughnutChart = new Chart(elem('#doughnut'), {
-            type: 'doughnut',
-            data: {
-                labels: ["data"],
-                datasets: [{data: [100]}]
-            },
-            animation: {
-                animateScale: false
-            }
-        });
-
-        ajax({
-            method: 'GET',
-            destination: '/api/appointmenttypes',
-            loader: false,
-        }, function(res) {
-            setDoughnut(JSON.parse(res));
-        });
-
-        function setDoughnut(data) {
-            doughnutChart.config.data = {
-                labels: data.list('name'),
-                datasets: [
-                    {
-                        data: data.list('amount'),
-                        backgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ],
-                        hoverBackgroundColor: [
-                            "#FF6384",
-                            "#36A2EB",
-                            "#FFCE56"
-                        ]
-                    }
-                ]
-            }
-            doughnutChart.update();
-        }
-
-    </script>
+    <script src="{{ asset('assets/dist/charts/doughnut.js') }}"></script>
 @stop

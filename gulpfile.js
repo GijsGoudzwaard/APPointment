@@ -24,7 +24,8 @@ var excluded_js = [
 	"!../bower_components/jquery/dist/jquery.slim.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data.min.js",
-	"!../bower_components/moment-timezone/builds/moment-timezone.min.js"
+	"!../bower_components/moment-timezone/builds/moment-timezone.min.js",
+	"!charts/*.js"
 ];
 
 var js = [
@@ -51,4 +52,6 @@ elixir(function(mix) {
 
 	// Scripts
 	mix.scripts(excluded_js.concat(js), "public/assets/dist/all.js");
+
+	mix.copy("resources/assets/js/charts", "public/assets/dist/charts");
 });
