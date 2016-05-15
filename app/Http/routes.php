@@ -47,7 +47,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 	// Users
 	Route::resource('users', 'Auth\UserController');
 
-	Route::resource('staff', 'StaffController');
+	Route::resource('customers', 'CustomerController', ['only' => ['index', 'show']]);
 
 	Route::resource('company', 'CompanyController', ['only' => [
 		'index', 'update'

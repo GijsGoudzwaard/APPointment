@@ -36,7 +36,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$company_id = $this->company_id ?? get_company()->id;
-		$users = Company::find($company_id)->users;
+		$users = Company::find($company_id)->users->where('role', 0);
 
 		return view('pages.users.index', [
 			'users' => $users,

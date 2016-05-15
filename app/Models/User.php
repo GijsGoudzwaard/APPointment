@@ -32,12 +32,34 @@ class User extends Model implements AuthenticatableContract,
     protected $hidden = ['password', 'remember_token'];
 
 	/**
+	 * All the user roles
+	 *
+	 * @var array
+	 */
+	private static $roles = [
+		'employee' => 0,
+		'admin' => 1,
+		'customer' => 2,
+	];
+
+	/**
 	 * Get the company of the user
 	 *
-	 * @return Illuminate\Database\Eloquent\Model
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function company()
 	{
 		return $this->belongsTo(Company::class, 'company_id');
+	}
+
+	/**
+	 * Get the role of a user
+	 *
+	 * @param  string $role
+	 * @return integer
+	 */
+	public static function role($role)
+	{
+	    return static::$roles[$role];
 	}
 }

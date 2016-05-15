@@ -45,11 +45,18 @@ class Company extends Model
 	/**
 	 * Get users
 	 *
+	 * @param  boolean $customers
 	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
 	 */
-	public function users()
+	public function users($customers = false)
 	{
-		return $this->hasMany(User::class);
+		$users = $this->hasMany(User::class);
+
+		if ($customers) {
+		    return $users->where('role', User::role('customer'))->get();
+		}
+
+		return $users;
 	}
 
 	/**
