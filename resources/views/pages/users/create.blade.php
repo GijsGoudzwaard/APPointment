@@ -7,13 +7,23 @@
 	{{ Form::open(['url' => action('Auth\UserController@store'), 'method' => 'post', 'files' => true]) }}
 
 		<div class="form-group">
-			<label for="name">Name *</label>
-			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Name" autofocus required>
+			<label for="firstname">Firstname *</label>
+			<input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname') }}" placeholder="Firstname" autofocus required>
+		</div>
+
+		<div class="form-group">
+			<label for="surname">Surname *</label>
+			<input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') }}" placeholder="Firstname" required>
 		</div>
 
 		<div class="form-group">
 			<label for="email">Email *</label>
 			<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Email" required>
+		</div>
+
+		<div class="form-group">
+			<label for="phonenumber">Phonenumber *</label>
+			<input type="text" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Phonenumber" required>
 		</div>
 
 		<div class="form-group">

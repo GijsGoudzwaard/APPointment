@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Http\Controllers\Controller;
-use App\Http\File;
-use Illuminate\Http\Request;
-use App\Models\User;
-use App\Models\Company;
 use Auth;
 use Validator;
+use App\Http\File;
+use App\Models\User;
+use App\Models\Company;
+use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 
 class UserController extends Controller
 {
@@ -121,6 +121,7 @@ class UserController extends Controller
 		$user->fill($request->all());
 		$user->company_id = $this->company_id ?? get_company()->id;
 		$user->password = bcrypt($request->get('password'));
+		$user->role = 0;
 
 		$user->save();
 
@@ -140,6 +141,7 @@ class UserController extends Controller
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email']) ? '' : '|unique:users',
+			'phonenumber' => 'required|max:255',
             'password' => 'min:6',
         ]);
 	}

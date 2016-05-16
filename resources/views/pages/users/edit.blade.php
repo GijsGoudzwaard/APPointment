@@ -8,17 +8,22 @@
 
 		<div class="form-group">
 			<label for="firstname">Firstname *</label>
-			<input type="text" class="form-control" id="firstname" name="firstname" value="{{ $user->firstname }}" placeholder="Firstname" autofocus required>
+			<input type="text" class="form-control" id="firstname" name="firstname" value="{{ old('firstname') ?: $user->firstname }}" placeholder="Firstname" autofocus required>
 		</div>
 
 		<div class="form-group">
 			<label for="surname">Surname *</label>
-			<input type="text" class="form-control" id="surname" name="surname" value="{{ $user->surname }}" placeholder="Firstname" required>
+			<input type="text" class="form-control" id="surname" name="surname" value="{{ old('surname') ?: $user->surname }}" placeholder="Firstname" required>
 		</div>
 
 		<div class="form-group">
 			<label for="email">Email *</label>
-			<input type="email" class="form-control" id="email" name="email" value="{{ $user->email }}" placeholder="Email" required>
+			<input type="email" class="form-control" id="email" name="email" value="{{ old('email') ?: $user->email }}" placeholder="Email" required>
+		</div>
+
+		<div class="form-group">
+			<label for="phonenumber">Phonenumber *</label>
+			<input type="text" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') ?: $user->phonenumber }}" placeholder="Phonenumber" required>
 		</div>
 
 		<div class="form-group">
