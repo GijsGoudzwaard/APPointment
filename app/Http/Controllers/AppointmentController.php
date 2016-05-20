@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use Validator;
 use App\Jobs\Verify;
 use App\Models\Appointment;
@@ -125,6 +126,7 @@ class AppointmentController extends Verify
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request
+	 * @param  mixed $rules
 	 * @return Validator
 	 */
 	public function validator($request, $rules = null)
@@ -133,5 +135,26 @@ class AppointmentController extends Verify
 			'name' => 'required|max:255',
 			'scheduled_at' => 'required|date'
 		]);
+	}
+
+	/**
+	 * Count all appointments per month of this year
+	 *
+	 * @return \Illuminate\Support\Collection
+	 */
+	public function getStats()
+	{
+		$appointments = [];
+
+		for ($i = 1; $i <= 12; $i++) {
+			$date = Carbon::create(Carbon::now()->year, $i, 1, 0);
+
+			$appointments[] = Appointment::whereBetween('scheduled_at', [
+				$date->startOfMonth()->toDateTimeString(),
+				$date->endOfMonth()->toDateTimeString()
+			])->selectRaw('count(*) as amount')->get()->pluck('amount');
+		}
+
+		return collect($appointments)->flatten();
 	}
 }

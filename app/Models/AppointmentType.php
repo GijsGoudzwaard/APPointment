@@ -47,4 +47,14 @@ class AppointmentType extends Model
     {
         return $this->hasMany(Appointment::class);
     }
+
+    /**
+     * Count the appointments without loading all the objects
+     *
+     * @return mixed
+     */
+    public function countAppointments()
+    {
+        return $this->appointments()->selectRaw('count(*) as amount')->get()->first()->amount;
+    }
 }

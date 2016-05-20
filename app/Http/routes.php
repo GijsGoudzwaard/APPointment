@@ -21,6 +21,7 @@ Route::group(['middleware' => 'web'], function () {
 
 Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
+    Route::get('api/appointments', 'AppointmentController@getStats');
     Route::get('api/appointmenttypes', 'AppointmentTypeController@getStats');
 
     Route::get('/', 'PageController@dashboard');

@@ -121,11 +121,11 @@ class AppointmentTypeController extends Controller
      * @param AppointmentType $appointment_type
      * @return array
      */
-    public function getAppointments($appointment_type)
+    public function getAppointments(AppointmentType $appointment_type)
     {
         return [
             'name' => $appointment_type->name,
-            'amount' => $appointment_type->appointments->count()
+            'amount' => $appointment_type->countAppointments()
         ];
     }
 }

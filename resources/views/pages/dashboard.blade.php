@@ -2,12 +2,12 @@
 
 @section('content')
 
-	<h1>Hello {{ Auth::user()->firstname }}!</h1>
+	<h4>Total appointments</h4>
 
     <div class="charts">
-        {{--<div class="item col-md-12">--}}
-            {{--<canvas id="line" width="400" height="400"></canvas>--}}
-        {{--</div>--}}
+        <div class="item">
+            <canvas id="line" width="500" height="200"></canvas>
+        </div>
 
         <div class="item col-md-4 col-sm-4">
             <canvas id="doughnut" width="400" height="400"></canvas>
