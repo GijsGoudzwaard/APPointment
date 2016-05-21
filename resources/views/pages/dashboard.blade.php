@@ -4,7 +4,7 @@
 
 	<h4>Total appointments</h4>
 
-    <div class="charts">
+    <div class="charts clearfix">
         <div class="item">
             <canvas id="line" width="500" height="200"></canvas>
         </div>
