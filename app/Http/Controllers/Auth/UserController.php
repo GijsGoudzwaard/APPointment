@@ -13,7 +13,7 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
 	/**
-	 * @var Int|null
+	 * @var int|null
 	 */
 	private $company_id = null;
 
@@ -31,7 +31,7 @@ class UserController extends Controller
 	 * Show the index
 	 * Only get the users based on the given company_id or by the company of the logged in user
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function index()
 	{
@@ -47,8 +47,8 @@ class UserController extends Controller
 	/**
 	 * Show the edit form
 	 *
-	 * @param  Int $user_id
-	 * @return Response
+	 * @param  int $user_id
+	 * @return mixed
 	 */
 	public function edit($user_id)
 	{
@@ -61,8 +61,8 @@ class UserController extends Controller
 	 * Update the user information
 	 *
 	 * @param  Request $request
-	 * @param  Int $user_id
-	 * @return Response
+	 * @param  int $user_id
+	 * @return mixed
 	 */
 	public function update(Request $request, $user_id)
 	{
@@ -97,7 +97,7 @@ class UserController extends Controller
 	/**
 	 * Show the create form
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function create()
 	{
@@ -108,7 +108,7 @@ class UserController extends Controller
 	 * Create a new user
 	 *
 	 * @param Request $request
-	 * @return Response
+	 * @return mixed
 	 */
 	public function store(Request $request)
 	{
@@ -126,6 +126,20 @@ class UserController extends Controller
 		$user->save();
 
 		return redirect('users/' . $user->id . '/edit')->with('success', 'Successfully created');
+	}
+
+	/**
+	 * Delete a user
+	 *
+	 * @param  int $id
+	 * @return mixed
+	 */
+	public function delete($id)
+	{
+		$user = User::find($id);
+		$user->delete();
+
+		return redirect()->back()->with('success', 'Successfully deleted');
 	}
 
 	/**
@@ -149,9 +163,9 @@ class UserController extends Controller
 	/**
 	 * Login using the $user_id
 	 *
-	 * @param  Int $company_id
-	 * @param  Int $user_id
-	 * @return Response
+	 * @param  int $company_id
+	 * @param  int $user_id
+	 * @return mixed
 	 */
 	public function loginUsingId($company_id, $user_id)
 	{

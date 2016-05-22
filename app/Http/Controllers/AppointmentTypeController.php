@@ -89,6 +89,20 @@ class AppointmentTypeController extends Controller
 	}
 
 	/**
+	 * Delete an appointment type
+	 *
+	 * @param  int $id
+	 * @return mixed
+	 */
+	public function delete($id)
+	{
+	    $appointment_type = AppointmentType::find($id);
+		$appointment_type->delete();
+
+		return redirect()->back()->with('success', 'Successfully deleted');
+	}
+
+	/**
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request

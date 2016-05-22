@@ -30,26 +30,20 @@ $(function() {
 	});
 
 	function getAppointments(start, end) {
-		$('#loader').fadeIn();
-		$.ajax({
-			url: "/appointments/get?start=" + start + "&end=" + end,
-			type: 'GET',
-			success: function(data) {
-				for (var i = 0; i < data.length; i++) {
-					calendar.fullCalendar('renderEvent', {
-						id: data[i].id,
-						title: data[i].name,
-						allDay: false,
-						start: data[i].scheduled_at,
-						end: moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
-						// color: '#000'
-					});
-				}
-				$('#loader').fadeOut();
-			},
-			error: function(data) {
-				console.log(data);
-				$('#loader').fadeOut();
+		ajax({
+			destination: '/appointments/get?start=' + start + '&end=' + end,
+			method: 'GET',
+			loader: true,
+		}, function(res) {
+			var data = JSON.parse(res);
+			for (var i = 0; i < data.length; i++) {
+				calendar.fullCalendar('renderEvent', {
+					id: data[i].id,
+					title: data[i].name,
+					allDay: false,
+					start: data[i].scheduled_at,
+					end: moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
+				});
 			}
 		});
 	}
