@@ -149,10 +149,14 @@ class AppointmentController extends Verify
 		for ($i = 1; $i <= 12; $i++) {
 			$date = Carbon::create(Carbon::now()->year, $i, 1, 0);
 
-			$appointments[] = Appointment::whereBetween('scheduled_at', [
-				$date->startOfMonth()->toDateTimeString(),
-				$date->endOfMonth()->toDateTimeString()
-			])->selectRaw('count(*) as amount')->get()->pluck('amount');
+			$month = get_company()->appointmentTypes->map(function($appointment_type) use($date) {
+				return $appointment_type->appointments()->whereBetween('scheduled_at', [
+					$date->startOfMonth()->toDateTimeString(),
+					$date->endOfMonth()->toDateTimeString()
+				])->selectRaw('count(*) as amount')->get()->pluck('amount');
+			});
+
+			$appointments[] = $month->flatten()->sum();
 		}
 
 		return collect($appointments)->flatten();
