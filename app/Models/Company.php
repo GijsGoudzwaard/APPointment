@@ -96,6 +96,6 @@ class Company extends Model
             $appointments->whereBetween('scheduled_at', $between);
         }
 
-        return $appointments->get();
+        return $appointments;
     }
 }

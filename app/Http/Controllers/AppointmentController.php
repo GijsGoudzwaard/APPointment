@@ -30,7 +30,7 @@ class AppointmentController extends Verify
 	{
 		$start = date('Y-m-d H:i:s', $request->get('start'));
 		$end = date('Y-m-d H:i:s', $request->get('end'));
-		$appointments = get_company()->appointments([$start, $end]);
+		$appointments = get_company()->appointments([$start, $end])->get();
 
 		return $appointments->map(function($appointment) {
 			return collect($appointment, $appointment->appointmentType);
@@ -149,14 +149,10 @@ class AppointmentController extends Verify
 		for ($i = 1; $i <= 12; $i++) {
 			$date = Carbon::create(Carbon::now()->year, $i, 1, 0);
 
-			$month = get_company()->appointmentTypes->map(function($appointment_type) use($date) {
-				return $appointment_type->appointments()->whereBetween('scheduled_at', [
-					$date->startOfMonth()->toDateTimeString(),
-					$date->endOfMonth()->toDateTimeString()
-				])->selectRaw('count(*) as amount')->get()->pluck('amount');
-			});
-
-			$appointments[] = $month->flatten()->sum();
+			$appointments[] = get_company()->appointments([
+				$date->startOfMonth()->toDateTimeString(),
+				$date->endOfMonth()->toDateTimeString()
+			])->selectRaw('count(*) as amount')->get()->pluck('amount')->sum();
 		}
 
 		return collect($appointments)->flatten();
