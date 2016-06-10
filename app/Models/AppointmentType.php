@@ -59,4 +59,14 @@ class AppointmentType extends Model
     {
         return $this->appointments()->selectRaw('count(*) as amount')->get()->first()->amount;
     }
+
+    /**
+     * A belongsToMany relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'appointment_type_staff');
+    }
 }

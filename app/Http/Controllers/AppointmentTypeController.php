@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\AppointmentType;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Validator;
 
@@ -30,8 +31,17 @@ class AppointmentTypeController extends Controller
 	public function edit($appointment_type_id)
 	{
 		$appointment_type = AppointmentType::find($appointment_type_id);
+		$active_employees = $appointment_type->users->pluck('id')->toArray();
+		$users = get_company()->users->where('role', 1);
+		$employees = [];
 
-		return view('pages.appointmenttypes.edit', compact('appointment_type'));
+		foreach ($users as $key => $user) {
+			$employees[$user->id] = $user->firstname . ' ' . $user->surname;
+		}
+
+		return view('pages.appointmenttypes.edit', compact([
+			'appointment_type', 'employees', 'active_employees'
+		]));
 	}
 
 	/**
@@ -53,6 +63,8 @@ class AppointmentTypeController extends Controller
 		$appointment_type->fill($request->all());
 		$appointment_type->save();
 
+		$appointment_type->users()->sync($request->get('employees'));
+
 		return redirect()->back()->with('success', 'Successfully updated');
 	}
 
@@ -63,7 +75,14 @@ class AppointmentTypeController extends Controller
 	 */
 	public function create()
 	{
-		return view('pages.appointmenttypes.create');
+		$users = get_company()->users->where('role', 1);
+		$employees = [];
+
+		foreach ($users as $key => $user) {
+			$employees[$user->id] = $user->firstname . ' ' . $user->surname;
+		}
+
+		return view('pages.appointmenttypes.create', compact('employees'));
 	}
 
 	/**
@@ -84,6 +103,11 @@ class AppointmentTypeController extends Controller
 		$appointment_type->fill($request->all());
 		$appointment_type->company_id = get_company()->id;
 		$appointment_type->save();
+
+		foreach ($request->get('employees') as $index => $employee) {
+			$user = User::find($employee);
+			$user->appointmentTypes()->attach($appointment_type->id);
+		}
 
 		return redirect('appointmenttypes/' . $appointment_type->id . '/edit')->with('success', 'Successfully updated');
 	}

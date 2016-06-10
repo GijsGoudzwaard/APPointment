@@ -24,7 +24,7 @@ class User extends Model implements AuthenticatableContract,
      */
     protected $fillable = ['firstname', 'surname', 'email', 'phonenumber'];
 
-    /**
+	/**
      * The attributes excluded from the model's JSON form.
      *
      * @var array
@@ -37,8 +37,8 @@ class User extends Model implements AuthenticatableContract,
 	 * @var array
 	 */
 	private static $roles = [
-		'employee' => 0,
-		'admin' => 1,
+		'admin' => 0,
+		'employee' => 1,
 		'customer' => 2,
 	];
 
@@ -61,5 +61,15 @@ class User extends Model implements AuthenticatableContract,
 	public static function role($role)
 	{
 	    return static::$roles[$role];
+	}
+
+	/**
+	 * A belongsToMany relation
+	 *
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+	 */
+	public function appointmentTypes()
+	{
+		return $this->belongsToMany(AppointmentType::class, 'appointment_type_staff');
 	}
 }

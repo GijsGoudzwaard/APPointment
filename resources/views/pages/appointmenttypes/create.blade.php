@@ -21,6 +21,15 @@
 			<input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" placeholder="Price" required>
 		</div>
 
+		<div class="form-group">
+			<label for="employees">Eligible employees *</label>
+			{{ Form::select('employees[]', $employees, null, [
+				'id' => 'employees',
+				'class' => 'form-control',
+				'multiple' => 'multiple'
+			]) }}
+		</div>
+
 		<button type="submit" class="btn btn-default">Submit</button>
 		<a href="{{ url('appointmenttypes') }}" class="btn btn-default">Back</a>
 

@@ -44,6 +44,7 @@ class AuthController extends Controller
     /**
      * Handle an authentication attempt.
      *
+	 * @param Request $request
      * @return Response
      */
     public function authenticate(Request $request)

@@ -36,7 +36,7 @@ class UserController extends Controller
 	public function index()
 	{
 		$company_id = $this->company_id ?? get_company()->id;
-		$users = Company::find($company_id)->users->where('role', 0);
+		$users = Company::find($company_id)->users->where('role', 1);
 
 		return view('pages.users.index', [
 			'users' => $users,
@@ -121,7 +121,7 @@ class UserController extends Controller
 		$user->fill($request->all());
 		$user->company_id = $this->company_id ?? get_company()->id;
 		$user->password = bcrypt($request->get('password'));
-		$user->role = 0;
+		$user->role = 1;
 
 		$user->save();
 
