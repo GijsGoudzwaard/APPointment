@@ -26,7 +26,7 @@
 			{{ Form::select('employees[]', $employees, $active_employees, [
 				'id' => 'employees',
 				'class' => 'form-control',
-				'multiple' => 'multiple'
+				'multiple' => true
 			]) }}
 		</div>
 

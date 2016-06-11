@@ -49,7 +49,7 @@ class AuthController extends Controller
      */
     public function authenticate(Request $request)
 	{
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password], (isset($request->remember) ? true : false))) {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 0], (isset($request->remember) ? true : false))) {
             return redirect()->intended('/');
         }
 

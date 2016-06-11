@@ -11,6 +11,7 @@
 					<th>Name</th>
 					<th>Email</th>
 					{!! ($company_id) ? '<th>Login</th>' : '' !!}
+					<th>Active</th>
 					<th>Company</th>
 					<th>Actions</th>
 				</tr>
@@ -24,6 +25,7 @@
 						<td>{{ $user->firstname . ' ' . $user->surname }}</td>
 						<td>{{ $user->email }}</td>
 						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
+						<td>{{ $user->active == 0 ? 'Yes' : 'No' }}</td>
 						<td>{{ $user->company->name }}</td>
 						<td>
 							<a href="{{ url('/users/' . $user->id . '/edit') }}"><i class="material-icons">edit</i></a>

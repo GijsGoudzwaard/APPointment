@@ -32,6 +32,14 @@
 		</div>
 
 		<div class="form-group">
+			<label for="active">Active</label>
+			{{ Form::select('active', ['Yes', 'No'], $user->active, [
+				'class' => 'form-control',
+				'id' => 'active'
+			]) }}
+		</div>
+
+		<div class="form-group">
 			<label for="avatar">Avatar</label>
 			<input type="file" class="form-control" id="avatar" name="avatar">
 		</div>
