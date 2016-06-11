@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\AppointmentType;
+use Cache;
+use Validator;
 use App\Models\User;
 use Illuminate\Http\Request;
-use Validator;
+use App\Models\AppointmentType;
 
 class AppointmentTypeController extends Controller
 {
@@ -148,9 +149,19 @@ class AppointmentTypeController extends Controller
      */
 	public function getStats()
 	{
+		// See if we already have a cache file
+		if (Cache::has('appointment_type_stats')) {
+			return Cache::get('appointment_type_stats');
+		}
+
 	    $appointment_types = get_company()->appointmentTypes;
 
-        return collect($appointment_types->map([$this, 'getAppointments']));
+        $stats = collect($appointment_types->map([$this, 'getAppointments']));
+
+		// Store the appointment stats in a cache file for a day
+		Cache::store('file')->put('appointment_type_stats', $stats, 1440);
+
+		return $stats;
 	}
 
     /**

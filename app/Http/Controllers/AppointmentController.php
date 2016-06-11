@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Cache;
 use Carbon\Carbon;
 use Validator;
 use App\Jobs\Verify;
@@ -146,6 +147,11 @@ class AppointmentController extends Verify
 	{
 		$appointments = [];
 
+		// See if we already have a cache file
+		if (Cache::has('appointment_stats')) {
+		    return Cache::get('appointment_stats');
+		}
+
 		for ($i = 1; $i <= 12; $i++) {
 			$date = Carbon::create(Carbon::now()->year, $i, 1, 0);
 
@@ -154,6 +160,9 @@ class AppointmentController extends Verify
 				$date->endOfMonth()->toDateTimeString()
 			])->selectRaw('count(*) as amount')->get()->pluck('amount')->sum();
 		}
+
+		// Store the appointment stats in a cache file for a day
+		Cache::store('file')->put('appointment_stats', collect($appointments)->flatten(), 1440);
 
 		return collect($appointments)->flatten();
 	}
