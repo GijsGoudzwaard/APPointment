@@ -85,19 +85,19 @@ form {
 	}
 
 	button {
-	    padding: 14px 25px;
-	    margin: .3em 0 1em 0;
-	    width: 100%;
-	    color: #fff;
-	    font-size: 16px;
-	    line-height: 20px;
-	    text-align: center;
-	    letter-spacing: 1px;
-	    background: $purple;
-	    border: 0;
-	    cursor: pointer;
-	    text-transform: uppercase;
-	    border-radius: 2px;
+		padding: 14px 25px;
+		margin: .3em 0 1em 0;
+		width: 100%;
+		color: #fff;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 1px;
+		background: $purple;
+		border: 0;
+		cursor: pointer;
+		text-transform: uppercase;
+		border-radius: 2px;
 		transition: all .1s linear;
 
 		&:hover {
@@ -107,5 +107,26 @@ form {
 		&:focus {
 			outline: 0;
 		}
+	}
+
+	a {
+		font-size: 13px;
+		position: relative;
+		color: $purple;
+		text-decoration: none;
+		bottom: 10px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.password-reset {
+	height: 200px;
+
+	h4 {
+		margin: 0;
+		color: $purple;
 	}
 }

@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
+use Auth;
 use Validator;
-use App\Http\Controllers\Controller;
+use App\Models\User;
+use Illuminate\Http\Request;
 use App\Http\Requests\UrlParser;
+use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
-use Illuminate\Http\Request;
-use Auth;
 
 class AuthController extends Controller
 {
@@ -32,13 +32,13 @@ class AuthController extends Controller
 	 *
 	 * @return Response
 	 */
-    public function showForm()
+    public function showLoginForm()
 	{
 		if (UrlParser::getSubdomain()) {
 			return redirect(UrlParser::getHost(null, true, true, false));
 		}
 
-        return view('login');
+        return view('auth.login');
     }
 
     /**
@@ -95,6 +95,6 @@ class AuthController extends Controller
 	{
 		Auth::logout();
 
-		return redirect()->action('Auth\AuthController@showForm');
+		return redirect()->action('Auth\AuthController@showLoginForm');
 	}
 }

@@ -13,8 +13,10 @@
 
 Route::group(['middleware' => 'web'], function () {
 
-	Route::get('login', 'Auth\AuthController@showForm');
-	Route::post('login', 'Auth\AuthController@authenticate');
+//	Route::get('login', 'Auth\AuthController@showForm');
+//	Route::post('login', 'Auth\AuthController@authenticate');
+
+	Route::auth();
 
 });
 
