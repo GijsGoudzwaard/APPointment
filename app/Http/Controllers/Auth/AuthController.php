@@ -30,7 +30,7 @@ class AuthController extends Controller
 	 * Show the login form
 	 * If we are already on a subdomain, redirect to the host
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
     public function showLoginForm()
 	{
@@ -45,7 +45,7 @@ class AuthController extends Controller
      * Handle an authentication attempt.
      *
 	 * @param Request $request
-     * @return Response
+     * @return mixed
      */
     public function authenticate(Request $request)
 	{
@@ -89,7 +89,7 @@ class AuthController extends Controller
 	/**
 	 * Log the user out
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function logout()
 	{

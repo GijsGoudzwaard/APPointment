@@ -21,7 +21,7 @@ class UrlParser
 		// Remove 'www.' if it is set
 		$host = str_replace('www.', '', parse_url($url, PHP_URL_HOST));
 
-		if (!$getSubdomain && self::getSubdomain($host)) {
+		if (! $getSubdomain && self::getSubdomain($host)) {
 			$arr = explode('.', $host);
 			// Since the subdomain is always the first, unset it
 			unset($arr[0]);
@@ -56,7 +56,7 @@ class UrlParser
 		 // Check if the url starts with http
 		 if ($url && substr($url, 0, 4) == 'http') {
 			 // Remove it
-			 $url = preg_replace("(^https?://)", "", $url);
+			 $url = preg_replace('(^https?://)', '', $url);
 		 }
 
 		 $arr = explode('.', $url ?? self::getHost($url, $getPort));
@@ -75,7 +75,7 @@ class UrlParser
 	 * At this moment we only support url's like this: subdomain.domain.com
 	 *
 	 * @param String $url
-	 * @return Response
+	 * @return mixed
 	 */
 	public static function setSubdomain(String $url = null)
 	{
@@ -85,7 +85,7 @@ class UrlParser
 		$scheme = parse_url($url, PHP_URL_SCHEME) . '://';
 
 		// Check if we already have a subdomain in the url
-		if($subdomain) {
+		if ($subdomain) {
 			// We do, replace it
 			// Replace the subdomain with the subdomain from the logged in user
 			$newUrl = str_replace($subdomain, get_company()->subdomain, $host);
