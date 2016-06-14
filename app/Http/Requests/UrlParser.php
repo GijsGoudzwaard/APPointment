@@ -59,10 +59,10 @@ class UrlParser
 			 $url = preg_replace("(^https?://)", "", $url);
 		 }
 
-		$arr = explode('.', $url ?? self::getHost($url, $getPort));
+		 $arr = explode('.', $url ?? self::getHost($url, $getPort));
 
 		// Check if we we can find a subdomain
-		if (count($arr) > 2 && count($arr) < 4) {
+		if (count($arr) > 2) {
 			// We can, let them pass
 			return $arr[0];
 		}
