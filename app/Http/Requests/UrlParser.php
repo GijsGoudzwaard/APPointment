@@ -23,11 +23,10 @@ class UrlParser
 
 		if (! $getSubdomain && self::getSubdomain($host)) {
 			$arr = explode('.', $host);
-			// Since the subdomain is always the first, unset it
-			unset($arr[0]);
 
 			// Set the new $host
-			$host = implode('.', $arr);
+			// Get only the last 2 elements from the array since that is the host
+			$host = implode('.', array_slice($arr, -2, 2, true));
 		}
 
 		// Check if we need to get the port aswell
@@ -80,19 +79,8 @@ class UrlParser
 	public static function setSubdomain(String $url = null)
 	{
 		$url = $url ?? url('');
-		$subdomain = self::getSubdomain($url);
 		$host = self::getHost($url, env('APP_DEBUG', false));
 		$scheme = parse_url($url, PHP_URL_SCHEME) . '://';
-
-		// Check if we already have a subdomain in the url
-		if ($subdomain) {
-			// We do, replace it
-			// Replace the subdomain with the subdomain from the logged in user
-			$newUrl = str_replace($subdomain, get_company()->subdomain, $host);
-
-			// Redirect to our new url
-			return redirect($scheme . $newUrl);
-		}
 
 		// We don't have a subdomain, set it
 		return redirect($scheme . get_company()->subdomain . '.' . $host);

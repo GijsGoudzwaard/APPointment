@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use Auth;
 use Validator;
 use App\Models\User;
+use App\Models\Company;
 use Illuminate\Http\Request;
 use App\Http\Requests\UrlParser;
 use App\Http\Controllers\Controller;
@@ -34,8 +35,11 @@ class AuthController extends Controller
 	 */
     public function showLoginForm()
 	{
-		if (UrlParser::getSubdomain()) {
-			return redirect(UrlParser::getHost(null, true, true, false));
+		$url = UrlParser::getSubdomain();
+		$company = Company::where('subdomain', $url)->get();
+
+		if ($url !== false && ! $company->isEmpty()) {
+			return redirect(str_replace($company->first()->subdomain.'.', '', url('')));
 		}
 
         return view('auth.login');
@@ -47,10 +51,10 @@ class AuthController extends Controller
 	 * @param Request $request
      * @return mixed
      */
-    public function authenticate(Request $request)
+    public function login(Request $request)
 	{
-        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 0], (isset($request->remember) ? true : false))) {
-            return redirect()->intended('/');
+		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 0], (isset($request->remember) ? true : false))) {
+			return redirect()->intended('/');
         }
 
 		return redirect()->back()->with('error', 'Email or password is incorrect');
