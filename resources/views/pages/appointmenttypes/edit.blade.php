@@ -21,13 +21,11 @@
 			<input type="text" class="form-control" id="price" name="price" value="{{ old('price') ?? $appointment_type->price }}" placeholder="Price" required>
 		</div>
 
-		<div class="form-group">
-			<label for="employees">Eligible employees *</label>
-			{{ Form::select('employees[]', $employees, $active_employees, [
-				'id' => 'employees',
-				'class' => 'form-control',
-				'multiple' => true
-			]) }}
+		<div class="form-group multiselect">
+			<label>Eligible employees *</label>
+			@foreach ($employees as $id => $employee)
+				<label><input type="checkbox" name="employees[{{ $id }}]" class="form-control" value="{{ old('employees['.$id.']') ?? $id }}" {{ in_array($id, $active_employees) ? 'checked': '' }}>{{ $employee }}</label>
+			@endforeach
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
