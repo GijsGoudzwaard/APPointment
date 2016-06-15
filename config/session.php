@@ -137,7 +137,7 @@ return [
     |
     */
 
-	'domain' => app()->runningInConsole() ? null : '.'.UrlParser::getHost(null, false, false, false),
+	'domain' => app()->runningInConsole() ? null : '.'.str_replace(['http://', 'https://', ':8000'], '', request()->root()),
 
     /*
     |--------------------------------------------------------------------------
