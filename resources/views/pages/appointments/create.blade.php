@@ -39,8 +39,8 @@
 @section('js')
 	<script type="text/javascript">
 		$('#scheduled_at').datetimepicker({
-			format: 'YYYY-MM-DD HH:mm',
-			defaultDate: moment("{{ date('m/d/Y H:i', strtotime($date)) }}", 'MM/DD/YYYY HH:mm')
+			format: 'DD-MM-YYYY HH:mm',
+			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($date)) }}", 'DD/MM/YYYY HH:mm')
 		});
 	</script>
 @stop
