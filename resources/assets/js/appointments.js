@@ -7,6 +7,7 @@ $(function() {
 			right: 'agendaDay, agendaWeek, month'
 		},
 		defaultView: 'agendaWeek',
+		axisFormat: 'HH:mm',
 		height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
 		views: {
 			week: {
