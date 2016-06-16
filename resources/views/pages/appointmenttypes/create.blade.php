@@ -21,12 +21,12 @@
 			<input type="text" class="form-control" id="price" name="price" value="{{ old('price') }}" placeholder="Price" required>
 		</div>
 
-	<div class="form-group multiselect">
-		<label>Eligible employees *</label>
-		@foreach ($employees as $id => $employee)
-			<label><input type="checkbox" name="employees[{{ $id }}]" class="form-control" value="{{ old('employees['.$id.']') ?? $id }}">{{ $employee }}</label>
-		@endforeach
-	</div>
+		<div class="form-group multiselect">
+			<label>Eligible employees *</label>
+			@foreach ($employees as $id => $employee)
+				<label><input type="checkbox" name="employees[{{ $id }}]" class="form-control" value="{{ old('employees['.$id.']') ?? $id }}">{{ $employee }}</label>
+			@endforeach
+		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
 		<a href="{{ url('appointmenttypes') }}" class="btn btn-default">Back</a>
