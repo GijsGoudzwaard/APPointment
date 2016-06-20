@@ -12,7 +12,7 @@
 		<li>
 			<a href="{{ route('appointmenttypes.index') }}" title="Appointment types"><i class="material-icons">subject</i> <span>Appointment types</span></a>
 		</li>
-		@if (Auth::user()->role == 1)
+		@if (Auth::user()->role == Auth::user()->role('admin'))
 			<li>
 				<a href="{{ route('companies.index') }}" title="Companies"><i class="material-icons">extension</i> <span>Companies</span></a>
 			</li>

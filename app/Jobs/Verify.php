@@ -31,7 +31,7 @@ abstract class Verify extends Controller
 	 */
 	public function formatDate($element)
 	{
-	    if (! strtotime($element)) {
+	    if (is_array($element) || ! strtotime($element)) {
 	        return $element;
 	    }
 

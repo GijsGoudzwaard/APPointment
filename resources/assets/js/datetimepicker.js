@@ -12,12 +12,14 @@ $('.datetimepicker input[type="checkbox"]').on("click", function() {
 	}
 });
 
-$('.date .from').datetimepicker({
+$('.date.from').datetimepicker({
 	format: 'HH:mm',
-	defaultDate: moment('08:00', 'HH:mm')
+	defaultDate: moment('08:00', 'HH:mm'),
+	allowInputToggle: true
 });
 
-$('.date .to').datetimepicker({
+$('.date.to').datetimepicker({
 	format: 'HH:mm',
-	defaultDate: moment('17:00', 'HH:mm')
+	defaultDate: moment('17:00', 'HH:mm'),
+	allowInputToggle: true
 });

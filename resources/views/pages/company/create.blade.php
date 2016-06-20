@@ -56,16 +56,16 @@
 								<label for="from[{{ $key }}]">
 									{{ get_day_name($key) }}
 								</label>
-								<input type="checkbox" name="enabled[{{ $key }}]" />
-								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker from" id="from[{{ $key }}]" value="{{ old('from[' . $key . ']') }}" name="from[{{ $key }}]" />
+								<input type="checkbox" name="enabled[{{ $key }}]" checked />
+								<div class="input-group date from form-group">
+					                <input type="text" class="form-control picker" id="from[{{ $key }}]" value="{{ old('from[' . $key . ']') }}" name="from[{{ $key }}]" />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
 								<label for="to[{{ $key }}]">To</label>
-								<div class="input-group date form-group">
-					                <input type="text" class="form-control picker to" id="to[{{ $key }}]" value="{{ old('to[' . $key . ']') }}" name="to[{{ $key }}]" />
+								<div class="input-group date to form-group">
+					                <input type="text" class="form-control picker" id="to[{{ $key }}]" value="{{ old('to[' . $key . ']') }}" name="to[{{ $key }}]" />
 					                <span class="input-group-addon">
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>

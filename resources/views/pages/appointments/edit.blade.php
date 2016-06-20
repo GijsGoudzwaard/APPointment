@@ -21,7 +21,7 @@
 
 		<div class="form-group">
 			<label for="scheduled_at">Scheduled at *</label>
-			<div class="input-group form-group">
+			<div class="input-group date form-group">
 				<input type="text" class="form-control" name="scheduled_at" id="scheduled_at" />
 				<span class="input-group-addon">
 					<span class="glyphicon glyphicon-calendar"></span>
@@ -39,9 +39,10 @@
 
 @section('js')
 	<script type="text/javascript">
-		$('#scheduled_at').datetimepicker({
+		$('.date').datetimepicker({
 			format: 'DD-MM-YYYY HH:mm',
-			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($appointment->scheduled_at)) }}", 'DD/MM/YYYY HH:mm')
+			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($appointment->scheduled_at)) }}", 'DD/MM/YYYY HH:mm'),
+			allowInputToggle: true
 		});
 	</script>
 @stop
