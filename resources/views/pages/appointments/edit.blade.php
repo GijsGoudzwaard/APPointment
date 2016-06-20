@@ -30,10 +30,12 @@
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>
-		<a href="{{ url('appointments') }}" class="btn btn-default">Back</a>
-		<a href="{{ url('appointments/' . $appointment->id . '/delete') }}" class="btn btn-danger right">Delete</a>
+		<a href="{{ route('appointments.index') }}" class="btn btn-default">Back</a>
+		<a href="javascript:;" data-toggle="modal" class="open-modal btn btn-danger right" data-target="#delete-modal" data-title="{{ $appointment->name }}" data-url="{{ route('appointments.destroy', $appointment->id) }}">Delete</a>
 
 	{{ Form::close() }}
+
+	@include('layouts.delete-modal')
 
 @stop
 

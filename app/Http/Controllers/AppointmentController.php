@@ -117,7 +117,7 @@ class AppointmentController extends Verify
 	 * @param  int $id
 	 * @return mixed
 	 */
-	public function delete($id)
+	public function destroy($id)
 	{
 		$appointment = Appointment::find($id);
 		$appointment->delete();

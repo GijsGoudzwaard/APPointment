@@ -25,26 +25,23 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 	// This middleware is to prevent people from getting into the restricted area's
 	Route::group(['middleware' => 'admin'], function() {
 	    Route::resource('companies', 'CompanyController');
+
 	    Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
 			'show'
 		]]);
+
 		Route::get('companies/{company_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
 	});
 
 	// Appointments
-	Route::resource('appointments', 'AppointmentController', ['except' => [
-		'show', 'destroy'
-	]]);
+	Route::resource('appointments', 'AppointmentController', ['except' => ['show']]);
 	Route::get('appointments/get', 'AppointmentController@get');
-	Route::get('appointments/{id}/delete', 'AppointmentController@delete');
 
 	// Appointment types
 	Route::resource('appointmenttypes', 'AppointmentTypeController');
-	Route::get('appointmenttypes/{id}/delete', 'AppointmentTypeController@delete');
 
 	// Users
 	Route::resource('users', 'Auth\UserController');
-	Route::get('users/{id}/delete', 'Auth\UserController@delete');
 
 	Route::resource('customers', 'CustomerController', ['only' => ['index', 'show']]);
 

@@ -119,7 +119,7 @@ class AppointmentTypeController extends Controller
 	 * @param  int $id
 	 * @return mixed
 	 */
-	public function delete($id)
+	public function destroy($id)
 	{
 	    $appointment_type = AppointmentType::find($id);
 		$appointment_type->delete();

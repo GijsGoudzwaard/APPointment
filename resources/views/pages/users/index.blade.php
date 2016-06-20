@@ -1,7 +1,7 @@
 @extends('layouts.layout', ['page' => 'Accounts'])
 @section('content')
 
-	<a href="{{ url('users/create') }}" class="btn btn-default create">Create new account</a>
+	<a href="{{ route($company_id ? 'companies.{company_id}.users.create' : 'users.create', $company_id) }}" class="btn btn-default create">Create new account</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
 			<h1>Accounts</h1>
@@ -28,8 +28,8 @@
 						<td>{{ $user->active == 0 ? 'Yes' : 'No' }}</td>
 						<td>{{ $user->company->name }}</td>
 						<td>
-							<a href="{{ url('/users/' . $user->id . '/edit') }}"><i class="material-icons">edit</i></a>
-							<a href="javascript:;" data-toggle="modal" class="open-modal" data-target="#delete-modal" data-title="{{ $user->firstname . ' ' . $user->surname }}" data-url="{{ url('users/' . $user->id . '/delete') }}"><i class="material-icons">delete</i></a>
+							<a href="{{ route('users.edit', $user->id) }}"><i class="material-icons">edit</i></a>
+							<a href="javascript:;" data-toggle="modal" class="open-modal" data-target="#delete-modal" data-title="{{ $user->firstname . ' ' . $user->surname }}" data-url="{{ route('users.destroy', $user->id) }}"><i class="material-icons">delete</i></a>
 						</td>
 					</tr>
 				@endforeach
@@ -37,24 +37,6 @@
 		</table>
 	</div>
 
-	<div class="delete-modal modal fade" id="delete-modal" tabindex="-1" role="dialog">
-		<div class="modal-dialog">
-			<div class="modal-content">
-				<div class="modal-header">
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h4 class="modal-title">Delete</h4>
-				</div>
-				<div class="modal-body">
-					<p>
-						Are you sure you want to delete <strong class="text"></strong>?
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-					<a href class="btn link btn-primary submit">Submit</a>
-				</div>
-			</div>
-		</div>
-	</div>
+	@include('layouts.delete-modal')
 
 @stop

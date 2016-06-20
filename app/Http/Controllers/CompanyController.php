@@ -158,6 +158,20 @@ class CompanyController extends Verify
 	}
 
 	/**
+	 * Delete a company
+	 *
+	 * @param  int $id
+	 * @return mixed
+	 */
+	public function destroy($id)
+	{
+		$company = Company::find($id);
+		$company->delete();
+
+		return redirect()->back()->with('success', 'Successfully deleted');
+	}
+
+	/**
 	 * Create a new Validor instance
 	 *
 	 * @param  Request $request

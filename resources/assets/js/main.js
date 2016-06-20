@@ -10,5 +10,5 @@ $(".hamburger-menu").on("click", function() {
 
 $('.open-modal').on('click', function() {
 	$('.modal .text').text($(this).data('title'));
-	$('.modal .link').attr('href', $(this).data('url'));
+	$('.modal form').attr('action', $(this).data('url'));
 });
