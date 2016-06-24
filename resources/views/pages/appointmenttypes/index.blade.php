@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<a href="{{ url('appointmenttypes/create') }}" class="btn btn-default create">Create appointment type</a>
+	<a href="{{ route('appointmenttypes.create') }}" class="btn btn-default create">Create appointment type</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
 			<h1>Appointment types</h1>
@@ -19,7 +19,7 @@
 						<td>{{ $appointment_type->name }}</td>
 						<td>{{ $appointment_type->time }}</td>
 						<td>
-							<a href="{{ url('/appointmenttypes/' . $appointment_type->id . '/edit') }}"><i class="material-icons">edit</i></a>
+							<a href="{{ route('appointmenttypes.edit', $appointment_type->id) }}"><i class="material-icons">edit</i></a>
 							<a href="javascript:;" data-toggle="modal" class="open-modal" data-target="#delete-modal" data-title="{{ $appointment_type->name }}" data-url="{{ route('appointmenttypes.destroy', $appointment_type->id) }}"><i class="material-icons">delete</i></a>
 						</td>
 					</tr>

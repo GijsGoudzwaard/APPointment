@@ -101,7 +101,9 @@ class UserController extends Controller
 	 */
 	public function create()
 	{
-		return view('pages.users.create');
+		return view('pages.users.create', [
+			'company_id' => $this->company_id ?? ''
+		]);
 	}
 
 	/**
@@ -113,15 +115,16 @@ class UserController extends Controller
 	public function store(Request $request)
 	{
 		$validator = $this->validator($request->all());
+
 		if ($validator->fails()) {
 			return redirect()->back()->with('errors', $validator->errors()->all())->withInput();
 		}
 
 		$user = new User;
 		$user->fill($request->all());
-		$user->company_id = $this->company_id ?? get_company()->id;
+		$user->company_id = $request->get('company_id') ?? get_company()->id;
 		$user->password = bcrypt($request->get('password'));
-		$user->role = 1;
+		$user->role = $user::role('employee');
 
 		$user->save();
 
@@ -154,7 +157,7 @@ class UserController extends Controller
 		return Validator::make($request, [
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
-            'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email']) ? '' : '|unique:users',
+            'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email'] ? '' : '|unique:users'),
 			'phonenumber' => 'required|max:255',
             'password' => 'min:6',
         ]);
@@ -169,8 +172,9 @@ class UserController extends Controller
 	 */
 	public function loginUsingId($company_id, $user_id)
 	{
-		Auth::loginUsingId((int) $user_id);
-		return redirect('/');
+		Auth::loginUsingId($user_id);
+
+		return redirect()->route('dashboard');
 	}
 
 }

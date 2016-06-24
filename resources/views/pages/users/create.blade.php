@@ -50,8 +50,10 @@
 			</div>
 		@endif
 
+		<input type="hidden" name="company_id" value="{{ $company_id }}">
+
 		<button type="submit" class="btn btn-default">Submit</button>
-		<a href="{{ url('users') }}" class="btn btn-default">Back</a>
+		<a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
 
 	{{ Form::close() }}
 
