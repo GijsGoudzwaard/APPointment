@@ -21,7 +21,6 @@ var css = [
 ];
 
 var excluded_js = [
-	"!../bower_components/jquery/dist/jquery.slim.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone.min.js",
