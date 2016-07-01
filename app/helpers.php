@@ -43,3 +43,15 @@ if (! function_exists('clean_string')) {
 		return preg_replace('/[^A-Za-z0-9\-]/', '', $string);
 	}
 }
+
+if (! function_exists('get_url')) {
+	/**
+	 * Get the url without the current subdomain
+	 *
+	 * @return string
+	 */
+	function get_url()
+    {
+		return \App\Http\Requests\UrlParser::getHost(null, false, false, false);
+    }
+}

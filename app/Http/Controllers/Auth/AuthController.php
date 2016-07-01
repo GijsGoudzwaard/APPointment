@@ -42,7 +42,7 @@ class AuthController extends Controller
 			return redirect(str_replace($company->first()->subdomain.'.', '', url('')));
 		}
 
-        return view('auth.login');
+		return view('auth.login');
     }
 
     /**
@@ -53,7 +53,7 @@ class AuthController extends Controller
      */
     public function login(Request $request)
 	{
-		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 0], (isset($request->remember) ? true : false))) {
+		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], (isset($request->remember) ? true : false))) {
 			return redirect()->intended('/');
         }
 

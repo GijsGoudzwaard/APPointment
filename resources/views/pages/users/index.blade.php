@@ -25,7 +25,7 @@
 						<td>{{ $user->firstname . ' ' . $user->surname }}</td>
 						<td>{{ $user->email }}</td>
 						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
-						<td>{{ $user->active == 0 ? 'Yes' : 'No' }}</td>
+						<td>{{ $user->active == 1 ? 'Yes' : 'No' }}</td>
 						<td>{{ $user->company->name }}</td>
 						<td>
 							<a href="{{ route('users.edit', $user->id) }}"><i class="material-icons">edit</i></a>

@@ -33,7 +33,7 @@
 
 		<div class="form-group">
 			<label for="active">Active</label>
-			{{ Form::select('active', ['Yes', 'No'], $user->active, [
+			{{ Form::select('active', [1 => 'Yes', 0 => 'No'], $user->active, [
 				'class' => 'form-control',
 				'id' => 'active'
 			]) }}
@@ -51,7 +51,7 @@
 		@endif
 
 		<button type="submit" class="btn btn-default">Submit</button>
-		<a href="{{ route('users.index') }}" class="btn btn-default">Back</a>
+		<a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
 
 	{{ Form::close() }}
 

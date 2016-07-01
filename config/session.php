@@ -137,7 +137,7 @@ return [
     |
     */
 
-	'domain' => app()->runningInConsole() ? null : '.'.str_replace(['http://', 'https://', ':8000'], '', request()->root()),
+	'domain' => app()->runningInConsole() ? null : '.'.get_url(),
 
     /*
     |--------------------------------------------------------------------------

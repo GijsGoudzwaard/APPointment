@@ -11,7 +11,7 @@
 |
 */
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });
 
@@ -23,7 +23,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
     Route::get('/', ['as' => 'dashboard', 'uses' => 'PageController@dashboard']);
 
 	// This middleware is to prevent people from getting into the restricted area's
-	Route::group(['middleware' => 'admin'], function() {
+	Route::group(['middleware' => ['admin']], function() {
 	    Route::resource('companies', 'CompanyController');
 
 	    Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
@@ -51,7 +51,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
 
 });
 
-Route::group(['middleware' => 'web'], function () {
+Route::group(['middleware' => ['web']], function () {
 	Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
 	Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
 	Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
