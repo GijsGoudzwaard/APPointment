@@ -2,14 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UrlParser;
-
 class PageController extends Controller
 {
 	/**
 	 * Show the dashboard
 	 *
-	 * @return Response
+	 * @return mixed
 	 */
 	public function dashboard()
 	{
