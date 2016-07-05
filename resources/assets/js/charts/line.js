@@ -9,7 +9,17 @@ var lineChart = new Chart(elem('#line'), {
         ]
     },
     options: {
-        defaultFontSize: 0
+        defaultFontSize: 0,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    min: 0,
+                    stepSize: 10,
+                    suggestedMax: 100,
+                    beginAtZero: true
+                }
+            }],
+        }
     }
 });
 
