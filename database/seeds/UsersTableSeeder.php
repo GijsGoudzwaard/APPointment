@@ -19,8 +19,8 @@ class UsersTableSeeder extends Seeder
                 'email' => 'gijs.goudzwaard@gmail.com',
                 'phonenumber' => '0642311100',
                 'password' => bcrypt('changeme'),
-                'role' => 0,
-                'active' => 0
+                'role' => 1,
+                'active' => 1
             ]);
         }
     }
