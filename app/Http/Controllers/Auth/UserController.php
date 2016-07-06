@@ -54,7 +54,7 @@ class UserController extends Controller
 	{
 		$user = User::find($user_id);
 
-		return view('pages.users.edit', compact('user'));
+		return view('pages.users.edit', compact('user', 'company_id'));
 	}
 
 	/**
@@ -122,7 +122,7 @@ class UserController extends Controller
 
 		$user = new User;
 		$user->fill($request->all());
-		$user->company_id = $request->get('company_id') ?? get_company()->id;
+		$user->company_id = $request->get('company_id') ?: get_company()->id;
 		$user->password = bcrypt($request->get('password'));
 		$user->role = $user::role('employee');
 		$user->active = 1;

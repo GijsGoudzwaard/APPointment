@@ -53,7 +53,7 @@
 		<input type="hidden" name="company_id" value="{{ $company_id }}">
 
 		<button type="submit" class="btn btn-default">Submit</button>
-		<a href="{{ url()->previous() }}" class="btn btn-default">Back</a>
+		<a href="{{ route(!$company_id ? 'users.index' : 'companies.{company_id}.users.index', $company_id) }}" class="btn btn-default">Back</a>
 
 	{{ Form::close() }}
 
