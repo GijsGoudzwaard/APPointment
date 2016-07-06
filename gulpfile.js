@@ -16,6 +16,7 @@ var excluded_css = [
 ];
 
 var css = [
+	"../bower_components/**/bootstrap.min.css",
 	"../bower_components/**/*.min.css",
 	"*.css"
 ];
