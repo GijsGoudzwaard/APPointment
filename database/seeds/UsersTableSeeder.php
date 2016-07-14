@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\User;
 use Illuminate\Database\Seeder;
 
 class UsersTableSeeder extends Seeder
@@ -11,7 +12,8 @@ class UsersTableSeeder extends Seeder
      */
     public function run()
     {
-        $user = \App\Models\User::where('email', 'gijs.goudzwaard@gmail.com')->get();
+        $user = User::where('email', 'gijs.goudzwaard@gmail.com')->get();
+
         if ($user->isEmpty()) {
             DB::table('users')->insert([
                 'firstname' => 'Gijs',
@@ -19,7 +21,7 @@ class UsersTableSeeder extends Seeder
                 'email' => 'gijs.goudzwaard@gmail.com',
                 'phonenumber' => '0642311100',
                 'password' => bcrypt('changeme'),
-                'role' => 1,
+                'role' => User::role('admin'),
                 'active' => 1
             ]);
         }

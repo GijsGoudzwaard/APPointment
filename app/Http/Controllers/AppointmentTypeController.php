@@ -127,22 +127,6 @@ class AppointmentTypeController extends Controller
 		return redirect()->back()->with('success', 'Successfully deleted');
 	}
 
-	/**
-	 * Create a new Validor instance
-	 *
-	 * @param  Request $request
-	 * @return Validator
-	 */
-	public function validator($request)
-	{
-		return Validator::make($request, [
-			'name' => 'required|max:255',
-			'time' => 'required|integer',
-			'price' => 'required|integer',
-			'employees' => 'required'
-		]);
-	}
-
     /**
      * Get all the appointment types for the doughnut chart
      *
@@ -177,5 +161,21 @@ class AppointmentTypeController extends Controller
             'name' => $appointment_type->name,
             'amount' => $appointment_type->countAppointments()
         ];
+    }
+
+    /**
+     * Create a new Validor instance
+     *
+     * @param  Request $request
+     * @return Validator
+     */
+    private function validator($request)
+    {
+        return Validator::make($request, [
+            'name' => 'required|max:255',
+            'time' => 'required|integer',
+            'price' => 'required',
+            'employees' => 'required'
+        ]);
     }
 }
