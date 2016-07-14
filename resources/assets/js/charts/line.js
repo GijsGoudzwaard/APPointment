@@ -28,8 +28,7 @@ ajax({
     destination: '/api/appointments',
     loader: false,
 }, function(res) {
-    setLineData([0, 0, 0, 0, 0, 0, 103, 0, 0, 0, 0, 0, 0]);
-    // setLineData(JSON.parse(res));
+    setLineData(JSON.parse(res));
 });
 
 function setLineData(data) {
