@@ -12,14 +12,20 @@ $('.datetimepicker input[type="checkbox"]').on("click", function() {
 	}
 });
 
-$('.date.from').datetimepicker({
-	format: 'HH:mm',
-	defaultDate: moment('08:00', 'HH:mm'),
-	allowInputToggle: true
-});
+// To prevent errors when the element doesn't exist
+if ($('.date.from').length > 0) {
+	$('.date.from').datetimepicker({
+		format: 'HH:mm',
+		defaultDate: moment('08:00', 'HH:mm'),
+		allowInputToggle: true
+	});
+}
 
-$('.date.to').datetimepicker({
-	format: 'HH:mm',
-	defaultDate: moment('17:00', 'HH:mm'),
-	allowInputToggle: true
-});
+// To prevent errors when the element doesn't exist
+if ($('.date.to').length > 0) {
+	$('.date.to').datetimepicker({
+		format: 'HH:mm',
+		defaultDate: moment('17:00', 'HH:mm'),
+		allowInputToggle: true
+	});
+}

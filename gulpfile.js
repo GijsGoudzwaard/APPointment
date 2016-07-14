@@ -25,6 +25,8 @@ var excluded_js = [
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone-with-data.min.js",
 	"!../bower_components/moment-timezone/builds/moment-timezone.min.js",
+	"!../bower_components/select2/docs*",
+	"!../bower_components/select2/dist/js/select2.full.min.js",
 	"!charts/*.js"
 ];
 
@@ -32,8 +34,9 @@ var js = [
 	"../bower_components/jquery/dist/jquery.min.js",
 	"../bower_components/moment/min/moment.min.js",
 	"../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
-	"../bower_components/**/*.min.js",
 	"../../../node_modules/chart.js/dist/Chart.min.js",
+	"../bower_components/select2/dist/js/select2.min.js",
+	"../bower_components/**/*.min.js",
 	"**/*.js"
 ];
 

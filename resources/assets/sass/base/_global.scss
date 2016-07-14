@@ -13,8 +13,11 @@ h1 {
 	margin-left: 275px;
 	margin-top: 160px;
 	margin-right: 50px;
-	transition: margin .1s linear;
 	position: relative;
+
+	&.animate {
+		transition: margin .1s linear;
+	}
 
 	&.calendar {
 	    margin: 135px 0 0 225px;
@@ -67,12 +70,12 @@ table .material-icons {
 	height: 100%;
 	position: fixed;
 	background-color: rgba(#000, .5);
-	top:0;bottom:0;
-	left:0;right:0;
+	top: 0;bottom: 0;
+	left: 0;right: 0;
 	z-index: 10000;
 	visibility: hidden;
 	opacity: 0;
-	transition: all .5s linear;
+	transition: opacity .5s linear;
 
 	&.active {
 		visibility: visible;

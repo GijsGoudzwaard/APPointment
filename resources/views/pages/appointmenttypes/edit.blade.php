@@ -22,10 +22,12 @@
 		</div>
 
 		<div class="form-group multiselect">
-			<label>Eligible employees *</label>
-			@foreach ($employees as $id => $employee)
-				<label><input type="checkbox" name="employees[{{ $id }}]" class="form-control" value="{{ old('employees['.$id.']') ?? $id }}" {{ in_array($id, $active_employees) ? 'checked': '' }}>{{ $employee }}</label>
-			@endforeach
+			<label for="employees">Eligible employees *</label>
+			{{ Form::select('employees[]', ['Select employees'] + $employees, $active_employees, [
+				'class' => 'form-control select2',
+				'id' => 'employees',
+				'multiple' => true
+			]) }}
 		</div>
 
 		<button type="submit" class="btn btn-default">Submit</button>

@@ -40,9 +40,9 @@ class AppointmentTypeController extends Controller
 			$employees[$user->id] = $user->firstname . ' ' . $user->surname;
 		}
 
-		return view('pages.appointmenttypes.edit', compact([
+		return view('pages.appointmenttypes.edit', compact(
 			'appointment_type', 'employees', 'active_employees'
-		]));
+		));
 	}
 
 	/**

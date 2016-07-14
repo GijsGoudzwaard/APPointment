@@ -1,4 +1,5 @@
 $(".hamburger-menu").on("click", function() {
+	$("nav, .topbar, #content").addClass("animate");
 	$("nav, .topbar, #content").toggleClass("expanded");
 
 	if(getCookie("smallMenu")) {
@@ -12,3 +13,5 @@ $('.open-modal').on('click', function() {
 	$('.modal .text').text($(this).data('title'));
 	$('.modal form').attr('action', $(this).data('url'));
 });
+
+$('.select2').select2();

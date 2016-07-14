@@ -33,7 +33,7 @@ function createCookie(name, value, days) {
  * @param {String} name
  */
 function deleteCookie(name) {
-	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=" + getHost();
+	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=." + getHost();
 }
 
 /**
@@ -48,7 +48,7 @@ function getHost() {
 }
 
 /**
- * A small replacement for the jQuery $ for when using jQuery is not needed
+ * A small replacement for the jQuery $ for when jQuery isn't needed
  *
  * @param  {String} selector
  * @param  {Object} context

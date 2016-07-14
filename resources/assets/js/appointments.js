@@ -1,34 +1,38 @@
 $(function() {
 	var calendar = $('#calendar');
-	calendar.fullCalendar({
-		header: {
-			left: 'prev, today, next',
-			center: 'title',
-			right: 'agendaDay, agendaWeek, month'
-		},
-		defaultView: 'agendaWeek',
-		axisFormat: 'HH:mm',
-		height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
-		views: {
-			week: {
-				titleFormat: 'MMM DD'
+
+	// To prevent errors when the element doesn't exist
+	if (calendar.length > 0) {
+		calendar.fullCalendar({
+			header: {
+				left: 'prev, today, next',
+				center: 'title',
+				right: 'agendaDay, agendaWeek, month'
 			},
-			agendaDay: {
-				titleFormat: 'dddd DD'
+			defaultView: 'agendaWeek',
+			axisFormat: 'HH:mm',
+			height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
+			views: {
+				week: {
+					titleFormat: 'MMM DD'
+				},
+				agendaDay: {
+					titleFormat: 'dddd DD'
+				}
+			},
+			dayClick: function(date, event, view) {
+				window.location.href = "/appointments/create?date=" + moment(date).unix();
+			},
+			eventClick: function(date, event, view) {
+				window.location.href = "/appointments/" + date.id + "/edit";
+			},
+			viewRender: function(view, element) {
+				// Remove all events so we won't get any duplicates
+				calendar.fullCalendar('removeEvents');
+				getAppointments(moment(view.start).unix(), moment(view.end).unix());
 			}
-		},
-		dayClick: function(date, event, view) {
-			window.location.href = "/appointments/create?date=" + moment(date).unix();
-		},
-		eventClick: function(date, event, view) {
-			window.location.href = "/appointments/" + date.id + "/edit";
-		},
-		viewRender: function(view, element) {
-			// Remove all events so we won't get any duplicates
-			calendar.fullCalendar('removeEvents');
-			getAppointments(moment(view.start).unix(), moment(view.end).unix());
-		}
-	});
+		});
+	}
 
 	function getAppointments(start, end) {
 		ajax({
