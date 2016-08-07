@@ -48,8 +48,13 @@ class AppointmentController extends Verify
 	{
 		$date = date('Y-m-d H:i:s', $request->get('date'));
 		$appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
+        $users = [];
 
-		return view('pages.appointments.create', compact('date', 'appointment_types'));
+        foreach (get_company()->users as $user) {
+            $users[$user->id] = $user->firstname.' '.$user->surname;
+        }
+
+		return view('pages.appointments.create', compact('date', 'appointment_types', 'users'));
 	}
 
 	/**

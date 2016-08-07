@@ -20,6 +20,15 @@
 		</div>
 
 		<div class="form-group">
+			<label for="user">Employee *</label>
+			<select name="user" id="user" class="form-control select2">
+				@foreach ($users as $id => $user)
+					<option value="{{ $id }}">{{ $user }}</option>
+				@endforeach
+			</select>
+		</div>
+
+		<div class="form-group">
 			<label for="scheduled_at">Scheduled at *</label>
 			<div class="input-group date form-group">
 				<input type="text" class="form-control" name="scheduled_at" id="scheduled_at" />

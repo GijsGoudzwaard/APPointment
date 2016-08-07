@@ -26,7 +26,7 @@
 						<td>{{ $user->email }}</td>
 						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
 						<td>{{ $user->active == 1 ? 'Yes' : 'No' }}</td>
-						<td>{{ $user->company->name }}</td>
+						<td>{{ $company->name }}</td>
 						<td>
 							<a href="{{ route('users.edit', $user->id) }}"><i class="material-icons">edit</i></a>
 							<a href="javascript:;" data-toggle="modal" class="open-modal" data-target="#delete-modal" data-title="{{ $user->firstname . ' ' . $user->surname }}" data-url="{{ route('users.destroy', $user->id) }}"><i class="material-icons">delete</i></a>
