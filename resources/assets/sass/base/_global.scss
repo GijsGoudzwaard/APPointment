@@ -122,3 +122,17 @@ table .material-icons {
 .fc-time-grid-event {
 	cursor: pointer;
 }
+
+.select2-container--default .select2-selection--single {
+	height: 34px;
+	border: 1px solid #ccc;
+
+	.select2-selection__rendered {
+		line-height: 33px;
+		color: #555;
+	}
+
+	.select2-selection__arrow {
+		height: 33px;
+	}
+}
