@@ -11,7 +11,9 @@ before_script:
   - cp .env.travis .env
   - mysql -e 'create database travis_test;'
   - composer self-update
-  - composer install --no-interaction
+  - composer update --no-scripts --no-interaction
+  - composer dump-autoload -o
+  - composer update --no-interaction
 
 script:
   - vendor/bin/phpunit
