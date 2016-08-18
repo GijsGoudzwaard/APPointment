@@ -11,166 +11,166 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Verify
 {
-	/**
-	 * Show the calendar
-	 *
-	 * @return mixed
-	 */
-	public function index()
-	{
-		return view('pages.appointments.index');
-	}
+    /**
+     * Show the calendar
+     *
+     * @return mixed
+     */
+    public function index()
+    {
+        return view('pages.appointments.index');
+    }
 
-	/**
-	 * Get all appointments from your company
-	 *
-	 * @param Request $request
-	 * @return array
-	 */
-	public function get(Request $request)
-	{
-		$start = date('Y-m-d H:i:s', $request->get('start'));
-		$end = date('Y-m-d H:i:s', $request->get('end'));
-		$appointments = get_company()->appointments([$start, $end])->get();
+    /**
+     * Get all appointments from your company
+     *
+     * @param Request $request
+     * @return array
+     */
+    public function get(Request $request)
+    {
+        $start = date('Y-m-d H:i:s', $request->get('start'));
+        $end = date('Y-m-d H:i:s', $request->get('end'));
+        $appointments = get_company()->appointments([$start, $end])->get();
 
-		return $appointments->map(function($appointment) {
-			return collect($appointment, $appointment->appointmentType);
-		});
-	}
+        return $appointments->map(function ($appointment) {
+            return collect($appointment, $appointment->appointmentType);
+        });
+    }
 
-	/**
-	 * Show the create form
-	 *
-	 * @param  Request $request
-	 * @return mixed
-	 */
-	public function create(Request $request)
-	{
-		$date = date('Y-m-d H:i:s', $request->get('date'));
-		$appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
+    /**
+     * Show the create form
+     *
+     * @param  Request $request
+     * @return mixed
+     */
+    public function create(Request $request)
+    {
+        $date = date('Y-m-d H:i:s', $request->get('date'));
+        $appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
         $users = [];
 
         foreach (get_company()->users as $user) {
-            $users[$user->id] = $user->firstname.' '.$user->surname;
+            $users[$user->id] = $user->firstname . ' ' . $user->surname;
         }
 
-		return view('pages.appointments.create', compact('date', 'appointment_types', 'users'));
-	}
+        return view('pages.appointments.create', compact('date', 'appointment_types', 'users'));
+    }
 
-	/**
-	 * Store a new record
-	 *
-	 * @param  Request $request
-	 * @return mixed
-	 */
-	public function store(Request $request)
-	{
-		$validator = $this->verify($request->all());
+    /**
+     * Store a new record
+     *
+     * @param  Request $request
+     * @return mixed
+     */
+    public function store(Request $request)
+    {
+        $validator = $this->verify($request->all());
 
-		if ($validator) {
-			return $validator;
-		}
+        if ($validator) {
+            return $validator;
+        }
 
-		$appointment = new Appointment;
-		$appointment->fill($request->all());
-		$appointment->scheduled_at = $this->formatDate($request->scheduled_at);
-		$appointment->save();
+        $appointment = new Appointment;
+        $appointment->fill($request->all());
+        $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
+        $appointment->save();
 
-		return redirect('appointments/' . $appointment->id . '/edit')->with('success', 'Successfully created');
-	}
+        return redirect('appointments/' . $appointment->id . '/edit')->with('success', 'Successfully created');
+    }
 
-	/**
-	 * Show the edit form
-	 *
-	 * @param  int $id
-	 * @return mixed
-	 */
-	public function edit($id)
-	{
-		$appointment = Appointment::find($id);
-		$appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
+    /**
+     * Show the edit form
+     *
+     * @param  int $id
+     * @return mixed
+     */
+    public function edit($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
 
-		return view('pages.appointments.edit', compact('appointment', 'appointment_types'));
-	}
+        return view('pages.appointments.edit', compact('appointment', 'appointment_types'));
+    }
 
-	/**
-	 * Update the record by it's $id
-	 *
-	 * @param  Request $request
-	 * @param  int $id
-	 * @return mixed
-	 */
-	public function update(Request $request, $id)
-	{
-		$validator = $this->verify($request->all());
+    /**
+     * Update the record by it's $id
+     *
+     * @param  Request $request
+     * @param  int     $id
+     * @return mixed
+     */
+    public function update(Request $request, $id)
+    {
+        $validator = $this->verify($request->all());
 
-		if ($validator) {
-			return $validator;
-		}
+        if ($validator) {
+            return $validator;
+        }
 
-		$appointment = Appointment::find($id);
-		$appointment->fill($request->all());
-		$appointment->scheduled_at = $this->formatDate($request->scheduled_at);
-		$appointment->save();
+        $appointment = Appointment::find($id);
+        $appointment->fill($request->all());
+        $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
+        $appointment->save();
 
-		return redirect()->back()->with('success', 'Successfully updated');
-	}
+        return redirect()->back()->with('success', 'Successfully updated');
+    }
 
-	/**
-	 * Delete an appointment
-	 *
-	 * @param  int $id
-	 * @return mixed
-	 */
-	public function destroy($id)
-	{
-		$appointment = Appointment::find($id);
-		$appointment->delete();
+    /**
+     * Delete an appointment
+     *
+     * @param  int $id
+     * @return mixed
+     */
+    public function destroy($id)
+    {
+        $appointment = Appointment::find($id);
+        $appointment->delete();
 
-		return redirect('appointments')->with('success', 'Successfully deleted');
-	}
+        return redirect('appointments')->with('success', 'Successfully deleted');
+    }
 
-	/**
-	 * Create a new Validor instance
-	 *
-	 * @param  Request $request
-	 * @param  mixed $rules
-	 * @return Validator
-	 */
-	public function validator($request, $rules = null)
-	{
-		return Validator::make($request, [
-			'name' => 'required|max:255',
-			'scheduled_at' => 'required|date'
-		]);
-	}
+    /**
+     * Create a new Validor instance
+     *
+     * @param  Request $request
+     * @param  mixed   $rules
+     * @return Validator
+     */
+    public function validator($request, $rules = null)
+    {
+        return Validator::make($request, [
+            'name' => 'required|max:255',
+            'scheduled_at' => 'required|date'
+        ]);
+    }
 
-	/**
-	 * Count all appointments per month of this year
-	 *
-	 * @return \Illuminate\Support\Collection
-	 */
-	public function getStats()
-	{
-		$appointments = [];
+    /**
+     * Count all appointments per month of this year
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function getStats()
+    {
+        $appointments = [];
 
-		// See if we already have a cache file
-		if (Cache::has('appointment_stats')) {
-		    return Cache::get('appointment_stats');
-		}
+        // See if we already have a cache file
+        if (Cache::has('appointment_stats')) {
+            return Cache::get('appointment_stats');
+        }
 
-		for ($i = 1; $i <= 12; $i++) {
-			$date = Carbon::create(Carbon::now()->year, $i, 1, 0);
+        for ($i = 1; $i <= 12; $i++) {
+            $date = Carbon::create(Carbon::now()->year, $i, 1, 0);
 
-			$appointments[] = get_company()->appointments([
-				$date->startOfMonth()->toDateTimeString(),
-				$date->endOfMonth()->toDateTimeString()
-			])->selectRaw('count(*) as amount')->get()->pluck('amount')->sum();
-		}
+            $appointments[] = get_company()->appointments([
+                $date->startOfMonth()->toDateTimeString(),
+                $date->endOfMonth()->toDateTimeString()
+            ])->selectRaw('count(*) as amount')->get()->pluck('amount')->sum();
+        }
 
-		// Store the appointment stats in a cache file for a day
-		Cache::store('file')->put('appointment_stats', collect($appointments)->flatten(), 1440);
+        // Store the appointment stats in a cache file for a day
+        Cache::store('file')->put('appointment_stats', collect($appointments)->flatten(), 1440);
 
-		return collect($appointments)->flatten();
-	}
+        return collect($appointments)->flatten();
+    }
 }

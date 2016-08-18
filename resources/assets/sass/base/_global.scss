@@ -1,142 +1,145 @@
 body {
-	font-family: 'Roboto', sans-serif;
-	font-weight: 400;
-	background-color: #eee;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    background-color: #eee;
 }
 
 h1 {
-	font-size: 26px;
-	margin: 0 0 25px;
+    font-size: 26px;
+    margin: 0 0 25px;
 }
 
 input[type='checkbox'] {
-	box-shadow: none;
+    box-shadow: none;
 }
 
 #content {
-	margin-left: 275px;
-	margin-top: 160px;
-	margin-right: 50px;
-	position: relative;
+    margin-left: 275px;
+    margin-top: 160px;
+    margin-right: 50px;
+    position: relative;
 
-	&.animate {
-		transition: margin .1s linear;
-	}
+    &.animate {
+        transition: margin .1s linear;
+    }
 
-	&.calendar {
-	    margin: 135px 0 0 225px;
-	}
+    &.calendar {
+        margin: 135px 0 0 225px;
+    }
 
-	&.expanded {
-		margin-left: 150px;
+    &.expanded {
+        margin-left: 150px;
 
-		&.calendar {
-			margin: 135px 0 0 100px;
-		}
-	}
+        &.calendar {
+            margin: 135px 0 0 100px;
+        }
+    }
 }
 
 table .material-icons {
-	color: $light-purple;
+    color: $light-purple;
 
-	&:hover {
-		color: $purple;
-	}
+    &:hover {
+        color: $purple;
+    }
 }
 
 .table {
-	th, td, hr, thead, tbody, .fc-row {
-		background: transparent !important;
-	}
+    th, td, hr, thead, tbody, .fc-row {
+        background: transparent !important;
+    }
 }
+
 .table > tbody > tr > td {
-	vertical-align: middle;
+    vertical-align: middle;
 }
 
 .avatar {
-	width: 50px;
-	height: 50px;
-	background-size: cover;
-	background-repeat: no-repeat;
-	background-position: center;
-	border-radius: 100%;
-	display: inline-block;
+    width: 50px;
+    height: 50px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+    border-radius: 100%;
+    display: inline-block;
 }
 
 .btn.create {
-	float:right;
+    float: right;
     position: absolute;
     right: 0;
 }
 
 #loader {
-	width: 100%;
-	height: 100%;
-	position: fixed;
-	background-color: rgba(#000, .5);
-	top: 0;bottom: 0;
-	left: 0;right: 0;
-	z-index: 10000;
-	visibility: hidden;
-	opacity: 0;
-	transition: opacity .5s linear;
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    background-color: rgba(#000, .5);
+    top: 0; bottom: 0;
+    left: 0; right: 0;
+    z-index: 10000;
+    visibility: hidden;
+    opacity: 0;
+    transition: opacity .5s linear;
 
-	&.active {
-		visibility: visible;
-		opacity: 1;
-	}
+    &.active {
+        visibility: visible;
+        opacity: 1;
+    }
 
-	.container {
-		width: 350px;
-		height: 175px;
-		background-color: #fff;
-		border-radius: 8px;
-		position: fixed;
-		top:0;bottom:0;
-		left:0;right:0;
-		margin: auto;
-		text-align: center;
-		padding-top: 50px;
+    .container {
+        width: 350px;
+        height: 175px;
+        background-color: #fff;
+        border-radius: 8px;
+        position: fixed;
+        top: 0; bottom: 0;
+        left: 0; right: 0;
+        margin: auto;
+        text-align: center;
+        padding-top: 50px;
 
-		img {
-			-webkit-animation: spin .9s infinite linear;
-			-moz-animation: spin .9s infinite linear;
-			animation: spin .9s infinite linear;
-		}
+        img {
+            -webkit-animation: spin .9s infinite linear;
+            -moz-animation: spin .9s infinite linear;
+            animation: spin .9s infinite linear;
+        }
 
-		p {
-			padding-top: 20px;
-		}
-	}
+        p {
+            padding-top: 20px;
+        }
+    }
 }
 
 @-moz-keyframes spin {
     from { -moz-transform: rotate(0deg); }
     to { -moz-transform: rotate(360deg); }
 }
+
 @-webkit-keyframes spin {
     from { -webkit-transform: rotate(0deg); }
     to { -webkit-transform: rotate(360deg); }
 }
+
 @keyframes spin {
-    from { transform:rotate(0deg); }
-    to { transform:rotate(360deg); }
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
 }
 
 .fc-time-grid-event {
-	cursor: pointer;
+    cursor: pointer;
 }
 
 .select2-container--default .select2-selection--single {
-	height: 34px;
-	border: 1px solid #ccc;
+    height: 34px;
+    border: 1px solid #ccc;
 
-	.select2-selection__rendered {
-		line-height: 33px;
-		color: #555;
-	}
+    .select2-selection__rendered {
+        line-height: 33px;
+        color: #555;
+    }
 
-	.select2-selection__arrow {
-		height: 33px;
-	}
+    .select2-selection__arrow {
+        height: 33px;
+    }
 }

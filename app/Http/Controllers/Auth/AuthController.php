@@ -27,37 +27,37 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-	/**
-	 * Show the login form
-	 * If we are already on a subdomain, redirect to the host
-	 *
-	 * @return mixed
-	 */
+    /**
+     * Show the login form
+     * If we are already on a subdomain, redirect to the host
+     *
+     * @return mixed
+     */
     public function showLoginForm()
-	{
-		$url = UrlParser::getSubdomain();
-		$company = Company::where('subdomain', $url)->get();
+    {
+        $url = UrlParser::getSubdomain();
+        $company = Company::where('subdomain', $url)->get();
 
-		if ($url !== false && ! $company->isEmpty()) {
-			return redirect(str_replace($company->first()->subdomain.'.', '', url('')));
-		}
+        if ($url !== false && ! $company->isEmpty()) {
+            return redirect(str_replace($company->first()->subdomain . '.', '', url('')));
+        }
 
-		return view('auth.login');
+        return view('auth.login');
     }
 
     /**
      * Handle an authentication attempt.
      *
-	 * @param Request $request
+     * @param Request $request
      * @return mixed
      */
     public function login(Request $request)
-	{
-		if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], (isset($request->remember) ? true : false))) {
-			return redirect()->intended('/');
+    {
+        if (Auth::attempt(['email' => $request->email, 'password' => $request->password, 'active' => 1], (isset($request->remember) ? true : false))) {
+            return redirect()->intended('/');
         }
 
-		return redirect()->back()->with('error', 'Email or password is incorrect');
+        return redirect()->back()->with('error', 'Email or password is incorrect');
     }
 
     /**
@@ -67,7 +67,7 @@ class AuthController extends Controller
      * @return \Illuminate\Contracts\Validation\Validator
      */
     protected function validator(array $data)
-	{
+    {
         return Validator::make($data, [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
@@ -82,7 +82,7 @@ class AuthController extends Controller
      * @return User
      */
     protected function create(array $data)
-	{
+    {
         return User::create([
             'name' => $data['name'],
             'email' => $data['email'],
@@ -90,15 +90,15 @@ class AuthController extends Controller
         ]);
     }
 
-	/**
-	 * Log the user out
-	 *
-	 * @return mixed
-	 */
-	public function logout()
-	{
-		Auth::logout();
+    /**
+     * Log the user out
+     *
+     * @return mixed
+     */
+    public function logout()
+    {
+        Auth::logout();
 
-		return redirect()->action('Auth\AuthController@showLoginForm');
-	}
+        return redirect()->action('Auth\AuthController@showLoginForm');
+    }
 }
