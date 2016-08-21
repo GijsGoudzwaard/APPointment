@@ -20,10 +20,7 @@
 		@include('layouts.header')
 
 		<div id="content" class="{{ (isset($page) && strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
-			<?php $message = session('success') ?? session('errors') ?>
-
 			@include('layouts.message')
-
 			@yield('content')
 		</div>
 

@@ -91,7 +91,7 @@ nav {
 		right: 50px;
 		top: 32px;
 
-		&:hover ul {
+		&:hover > ul {
 			display: block;
 		}
 
@@ -101,7 +101,7 @@ nav {
 			margin-left: 12px;
 		}
 
-		ul {
+		> ul {
 			display: none;
 			background-color: #fff;
 			box-shadow: 3px 3px 4px #ccc;
@@ -114,6 +114,7 @@ nav {
 			}
 
 			li {
+				cursor: pointer;
 				list-style-type: none;
 
 				&:hover {
@@ -124,9 +125,31 @@ nav {
 					color: #000;
 					display: block;
 					padding: 12px;
+					text-decoration: none;
 
 					&:hover {
 						text-decoration: none;
+					}
+				}
+
+				&.language-switcher {
+					ul {
+						padding: 0;
+						max-height: 0;
+						overflow-y: hidden;
+						-webkit-transition: max-height .15s linear;
+						-moz-transition: max-height .15s linear;
+						-ms-transition: max-height .15s linear;
+						-o-transition: max-height .15s linear;
+						transition: max-height .15s linear;
+
+						li {
+							padding-left: 10px;
+						}
+					}
+
+					&.active ul {
+						max-height: 100px;
 					}
 				}
 			}

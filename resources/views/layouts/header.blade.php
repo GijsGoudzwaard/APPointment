@@ -7,6 +7,14 @@
 		<span>{{ Auth::user()->firstname . ' ' . Auth::user()->surname }}</span>
 		<ul>
 			<li><a href="{{ route('users.edit', Auth::user()->id) }}">Account settings</a></li>
+			<li class="language-switcher">
+				<a href="javascript:;">Language: <strong>NL</strong></a>
+				<ul>
+					@foreach (get_locales() as $locale)
+						<li><a href="{{ $locale }}">{{ trans('languages.' . $locale) }}</a></li>
+					@endforeach
+				</ul>
+			</li>
 			<li><a href="{{ route('auth.logout') }}">Logout</a></li>
 		</ul>
 	</div>

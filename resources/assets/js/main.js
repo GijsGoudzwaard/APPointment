@@ -15,3 +15,7 @@ $('.open-modal').on('click', function() {
 });
 
 $('.select2').select2();
+
+elem('.language-switcher').addEventListener('click', function() {
+	this.classList.toggle('active');
+});
