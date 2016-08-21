@@ -1,4 +1,10 @@
 .charts {
+    user-select: none;
+    -moz-user-select: none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    -o-user-select: none;
+
     .item {
         background-color: #fff;
         border: 2px solid #eee;

@@ -1,4 +1,4 @@
-@extends('layouts.layout', ['page' => null])
+@extends('layouts.layout')
 
 @section('content')
 
