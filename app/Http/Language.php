@@ -2,7 +2,10 @@
 
 namespace App\Http;
 
-class Language
+use Cookie;
+use App\Http\Controllers\Controller;
+
+class Language extends Controller
 {
     /**
      * The supported locales
@@ -14,8 +17,22 @@ class Language
         'en'
     ];
 
+    /**
+     * Set a the locale
+     *
+     * @param  string $locale
+     * @return mixed
+     */
     public function set($locale)
     {
-        // set lang
+        if (! Cookie::get('lang')) {
+            Cookie::queue('lang', 'nl');
+        }
+
+        if ($locale != Cookie::get('lang')) {
+            Cookie::queue('lang', $locale);
+        }
+
+        return redirect()->back();
     }
 }

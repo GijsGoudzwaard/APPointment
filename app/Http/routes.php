@@ -15,40 +15,41 @@ Route::group(['middleware' => ['web']], function () {
 	Route::auth();
 });
 
-Route::group(['middleware' => ['web', 'auth', 'subdomain']], function () {
+Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function () {
 
     Route::get('api/appointments', 'AppointmentController@getStats');
     Route::get('api/appointmenttypes', 'AppointmentTypeController@getStats');
 
     Route::get('/', ['as' => 'dashboard', 'uses' => 'PageController@dashboard']);
 
-	// This middleware is to prevent people from getting into the restricted area's
-	Route::group(['middleware' => ['admin']], function() {
-	    Route::resource('companies', 'CompanyController');
+    // This middleware is to prevent people from getting into the restricted area's
+    Route::group(['middleware' => ['admin']], function() {
+        Route::resource('companies', 'CompanyController');
 
-	    Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
-			'show'
-		]]);
+        Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
+            'show'
+        ]]);
 
-		Route::get('companies/{company_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
-	});
+        Route::get('companies/{company_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
+    });
 
-	// Appointments
-	Route::resource('appointments', 'AppointmentController', ['except' => ['show']]);
-	Route::get('appointments/get', 'AppointmentController@get');
+    // Appointments
+    Route::resource('appointments', 'AppointmentController', ['except' => ['show']]);
+    Route::get('appointments/get', 'AppointmentController@get');
 
-	// Appointment types
-	Route::resource('appointmenttypes', 'AppointmentTypeController');
+    // Appointment types
+    Route::resource('appointmenttypes', 'AppointmentTypeController');
 
-	// Users
-	Route::resource('users', 'Auth\UserController');
+    // Users
+    Route::resource('users', 'Auth\UserController');
 
-	Route::resource('customers', 'CustomerController', ['only' => ['index', 'show']]);
+    Route::resource('customers', 'CustomerController', ['only' => ['index', 'show']]);
 
-	Route::resource('company', 'CompanyController', ['only' => [
-		'index', 'update'
-	]]);
+    Route::resource('company', 'CompanyController', ['only' => [
+        'index', 'update'
+    ]]);
 
+    Route::get('language/set/{locale}', ['as' => 'setlanguage', 'uses' => '\App\Http\Language@set']);
 });
 
 Route::group(['middleware' => ['web']], function () {

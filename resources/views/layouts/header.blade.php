@@ -1,4 +1,4 @@
-<div class="topbar {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
+<div class="topbar {{ \Cookie::has('smallMenu') ? 'expanded' : '' }}">
 
 	<a href="javascript:;" class="hamburger-menu"><i class="material-icons">menu</i></a>
 
@@ -8,10 +8,10 @@
 		<ul>
 			<li><a href="{{ route('users.edit', Auth::user()->id) }}">Account settings</a></li>
 			<li class="language-switcher">
-				<a href="javascript:;">Language: <strong>NL</strong></a>
+				<a href="javascript:;">Language: <strong>{{ strtoupper(app()->getLocale()) }}</strong></a>
 				<ul>
 					@foreach (get_locales() as $locale)
-						<li><a href="{{ $locale }}">{{ trans('languages.' . $locale) }}</a></li>
+						<li><a href="{{ route('setlanguage', $locale) }}">{{ trans('languages.' . $locale) }}</a></li>
 					@endforeach
 				</ul>
 			</li>
