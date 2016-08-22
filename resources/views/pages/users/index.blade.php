@@ -1,19 +1,20 @@
-@extends('layouts.layout', ['page' => 'Accounts'])
+@extends('layouts.layout', ['page' => trans('base.accounts')])
 @section('content')
 
-	<a href="{{ route($company_id ? 'companies.{company_id}.users.create' : 'users.create', $company_id) }}" class="btn btn-default create">Create new account</a>
+	<a href="{{ route($company_id ? 'companies.{company_id}.users.create' : 'users.create', $company_id) }}" class="btn btn-default create">{{ trans('forms.create_a_new') }} {{ trans('forms.account') }}</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
-			<h1>Accounts</h1>
+			<h1>{{ trans('base.accounts') }}</h1>
+
 			<thead>
 				<tr>
-					<th>Avatar</th>
-					<th>Name</th>
-					<th>Email</th>
-					{!! ($company_id) ? '<th>Login</th>' : '' !!}
-					<th>Active</th>
-					<th>Company</th>
-					<th>Actions</th>
+					<th>{{ trans('forms.avatar') }}</th>
+					<th>{{ trans('forms.name') }}</th>
+					<th>{{ trans('forms.email') }}</th>
+					{!! ($company_id) ? '<th>' . trans('forms.login') . '</th>' : '' !!}
+					<th>{{ trans('forms.active') }}</th>
+					<th>{{ trans('forms.company') }}</th>
+					<th>{{ trans('forms.actions') }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -24,8 +25,8 @@
 						</td>
 						<td>{{ $user->firstname . ' ' . $user->surname }}</td>
 						<td>{{ $user->email }}</td>
-						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">Login</a></td>' : '' !!}
-						<td>{{ $user->active == 1 ? 'Yes' : 'No' }}</td>
+						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">' . trans('forms.login') . '</a></td>' : '' !!}
+						<td>{{ $user->active == 1 ? trans('base.yes') : trans('base.no') }}</td>
 						<td>{{ $company->name }}</td>
 						<td>
 							<a href="{{ route('users.edit', $user->id) }}"><i class="material-icons">edit</i></a>

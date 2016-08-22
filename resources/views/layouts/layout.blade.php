@@ -12,14 +12,14 @@
 		<div id="loader">
 			<div class="container">
 				<img src="{{ asset('assets/img/loading.svg') }}" alt="loader" />
-				<p>Loading...</p>
+				<p>{{ trans('base.loading') }}</p>
 			</div>
 		</div>
 
 		@include('layouts.nav')
 		@include('layouts.header')
 
-		<div id="content" class="{{ (isset($page) && strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ isset($_COOKIE['smallMenu']) ? 'expanded' : '' }}">
+		<div id="content" class="{{ (isset($page) && strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ \Cookie::has('smallMenu') ? 'expanded' : '' }}">
 			@include('layouts.message')
 			@yield('content')
 		</div>

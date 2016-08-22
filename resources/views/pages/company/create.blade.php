@@ -8,42 +8,42 @@
 
 		<ul class="nav nav-tabs" id="guide-tabs">
 			<li class="active">
-				<a href="#info" data-toggle="tab">Info</a>
+				<a href="#info" data-toggle="tab">{{ trans('forms.info') }}</a>
 			</li>
 			<li>
-				<a href="#opening-hours" data-toggle="tab">Opening hours</a>
+				<a href="#opening-hours" data-toggle="tab">{{ trans('forms.opening_hours') }}</a>
 			</li>
 		</ul>
 
 		<div class="tab-content">
 			<div id="info" class="tab-pane active">
 				<div class="form-group">
-					<label for="name">Name</label>
-					<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="Name" autofocus required />
+					<label for="name">{{ trans('forms.name') }}</label>
+					<input type="text" class="form-control" id="name" name="name" value="{{ old('name') }}" placeholder="{{ trans('forms.name') }}" autofocus required />
 				</div>
 
 				<div class="form-group">
-					<label for="subdomain">Subdomain</label>
-					<input type="text" class="form-control" id="subdomain" name="subdomain" value="{{ old('subdomain') }}" placeholder="Subdomain" required />
+					<label for="subdomain">{{ trans('forms.subdomain') }}</label>
+					<input type="text" class="form-control" id="subdomain" name="subdomain" value="{{ old('subdomain') }}" placeholder="{{ trans('forms.subdomain') }}" required />
 				</div>
 
 				<div class="form-group">
-					<label for="email">Email</label>
-					<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="Email" required />
+					<label for="email">{{ trans('forms.email') }}</label>
+					<input type="email" class="form-control" id="email" name="email" value="{{ old('email') }}" placeholder="{{ trans('forms.email') }}" required />
 				</div>
 
 				<div class="form-group">
-					<label for="address">Address</label>
-					<input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" placeholder="Address" required />
+					<label for="address">{{ trans('forms.address') }}</label>
+					<input type="text" class="form-control" id="address" name="address" value="{{ old('address') }}" placeholder="{{ trans('forms.address') }}" required />
 				</div>
 
 				<div class="form-group">
-					<label for="phonenumber">Phonenumber</label>
-					<input type="text" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="Phonenumber" required />
+					<label for="phonenumber">{{ trans('forms.phonenumber') }}</label>
+					<input type="text" class="form-control" id="phonenumber" name="phonenumber" value="{{ old('phonenumber') }}" placeholder="{{ trans('forms.phonenumber') }}" required />
 				</div>
 
 				<div class="form-group">
-					<label for="logo">Logo</label>
+					<label for="logo">{{ trans('forms.logo') }}</label>
 					<input type="file" class="form-control" id="logo" name="logo">
 				</div>
 			</div>
@@ -54,7 +54,7 @@
 						@foreach($days as $key => $day)
 							<div class="{{ $key }}">
 								<label for="from[{{ $key }}]">
-									{{ get_day_name($key) }}
+									{{ trans('days.' . $key) }}
 								</label>
 								<input type="checkbox" name="enabled[{{ $key }}]" checked />
 								<div class="input-group date from form-group">
@@ -63,7 +63,7 @@
 					                    <span class="glyphicon glyphicon-calendar"></span>
 					                </span>
 					            </div>
-								<label for="to[{{ $key }}]">To</label>
+								<label for="to[{{ $key }}]">{{ trans('forms.to') }}</label>
 								<div class="input-group date to form-group">
 					                <input type="text" class="form-control picker" id="to[{{ $key }}]" value="{{ old('to[' . $key . ']') }}" name="to[{{ $key }}]" />
 					                <span class="input-group-addon">
@@ -77,7 +77,7 @@
 			</div>
 
 		</div>
-		<button type="submit" class="btn btn-default">Submit</button>
+		<button type="submit" class="btn btn-default">{{ trans('forms.submit') }}</button>
 
 	{{ Form::close() }}
 

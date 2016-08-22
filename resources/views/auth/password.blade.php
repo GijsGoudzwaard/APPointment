@@ -3,7 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-	<title>APPointment password reset</title>
+	<title>APPointment {{ strtolower(trans('auth.password_reset')) }}</title>
 	<link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
 	<link rel="stylesheet" href="{{ url('assets/dist/login.css') }}" />
 </head>
@@ -17,7 +17,7 @@
 			</div>
 		@endif
 
-		<h4>Password reset</h4>
+		<h4>{{ trans('auth.password_reset') }}</h4>
 
 		<input type="email" name="email" placeholder="E-mail" class="{{ (session('error')) ? 'error' : '' }}" required autofocus />
 
@@ -25,9 +25,9 @@
 			<small>{{ session('error') }}</small>
 		@endif
 
-		<button>Submit</button>
+		<button>{{ trans('forms.submit') }}</button>
 
-		<a href="{{ url('login') }}">Go back</a>
+		<a href="{{ route('auth.login') }}">{{ trans('forms.go_back') }}</a>
 
 	{!! Form::close() !!}
 

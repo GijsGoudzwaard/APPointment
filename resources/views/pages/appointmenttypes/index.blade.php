@@ -1,16 +1,16 @@
-@extends('layouts.layout', ['page' => 'Appointment types'])
+@extends('layouts.layout', ['page' => trans('forms.appointment_types')])
 
 @section('content')
 
-	<a href="{{ route('appointmenttypes.create') }}" class="btn btn-default create">Create appointment type</a>
+	<a href="{{ route('appointmenttypes.create') }}" class="btn btn-default create">{{ trans('forms.create') }} {{ strtolower(trans('forms.appointment_type')) }}</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
-			<h1>Appointment types</h1>
+			<h1>{{ trans('forms.appointment_types') }}</h1>
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Time (minutes)</th>
-					<th>Actions</th>
+					<th>{{ trans('forms.name') }}</th>
+					<th>{{ trans('forms.time') }} ({{ trans('forms.minutes') }})</th>
+					<th>{{ trans('forms.actions') }}</th>
 				</tr>
 			</thead>
 			<tbody>
