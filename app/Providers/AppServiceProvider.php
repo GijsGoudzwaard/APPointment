@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Cookie;
 use Illuminate\Support\ServiceProvider;
 use Barryvdh\Debugbar\LaravelDebugbar as Debugbar;
 
@@ -15,7 +16,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (env('APP_ENV') == 'production') {
-        	(new Debugbar)->disable();
+            (new Debugbar)->disable();
         }
     }
 

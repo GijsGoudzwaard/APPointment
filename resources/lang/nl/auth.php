@@ -13,13 +13,13 @@ return [
     |
     */
 
-    'failed' => 'These credentials do not match our records.',
-    'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
+    'failed'   => 'Deze combinatie van e-mailadres en wachtwoord is niet geldig.',
+    'throttle' => 'Teveel gefaalde login pogingen. Probeer het over :seconds seconden nogmaals.',
 
-    'password_reset' => 'Password reset',
-    'reset_password' => 'Reset Password',
-    'reset_password_link' => 'Send Password Reset Link',
+    'password_reset' => 'Wachtwoord reset',
+    'reset_password' => 'Reset wachtwoord',
+    'reset_password_link' => 'Stuur wachtwoord reset link',
 
-    'remember_me' => 'Remember me',
-    'forgot_password' => 'Forgot password?'
+    'remember_me' => 'Onthoud mij',
+    'forgot_password' => 'Wachtwoord vergeten?'
 ];

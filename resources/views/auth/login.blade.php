@@ -10,26 +10,26 @@
 <body>
 
 	{!! Form::open() !!}
-		<input type="email" name="email" placeholder="E-mail" class="{{ (session('error')) ? 'error' : '' }}" required autofocus />
+		<input type="email" name="email" placeholder="{{ trans('forms.email') }}" class="{{ (session('error')) ? 'error' : '' }}" value="{{ old('email') }}" required autofocus />
 
 		@if (session('error'))
 			<small>{{ session('error') }}</small>
 		@endif
 
-		<input type="password" name="password" placeholder="Password"  class="{{ (session('error')) ? 'error' : '' }}" required />
+		<input type="password" name="password" placeholder="{{ trans('forms.password') }}"  class="{{ (session('error')) ? 'error' : '' }}" required />
 
 		@if (session('error'))
 			<small>{{ session('error') }}</small>
 		@endif
 
-		<label for="remember">Remember me
+		<label for="remember">{{ trans('auth.remember_me') }}
 			<input type="checkbox" name="remember">
 		</label>
 
 
-		<button>Submit</button>
+		<button>{{ trans('forms.submit') }}</button>
 
-		<a href="{{ url('password/reset') }}" class="forgot-password">Forgot password?</a>
+		<a href="{{ url('password/reset') }}" class="forgot-password">{{ trans('auth.forgot_password') }}</a>
 
 	{!! Form::close() !!}
 

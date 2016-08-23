@@ -2,7 +2,7 @@
 
 @section('content')
 
-	<h4>Total appointments</h4>
+	<h4>{{ trans('base.total_appointments') }}</h4>
 
     <div class="charts clearfix">
         <div class="item">

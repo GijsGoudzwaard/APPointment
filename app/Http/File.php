@@ -12,8 +12,8 @@ class File
 	 * Upload a file
 	 *
 	 * @param  Request $request
-	 * @param  String $name
-	 * @return Array|String|null
+	 * @param  string $name
+	 * @return array|string|null
 	 */
 	public static function upload(Request $request, String $name)
 	{

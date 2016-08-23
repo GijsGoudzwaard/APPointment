@@ -1,3 +1,5 @@
+<?php $message = session('success') ?? session('errors') ?>
+
 @if ($message)
     <div class="alert alert-{{ (session('success')) ? 'success' : 'danger' }}" role="alert">
         @if (is_array($message))

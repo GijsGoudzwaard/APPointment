@@ -1,14 +1,15 @@
-@extends('layouts.layout', ['page' => 'Customers'])
+@extends('layouts.layout', ['page' => trans('base.customers')])
 @section('content')
 
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
-			<h1>Customers</h1>
+			<h1>{{ trans('base.customers') }}</h1>
+
 			<thead>
 				<tr>
-					<th>Name</th>
-					<th>Email</th>
-					<th>Phonenumber</th>
+					<th>{{ trans('forms.name') }}</th>
+					<th>{{ trans('forms.email') }}</th>
+					<th>{{ trans('forms.phonenumber') }}</th>
 				</tr>
 			</thead>
 			<tbody>
