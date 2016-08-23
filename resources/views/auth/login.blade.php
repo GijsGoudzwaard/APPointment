@@ -10,7 +10,7 @@
 <body>
 
 	{!! Form::open() !!}
-		<input type="email" name="email" placeholder="{{ trans('forms.email') }}" class="{{ (session('error')) ? 'error' : '' }}" required autofocus />
+		<input type="email" name="email" placeholder="{{ trans('forms.email') }}" class="{{ (session('error')) ? 'error' : '' }}" value="{{ old('email') }}" required autofocus />
 
 		@if (session('error'))
 			<small>{{ session('error') }}</small>
