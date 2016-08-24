@@ -76,7 +76,7 @@ class AppointmentController extends Verify
         $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
         $appointment->save();
 
-        return redirect('appointments/' . $appointment->id . '/edit')->with('success', 'Successfully created');
+        return route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
     }
 
     /**
@@ -89,8 +89,13 @@ class AppointmentController extends Verify
     {
         $appointment = Appointment::find($id);
         $appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
+        $users = [];
 
-        return view('pages.appointments.edit', compact('appointment', 'appointment_types'));
+        foreach (get_company()->users as $user) {
+            $users[$user->id] = $user->firstname . ' ' . $user->surname;
+        }
+
+        return view('pages.appointments.edit', compact('appointment', 'appointment_types', 'users'));
     }
 
     /**
@@ -127,7 +132,7 @@ class AppointmentController extends Verify
         $appointment = Appointment::find($id);
         $appointment->delete();
 
-        return redirect('appointments')->with('success', 'Successfully deleted');
+        return redirect()->back()->with('success', 'Successfully deleted');
     }
 
     /**

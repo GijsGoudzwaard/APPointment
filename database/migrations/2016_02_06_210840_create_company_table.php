@@ -19,7 +19,6 @@ class CreateCompanyTable extends Migration
             $table->string('address');
             $table->string('phonenumber');
 			$table->string('logo');
-			$table->integer('environment_id');
             $table->timestamps();
         });
     }

@@ -14,7 +14,7 @@ class Appointment extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'appointment_type_id', 'scheduled_at'];
+    protected $fillable = ['name', 'user_id', 'appointment_type_id', 'scheduled_at'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -26,7 +26,7 @@ class Appointment extends Model
 	/**
 	 * A belongsTo relation
 	 *
-	 * @return App\Models\AppointmentType
+	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
 	 */
 	public function appointmentType()
 	{

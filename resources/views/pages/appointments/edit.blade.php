@@ -3,7 +3,6 @@
 @section('content')
 
 	<h1>{{ trans('forms.edit_an') }} {{ strtolower(trans('forms.appointment')) }}</h1>
-
 	{{ Form::open(['url' => action('AppointmentController@update', $appointment->id), 'method' => 'put']) }}
 
 		<div class="form-group">
@@ -15,7 +14,15 @@
 			<label for="appointment_type_id">{{ trans('forms.appointment_type') }} *</label>
 			{{ Form::select('appointment_type_id', $appointment_types, $appointment->appointment_type_id, [
 				'id' => 'appointment_type_id',
-				'class' => 'form-control'
+				'class' => 'form-control select2'
+			]) }}
+		</div>
+
+		<div class="form-group">
+			<label for="user">{{ trans('forms.employee') }} *</label>
+			{{ Form::select('user_id', $users, $appointment->user_id, [
+				'id' => 'user_id',
+				'class' => 'form-control select2'
 			]) }}
 		</div>
 
@@ -29,7 +36,7 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-default">{{ trans('forms.submit') }}</button>
+		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>
 		<a href="{{ route('appointments.index') }}" class="btn btn-default">{{ trans('forms.back') }}</a>
 		<a href="javascript:;" data-toggle="modal" class="open-modal btn btn-danger right" data-target="#delete-modal" data-title="{{ $appointment->name }}" data-url="{{ route('appointments.destroy', $appointment->id) }}">{{ trans('forms.delete') }}</a>
 

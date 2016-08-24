@@ -22,7 +22,8 @@ class UsersTableSeeder extends Seeder
                 'phonenumber' => '0642311100',
                 'password' => bcrypt('changeme'),
                 'role' => User::role('admin'),
-                'active' => 1
+                'active' => 1,
+                'company_id' => 1
             ]);
         }
     }

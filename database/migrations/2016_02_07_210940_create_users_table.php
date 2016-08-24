@@ -19,7 +19,10 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('password', 60);
 			$table->boolean('role')->default(0);
-			$table->integer('company_id');
+
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->foreign('company_id')->references('id')->on('companies');
+
             $table->rememberToken();
             $table->timestamps();
         });

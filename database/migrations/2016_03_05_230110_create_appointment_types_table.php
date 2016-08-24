@@ -16,7 +16,10 @@ class CreateAppointmentTypesTable extends Migration
             $table->increments('id');
             $table->string('name');
 			$table->integer('time');
-			$table->integer('company_id');
+
+            $table->integer('company_id')->unsigned()->nullable();
+            $table->foreign('company_id')->references('id')->on('companies');
+
             $table->timestamps();
         });
     }

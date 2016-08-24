@@ -3,7 +3,7 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class RemoveEnvironmentsTable extends Migration
+class AddClosedToAppointments extends Migration
 {
     /**
      * Run the migrations.
@@ -12,7 +12,9 @@ class RemoveEnvironmentsTable extends Migration
      */
     public function up()
     {
-		Schema::drop('environments');
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->integer('closed')->default(0)->after('name');
+        });
     }
 
     /**
@@ -22,6 +24,8 @@ class RemoveEnvironmentsTable extends Migration
      */
     public function down()
     {
-		Schema::drop('environments');
+        Schema::table('appointments', function (Blueprint $table) {
+            $table->dropColumn('closed');
+        });
     }
 }

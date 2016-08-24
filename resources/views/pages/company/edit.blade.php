@@ -83,7 +83,7 @@
 			</div>
 
 		</div>
-		<button type="submit" class="btn btn-default">{{ trans('forms.submit') }}</button>
+		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>
 
 	{{ Form::close() }}
 

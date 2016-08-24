@@ -21,7 +21,7 @@
 
 		<div class="form-group">
 			<label for="user">{{ trans('forms.employee') }} *</label>
-			<select name="user" id="user" class="form-control select2">
+			<select name="user_id" id="user" class="form-control select2">
 				@foreach ($users as $id => $user)
 					<option value="{{ $id }}">{{ $user }}</option>
 				@endforeach
@@ -38,7 +38,7 @@
 			</div>
 		</div>
 
-		<button type="submit" class="btn btn-default">{{ trans('forms.submit') }}</button>
+		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>
 		<a href="{{ route('appointments.index') }}" class="btn btn-default">{{ trans('forms.back') }}</a>
 
 	{{ Form::close() }}
