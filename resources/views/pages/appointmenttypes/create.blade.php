@@ -23,9 +23,13 @@
 
 		<div class="form-group multiselect">
 			<label for="employees">{{ trans('forms.eligable_employees') }} *</label>
-			@foreach ($employees as $id => $employee)
-				<label><input type="checkbox" name="employees[{{ $id }}]" class="form-control" value="{{ old('employees['.$id.']') ?? $id }}">{{ $employee }}</label>
-			@endforeach
+			{{ Form::select('employees[]', $employees, null, [
+				'class' => 'form-control select2',
+				'id' => 'employees',
+				'data-placeholder' => trans('forms.select_employees'),
+				'multiple' => true,
+				'required' => true
+			]) }}
 		</div>
 
 		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>

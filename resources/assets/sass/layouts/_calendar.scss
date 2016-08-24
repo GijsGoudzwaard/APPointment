@@ -1,6 +1,13 @@
 #calendar {
 	padding: 0 25px;
 
+	.event {
+		&.closed {
+			background-color: #f00;
+			border-color: #f00;
+		}
+	}
+
 	.fc-center {
 		h2 {
 			font-size: 24px;

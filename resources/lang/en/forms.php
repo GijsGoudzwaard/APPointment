@@ -25,6 +25,7 @@ return [
     'subdomain' => 'Subdomain',
     'address' => 'Address',
     'logo' => 'Logo',
+    'closed' => 'Closed',
 
     'appointment_type' => 'Appointment type',
     'appointment_types' => 'Appointment types',

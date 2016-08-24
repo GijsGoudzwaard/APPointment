@@ -12,20 +12,24 @@
 		</div>
 
 		<div class="form-group">
+			<label for="closed">{{ trans('forms.closed') }}</label>
+			<input type="checkbox" class="form-control" id="closed" name="closed" value="1" {{ old('closed') ? 'checked' : '' }} />
+		</div>
+
+		<div class="form-group appointment_type_id">
 			<label for="appointment_type_id">{{ trans('forms.appointment_type') }} *</label>
 			{{ Form::select('appointment_type_id', $appointment_types, null, [
 				'id' => 'appointment_type_id',
-				'class' => 'form-control'
+				'class' => 'form-control select2'
 			]) }}
 		</div>
 
-		<div class="form-group">
+		<div class="form-group user_id">
 			<label for="user">{{ trans('forms.employee') }} *</label>
-			<select name="user_id" id="user" class="form-control select2">
-				@foreach ($users as $id => $user)
-					<option value="{{ $id }}">{{ $user }}</option>
-				@endforeach
-			</select>
+			{{ Form::select('user_id', $users, null, [
+				'id' => 'user_id',
+				'class' => 'form-control select2'
+			]) }}
 		</div>
 
 		<div class="form-group">
@@ -52,5 +56,13 @@
 			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($date)) }}", 'DD/MM/YYYY HH:mm'),
 			allowInputToggle: true
 		});
+
+		$('input[name="closed"]').on('change', function() {
+			$('.appointment_type_id, .user_id').toggle();
+		});
+
+		if ($('input[name="closed"]').is(':checked')) {
+			$('.appointment_type_id, .user_id').toggle();
+		}
 	</script>
 @stop

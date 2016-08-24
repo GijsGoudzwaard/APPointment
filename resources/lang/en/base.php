@@ -3,7 +3,7 @@
 return [
     'total_appointments' => 'Total appointments',
     'delete' => 'Delete',
-    'are_you_sure_delete' => 'Are you sure you want to delete :name',
+    'are_you_sure_delete' => 'Are you sure you want to delete :name?',
 
     'language' => 'Language',
     'account_settings' => 'Account settings',

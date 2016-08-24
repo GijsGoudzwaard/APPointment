@@ -7,10 +7,15 @@
 
 		<div class="form-group">
 			<label for="name">{{ trans('forms.name') }} *</label>
-			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? $appointment->name }}" placeholder="{{ trans('forms.name') }}" autofocus required>
+			<input type="text" class="form-control" id="name" name="name" value="{{ old('name') ?? $appointment->name }}" placeholder="{{ trans('forms.name') }}" autofocus required />
 		</div>
 
 		<div class="form-group">
+			<label for="closed">{{ trans('forms.closed') }}</label>
+			<input type="checkbox" class="form-control" id="closed" name="closed" value="1" {{ old('closed') || $appointment->closed ? 'checked' : '' }} />
+		</div>
+
+		<div class="form-group appointment_type_id">
 			<label for="appointment_type_id">{{ trans('forms.appointment_type') }} *</label>
 			{{ Form::select('appointment_type_id', $appointment_types, $appointment->appointment_type_id, [
 				'id' => 'appointment_type_id',
@@ -18,7 +23,7 @@
 			]) }}
 		</div>
 
-		<div class="form-group">
+		<div class="form-group user_id">
 			<label for="user">{{ trans('forms.employee') }} *</label>
 			{{ Form::select('user_id', $users, $appointment->user_id, [
 				'id' => 'user_id',
@@ -53,5 +58,13 @@
 			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($appointment->scheduled_at)) }}", 'DD/MM/YYYY HH:mm'),
 			allowInputToggle: true
 		});
+
+		$('input[name="closed"]').on('change', function() {
+			$('.appointment_type_id, .user_id').toggle();
+		});
+
+		if ($('input[name="closed"]').is(':checked')) {
+			$('.appointment_type_id, .user_id').toggle();
+		}
 	</script>
 @stop

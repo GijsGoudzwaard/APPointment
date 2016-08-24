@@ -14,7 +14,7 @@ class Appointment extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'user_id', 'appointment_type_id', 'scheduled_at'];
+    protected $fillable = ['name', 'closed', 'user_id', 'appointment_type_id', 'scheduled_at'];
 
     /**
      * The attributes excluded from the model's JSON form.

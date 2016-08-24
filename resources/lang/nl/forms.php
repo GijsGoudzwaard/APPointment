@@ -25,6 +25,7 @@ return [
     'subdomain' => 'Subdomein',
     'address' => 'Adres',
     'logo' => 'Logo',
+    'closed' => 'Gesloten',
 
     'appointment_type' => 'Afspraak type',
     'appointment_types' => 'Afspraak types',

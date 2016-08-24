@@ -42,13 +42,20 @@ $(function() {
 		}, function(res) {
 			var data = JSON.parse(res);
 			for (var i = 0; i < data.length; i++) {
-				calendar.fullCalendar('renderEvent', {
+				var event = {
 					id: data[i].id,
 					title: data[i].name,
 					allDay: false,
 					start: data[i].scheduled_at,
 					end: moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
-				});
+					className: ['event']
+				}
+
+				if (data[i].closed) {
+				    event.className.push('closed');
+				}
+
+				calendar.fullCalendar('renderEvent', event);
 			}
 		});
 	}

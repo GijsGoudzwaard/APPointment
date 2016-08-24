@@ -22,7 +22,7 @@ class CreateAppointmentsTable extends Migration
             $table->integer('appointment_type_id')->unsigned()->nullable();
             $table->foreign('appointment_type_id')->references('id')->on('appointment_types');
 
-            $table->timestamp('scheduled_at');
+            $table->timestamp('scheduled_at')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

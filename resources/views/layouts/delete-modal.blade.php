@@ -8,7 +8,7 @@
                 </div>
                 <div class="modal-body">
                     <p>
-                        {!! trans('base.are_you_sure_delete', ['name' => '\'<strong class="text"></strong>\'']) !!}?
+                        {!! trans('base.are_you_sure_delete', ['name' => '\'<strong class="text"></strong>\'']) !!}
                     </p>
                     <input type="hidden" name="_method" value="DELETE">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">

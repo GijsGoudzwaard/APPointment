@@ -71,12 +71,16 @@ class AppointmentController extends Verify
             return $validator;
         }
 
+        if (! $request->get('closed')) {
+            $request->request->add(['closed' => 0]);
+        }
+
         $appointment = new Appointment;
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
         $appointment->save();
 
-        return route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
+        return redirect()->route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
     }
 
     /**
@@ -113,9 +117,13 @@ class AppointmentController extends Verify
             return $validator;
         }
 
+        if (! $request->get('closed')) {
+            $request->request->add(['closed' => 0]);
+        }
+
         $appointment = Appointment::find($id);
         $appointment->fill($request->all());
-        $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
+        $appointment->scheduled_at = $this->formatDate($request->get('scheduled_at'));
         $appointment->save();
 
         return redirect()->back()->with('success', 'Successfully updated');
@@ -132,7 +140,7 @@ class AppointmentController extends Verify
         $appointment = Appointment::find($id);
         $appointment->delete();
 
-        return redirect()->back()->with('success', 'Successfully deleted');
+        return redirect()->route('appointments.index')->with('success', 'Successfully deleted');
     }
 
     /**
