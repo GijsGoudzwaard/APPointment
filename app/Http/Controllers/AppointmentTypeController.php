@@ -152,14 +152,15 @@ class AppointmentTypeController extends Controller
     /**
      * Count all the appointments associated with the appointment type
      *
-     * @param AppointmentType $appointment_type
+     * @param  AppointmentType $appointment_type
      * @return array
      */
     public function getAppointments(AppointmentType $appointment_type)
     {
         return [
             'name' => $appointment_type->name,
-            'amount' => $appointment_type->countAppointments()
+            'amount' => $appointment_type->countAppointments(),
+            'price' => $appointment_type->price
         ];
     }
 

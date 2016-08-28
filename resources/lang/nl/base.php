@@ -20,5 +20,8 @@ return [
     'settings' => 'Instellingen',
 
     'yes' => 'Ja',
-    'no' => 'Nee'
+    'no' => 'Nee',
+
+    'monthly_income' => 'Maandinkomen',
+    'currency' => '&euro;'
 ];

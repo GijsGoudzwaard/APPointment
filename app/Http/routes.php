@@ -17,6 +17,7 @@ Route::group(['middleware' => ['web']], function () {
 
 Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function () {
 
+    Route::get('api/income', 'AppointmentController@income');
     Route::get('api/appointments', 'AppointmentController@getStats');
     Route::get('api/appointmenttypes', 'AppointmentTypeController@getStats');
 

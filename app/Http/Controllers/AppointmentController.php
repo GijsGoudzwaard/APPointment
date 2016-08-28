@@ -186,4 +186,25 @@ class AppointmentController extends Verify
 
         return collect($appointments)->flatten();
     }
+
+    /**
+     * Get the income of this month
+     *
+     * @return \Illuminate\Support\Collection
+     */
+    public function income()
+    {
+        $appointment_types = get_company()->appointmentTypes->load(['appointments' => function($appointments) {
+            $date = Carbon::now();
+
+            return $appointments->whereBetween('scheduled_at', [
+                $date->startOfMonth()->toDateTimeString(),
+                $date->endOfMonth()->toDateTimeString()
+            ]);
+        }]);
+
+        return collect($appointment_types->map(function ($appointment_type) {
+            return str_replace(',', '.', $appointment_type->price) * $appointment_type->appointments->count();
+        }));
+    }
 }

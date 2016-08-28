@@ -14,8 +14,8 @@
         </div>
 
         <div class="item earnings col-md-4 col-sm-4">
-            <h2>Montly earning</h2>
-            <h3>&euro; 500</h3>
+            <h2>{{ trans('base.monthly_income') }}</h2>
+            <h3>{{ trans('base.currency') }} <span>0</span></h3>
         </div>
     </div>
 
@@ -24,4 +24,5 @@
 @section('js')
     <script src="{{ asset('assets/dist/charts/line.js') }}"></script>
     <script src="{{ asset('assets/dist/charts/doughnut.js') }}"></script>
+    <script src="{{ asset('assets/dist/charts/income.js') }}"></script>
 @stop

@@ -20,5 +20,8 @@ return [
     'settings' => 'Settings',
 
     'yes' => 'Yes',
-    'no' => 'No'
+    'no' => 'No',
+
+    'monthly_income' => 'Monthly income',
+    'currency' => '&#36;'
 ];
