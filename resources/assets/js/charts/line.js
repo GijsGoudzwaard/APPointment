@@ -36,7 +36,7 @@ function setLineData(data) {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [
             {
-                label: 'Appointments',
+                label: 'Afspraken',
                 fill: true,
                 lineTension: 0.2,
                 backgroundColor: "rgba(75,192,192,0.4)",

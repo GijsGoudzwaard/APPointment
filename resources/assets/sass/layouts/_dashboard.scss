@@ -8,5 +8,12 @@
     .item {
         background-color: #fff;
         border: 2px solid #eee;
+        padding: 15px;
+
+        &.earnings {
+            background-color: $light-purple;
+            color: #fff;
+            text-align: center;
+        }
     }
 }

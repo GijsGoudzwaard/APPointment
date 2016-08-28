@@ -5,12 +5,17 @@
 	<h4>{{ trans('base.total_appointments') }}</h4>
 
     <div class="charts clearfix">
-        <div class="item">
-            <canvas id="line" width="500" height="200"></canvas>
+        <div class="item col-lg-8 col-md-12">
+            <canvas id="line" height="160"></canvas>
         </div>
 
-        <div class="item col-md-4 col-sm-4">
-            <canvas id="doughnut" width="400" height="400"></canvas>
+        <div class="item col-lg-4 col-md-4 col-sm-4">
+            <canvas id="doughnut" height="250"></canvas>
+        </div>
+
+        <div class="item earnings col-md-4 col-sm-4">
+            <h2>Montly earning</h2>
+            <h3>&euro; 500</h3>
         </div>
     </div>
 
