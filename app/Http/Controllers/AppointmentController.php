@@ -178,7 +178,7 @@ class AppointmentController extends Verify
             $appointments[] = get_company()->appointments([
                 $date->startOfMonth()->toDateTimeString(),
                 $date->endOfMonth()->toDateTimeString()
-            ])->selectRaw('count(*) as amount')->get()->pluck('amount')->sum();
+            ])->selectRaw('count(*) as amount')->where('closed', 0)->get()->pluck('amount')->sum();
         }
 
         // Store the appointment stats in a cache file for a day
