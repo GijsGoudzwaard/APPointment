@@ -1,7 +1,9 @@
 <nav class="navbar navbar-fixed-top {{ \Cookie::has('smallMenu') ? 'expanded' : '' }}" id="sidebar-wrapper" role="navigation">
 	<ul class="nav sidebar-nav">
-		<li class="sidebar-brand" style="background-image:url({{ asset('assets/img/logo.png') }});">
-			<a href="{{ route('dashboard') }}"></a>
+		<li class="sidebar-brand">
+			<a href="{{ route('dashboard') }}">
+				@include('svg.bell')
+			</a>
 		</li>
 		<li>
 			<a href="{{ route('dashboard') }}" title="Dashboard"><i class="material-icons">dashboard</i> <span>{{ trans('base.dashboard') }}</span></a>

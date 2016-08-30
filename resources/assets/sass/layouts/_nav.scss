@@ -11,6 +11,10 @@ nav {
 		a span {
 			display: none;
 		}
+
+		li.sidebar-brand svg {
+			width: 50px;
+		}
 	}
 
 	ul {
@@ -24,9 +28,20 @@ nav {
 				background-color: $purple;
 				height: 115px;
 				margin-bottom: 15px;
-				background-position: center;
-				background-repeat: no-repeat;
-				background-size: contain;
+
+				svg {
+					transition: width .1s linear;
+					width: 65px;
+					height: 100%;
+
+					#bell {
+						transition: all .1s linear;
+					}
+				}
+
+				&:hover svg #bell {
+					fill: #fff;
+				}
 
 				a {
 					width: 100%;
