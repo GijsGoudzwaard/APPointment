@@ -15,7 +15,7 @@
 
         <div class="item earnings col-md-4 col-sm-4">
             <h2>{{ trans('base.monthly_income') }}</h2>
-            <h3>{{ trans('base.currency') }} <span>0</span></h3>
+            <h3>{{ trans('base.currency') }} <span class="number">0</span><span class="decimal"></span></h3>
         </div>
     </div>
 
