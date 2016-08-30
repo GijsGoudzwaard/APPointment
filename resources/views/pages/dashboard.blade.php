@@ -9,13 +9,15 @@
             <canvas id="line" height="160"></canvas>
         </div>
 
-        <div class="item col-lg-4 col-md-4 col-sm-4">
-            <canvas id="doughnut" height="250"></canvas>
-        </div>
+        <div class="wrapper col-lg-4 col-md-12">
+            <div class="item col-lg-12 col-md-12 col-sm-12">
+                <canvas id="doughnut" height="250"></canvas>
+            </div>
 
-        <div class="item earnings col-md-4 col-sm-4">
-            <h2>{{ trans('base.monthly_income') }}</h2>
-            <h3>{{ trans('base.currency') }} <span class="number">0</span><span class="decimal"></span></h3>
+            <div class="item earnings col-md-12 col-sm-12">
+                <h2>{{ trans('base.monthly_income') }}</h2>
+                <h3>{{ trans('base.currency') }} <span class="number">0</span><span class="decimal"></span></h3>
+            </div>
         </div>
     </div>
 
