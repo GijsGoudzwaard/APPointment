@@ -54,7 +54,11 @@
 		$('.date').datetimepicker({
 			format: 'DD-MM-YYYY HH:mm',
 			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($date)) }}", 'DD/MM/YYYY HH:mm'),
-			allowInputToggle: true
+			allowInputToggle: true,
+			widgetPositioning: {
+				vertical: 'bottom',
+				horizontal: 'left'
+			}
 		});
 
 		$('input[name="closed"]').on('change', function() {

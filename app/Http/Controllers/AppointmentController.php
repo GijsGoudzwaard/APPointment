@@ -24,7 +24,7 @@ class AppointmentController extends Verify
     /**
      * Get all appointments from your company
      *
-     * @param Request $request
+     * @param  Request $request
      * @return array
      */
     public function get(Request $request)
@@ -78,6 +78,7 @@ class AppointmentController extends Verify
         $appointment = new Appointment;
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
+        $appointment->to = $this->formatDate($request->to);
         $appointment->save();
 
         return redirect()->route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
@@ -106,7 +107,7 @@ class AppointmentController extends Verify
      * Update the record by it's $id
      *
      * @param  Request $request
-     * @param  int     $id
+     * @param  int $id
      * @return mixed
      */
     public function update(Request $request, $id)
@@ -124,6 +125,7 @@ class AppointmentController extends Verify
         $appointment = Appointment::find($id);
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->get('scheduled_at'));
+        $appointment->to = $this->formatDate($request->to);
         $appointment->save();
 
         return redirect()->back()->with('success', 'Successfully updated');

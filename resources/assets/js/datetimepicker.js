@@ -17,7 +17,11 @@ if ($('.date.from').length > 0) {
 	$('.date.from').datetimepicker({
 		format: 'HH:mm',
 		defaultDate: moment('08:00', 'HH:mm'),
-		allowInputToggle: true
+		allowInputToggle: true,
+		widgetPositioning: {
+			vertical: 'bottom',
+			horizontal: 'left'
+		}
 	});
 }
 
@@ -26,6 +30,10 @@ if ($('.date.to').length > 0) {
 	$('.date.to').datetimepicker({
 		format: 'HH:mm',
 		defaultDate: moment('17:00', 'HH:mm'),
-		allowInputToggle: true
+		allowInputToggle: true,
+		widgetPositioning: {
+			vertical: 'bottom',
+			horizontal: 'left'
+		}
 	});
 }

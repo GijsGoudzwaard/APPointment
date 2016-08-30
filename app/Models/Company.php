@@ -75,7 +75,7 @@ class Company extends Model
 	/**
 	 * Decode the json array
 	 *
-	 * @return Object
+	 * @return object
 	 */
 	public function openingHours()
 	{
@@ -85,7 +85,7 @@ class Company extends Model
     /**
      * A hasManyThrough relationship
      *
-     * @param array $between
+     * @param  array $between
      * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
      */
     public function appointments($between = [])

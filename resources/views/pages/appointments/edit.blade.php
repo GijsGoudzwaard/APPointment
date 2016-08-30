@@ -15,29 +15,43 @@
 			<input type="checkbox" class="form-control" id="closed" name="closed" value="1" {{ old('closed') || $appointment->closed ? 'checked' : '' }} />
 		</div>
 
-		<div class="form-group appointment_type_id">
-			<label for="appointment_type_id">{{ trans('forms.appointment_type') }} *</label>
-			{{ Form::select('appointment_type_id', $appointment_types, $appointment->appointment_type_id, [
-				'id' => 'appointment_type_id',
-				'class' => 'form-control select2'
-			]) }}
-		</div>
+		<div class="open {{ $appointment->closed ? 'hide' : '' }}">
+			<div class="form-group appointment_type_id">
+				<label for="appointment_type_id">{{ trans('forms.appointment_type') }} *</label>
+				{{ Form::select('appointment_type_id', $appointment_types, $appointment->appointment_type_id, [
+                    'id' => 'appointment_type_id',
+                    'class' => 'form-control select2'
+                ]) }}
+			</div>
 
-		<div class="form-group user_id">
-			<label for="user">{{ trans('forms.employee') }} *</label>
-			{{ Form::select('user_id', $users, $appointment->user_id, [
-				'id' => 'user_id',
-				'class' => 'form-control select2'
-			]) }}
+			<div class="form-group user_id">
+				<label for="user">{{ trans('forms.employee') }} *</label>
+				{{ Form::select('user_id', $users, $appointment->user_id, [
+                    'id' => 'user_id',
+                    'class' => 'form-control select2'
+                ]) }}
+			</div>
 		</div>
 
 		<div class="form-group">
 			<label for="scheduled_at">{{ trans('forms.scheduled_at') }} *</label>
-			<div class="input-group date form-group">
+			<div class="input-group date scheduled_at form-group">
 				<input type="text" class="form-control" name="scheduled_at" id="scheduled_at" />
 				<span class="input-group-addon">
 					<span class="glyphicon glyphicon-calendar"></span>
 				</span>
+			</div>
+		</div>
+
+		<div class="closed {{ ! $appointment->closed ? 'hide' : '' }}">
+			<div class="form-group">
+				<label for="to">{{ trans('forms.to') }} *</label>
+				<div class="input-group date form-group">
+					<input type="text" class="form-control" name="to" id="to" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
 			</div>
 		</div>
 
@@ -53,18 +67,49 @@
 
 @section('js')
 	<script type="text/javascript">
-		$('.date').datetimepicker({
+		$('.scheduled_at').datetimepicker({
 			format: 'DD-MM-YYYY HH:mm',
 			defaultDate: moment("{{ date('d/m/Y H:i', strtotime($appointment->scheduled_at)) }}", 'DD/MM/YYYY HH:mm'),
-			allowInputToggle: true
+			allowInputToggle: true,
+			widgetPositioning: {
+				vertical: 'bottom',
+				horizontal: 'left'
+			}
+		});
+
+		$('.date').datetimepicker({
+			format: 'DD-MM-YYYY HH:mm',
+			defaultDate: moment("{{ date('d/m/Y H:i', $appointment->to ? strtotime($appointment->to) : strtotime('+30 minutes', strtotime($appointment->scheduled_at))) }}", 'DD/MM/YYYY HH:mm'),
+			allowInputToggle: true,
+			widgetPositioning: {
+				vertical: 'bottom',
+				horizontal: 'left'
+			}
 		});
 
 		$('input[name="closed"]').on('change', function() {
-			$('.appointment_type_id, .user_id').toggle();
-		});
+			var context;
 
-		if ($('input[name="closed"]').is(':checked')) {
-			$('.appointment_type_id, .user_id').toggle();
-		}
+			if (! $(this).is(':checked')) {
+			    context = $('.open');
+				$('.closed').toggle();
+			} else {
+				context = $('.closed');
+				$('.open').toggle();
+			}
+
+			if (context.hasClass('hide')) {
+				context.removeClass('hide');
+
+				// Reinitalize the select2 to fix the broken styles
+				$('.select2').select2({
+					placeholder: function(){
+						$(this).data('placeholder');
+					}
+				});
+			} else {
+				context.toggle();
+			}
+		});
 	</script>
 @stop

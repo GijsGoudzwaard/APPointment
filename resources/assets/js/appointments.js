@@ -12,6 +12,7 @@ $(function() {
 			},
 			defaultView: 'agendaWeek',
 			axisFormat: 'HH:mm',
+			timeFormat: 'HH:mm',
 			height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
 			views: {
 				week: {
@@ -48,7 +49,7 @@ $(function() {
 					title: data[i].name,
 					allDay: false,
 					start: data[i].scheduled_at,
-					end: moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
+					end: data[i].closed ? moment(data[i].to) : moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
 					className: ['event']
 				}
 
