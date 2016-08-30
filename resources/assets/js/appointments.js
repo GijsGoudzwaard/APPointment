@@ -4,6 +4,7 @@ $(function() {
 	// To prevent errors when the element doesn't exist
 	if (calendar.length > 0) {
 		calendar.fullCalendar({
+			nowIndicator: true,
 			header: {
 				left: 'prev, today, next',
 				center: 'title',

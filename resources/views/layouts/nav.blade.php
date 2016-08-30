@@ -9,7 +9,7 @@
 			<a href="{{ route('dashboard') }}" title="Dashboard"><i class="material-icons">dashboard</i> <span>{{ trans('base.dashboard') }}</span></a>
 		</li>
 		<li>
-			<a href="{{ route('appointments.index') }}" title="Appointments"><i class="material-icons">description</i> <span>{{ trans('base.appointments') }}</span></a>
+			<a href="{{ route('appointments.index') }}" title="Appointments"><i class="material-icons">event</i> <span>{{ trans('base.appointments') }}</span></a>
 		</li>
 		<li>
 			<a href="{{ route('appointmenttypes.index') }}" title="Appointment types"><i class="material-icons">subject</i> <span>{{ trans('base.appointment_types') }}</span></a>
