@@ -75,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
 
     // Password Reset Routes...
-//    Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
-//    Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-//    Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+    Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+    Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\ResetPasswordController@sendResetLinkEmail']);
+    Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
