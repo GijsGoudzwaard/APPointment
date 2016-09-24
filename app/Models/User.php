@@ -13,6 +13,7 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements
     AuthenticatableContract,
+use Notifiable;
     AuthorizableContract,
     CanResetPasswordContract
 {
