@@ -196,7 +196,7 @@ class AppointmentController extends Verify
      */
     public function income()
     {
-        $appointment_types = get_company()->appointmentTypes->load(['appointments' => function($appointments) {
+        $appointment_types = get_company()->appointmentTypes->load(['appointments' => function ($appointments) {
             return $appointments->whereBetween('scheduled_at', [
                 Carbon::now()->startOfMonth()->toDateTimeString(),
                 Carbon::now()->toDateTimeString()

@@ -48,9 +48,9 @@ class Kernel extends HttpKernel
         'auth.basic' => \Illuminate\Auth\Middleware\AuthenticateWithBasicAuth::class,
         'guest' => \App\Http\Middleware\RedirectIfAuthenticated::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
-		'subdomain' => \App\Http\Middleware\Subdomain::class,
-		'admin' => \App\Http\Middleware\Admin::class,
-		'lang' => \App\Http\Middleware\Language::class,
+        'subdomain' => \App\Http\Middleware\Subdomain::class,
+        'admin' => \App\Http\Middleware\Admin::class,
+        'lang' => \App\Http\Middleware\Language::class,
         'cors' => \App\Http\Middleware\Cors::class,
     ];
 }

@@ -137,7 +137,7 @@ return [
     |
     */
 
-	'domain' => app()->runningInConsole() ? null : '.'.get_url(),
+    'domain' => app()->runningInConsole() ? null : '.'.get_url(),
 
     /*
     |--------------------------------------------------------------------------

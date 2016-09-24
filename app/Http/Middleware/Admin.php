@@ -16,10 +16,10 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-		if (Auth::user()->role != Auth::user()->role('admin')) {
-			return redirect('/')->with('errors', 'You\'re not allowed there!');
-		}
+        if (Auth::user()->role != Auth::user()->role('admin')) {
+            return redirect('/')->with('errors', 'You\'re not allowed there!');
+        }
 
-		return $next($request);
-	}
+        return $next($request);
+    }
 }

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
 {
-	use SoftDeletes;
+    use SoftDeletes;
 
     /**
      * The database table used by the model.
@@ -30,57 +30,57 @@ class Company extends Model
      */
     protected $hidden = [];
 
-	/**
-	 * All the days of the week
-	 *
-	 * @var array
-	 */
-	public $days = [
-		'mo' => 'Monday',
-		'tu' => 'Tuesday',
-		'we' => 'Wednesday',
-		'thu' => 'Thursday',
-		'fr' => 'Friday',
-		'sa' => 'Saturday',
-		'su' => 'Sunday'
-	];
+    /**
+     * All the days of the week
+     *
+     * @var array
+     */
+    public $days = [
+        'mo' => 'Monday',
+        'tu' => 'Tuesday',
+        'we' => 'Wednesday',
+        'thu' => 'Thursday',
+        'fr' => 'Friday',
+        'sa' => 'Saturday',
+        'su' => 'Sunday'
+    ];
 
-	/**
-	 * Get users
-	 *
-	 * @param  boolean $customers
-	 * @return \Illuminate\Database\Eloquent\Relations\hasOne
-	 */
-	public function users($customers = false)
-	{
-		$users = $this->hasMany(User::class);
+    /**
+     * Get users
+     *
+     * @param  boolean $customers
+     * @return \Illuminate\Database\Eloquent\Relations\hasOne
+     */
+    public function users($customers = false)
+    {
+        $users = $this->hasMany(User::class);
 
-		if ($customers) {
-		    return $users->where('role', User::role('customer'))->get();
-		}
+        if ($customers) {
+            return $users->where('role', User::role('customer'))->get();
+        }
 
-		return $users;
-	}
+        return $users;
+    }
 
-	/**
-	 * A hasMany relationship
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\HasMany
-	 */
-	public function appointmentTypes()
-	{
-		return $this->hasMany(AppointmentType::class);
-	}
+    /**
+     * A hasMany relationship
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function appointmentTypes()
+    {
+        return $this->hasMany(AppointmentType::class);
+    }
 
-	/**
-	 * Decode the json array
-	 *
-	 * @return object
-	 */
-	public function openingHours()
-	{
-		return json_decode($this->opening_hours) ?? (object) $this->days;
-	}
+    /**
+     * Decode the json array
+     *
+     * @return object
+     */
+    public function openingHours()
+    {
+        return json_decode($this->opening_hours) ?? (object) $this->days;
+    }
 
     /**
      * A hasManyThrough relationship
