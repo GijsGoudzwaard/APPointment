@@ -13,11 +13,11 @@ use Illuminate\Contracts\Auth\CanResetPassword as CanResetPasswordContract;
 
 class User extends Model implements
     AuthenticatableContract,
-use Notifiable;
-    AuthorizableContract,
-    CanResetPasswordContract
+use NotifiableAuthorizableContractuseCanResetPasswordContract
 {
-    use SoftDeletes, Authenticatable, Authorizable, CanResetPassword;
+    use SoftDeletes;
+
+    use  Authenticatable, Authorizable, CanResetPassword;
 
     /**
      * The attributes that are mass assignable.
