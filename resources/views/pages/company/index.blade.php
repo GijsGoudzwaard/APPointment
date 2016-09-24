@@ -21,7 +21,7 @@
 						<td>{{ $company->name }}</td>
 						<td>{{ $company->email }}</td>
 						<td>{{ $company->phonenumber }}</td>
-						<td><a href="{{ route('companies.{company_id}.users.index', $company->id) }}" class="btn btn-default">{{ trans('base.accounts') }}</a></td>
+						<td><a href="{{ route('companies.users.index', $company->id) }}" class="btn btn-default">{{ trans('base.accounts') }}</a></td>
 						<td>
 							<a href="{{ route('companies.edit', $company->id) }}"><i class="material-icons">edit</i></a>
 							<a href="javascript:;" data-toggle="modal" class="open-modal" data-target="#delete-modal" data-title="{{ $company->name }}" data-url="{{ route('companies.destroy', $company->id) }}"><i class="material-icons">delete</i></a>

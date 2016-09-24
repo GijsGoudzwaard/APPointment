@@ -31,6 +31,12 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function ()
 
         Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
             'show'
+        ], 'names' => [
+            'index' => 'companies.users.index',
+            'create' => 'companies.users.create',
+            'store' => 'companies.users.store',
+            'edit' => 'companies.users.edit',
+            'update' => 'companies.users.update'
         ]]);
 
         Route::get('companies/{company_id}/users/{user_id}', 'Auth\UserController@loginUsingId');
@@ -55,7 +61,7 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function ()
     Route::get('language/set/{locale}', ['as' => 'setlanguage', 'uses' => '\App\Http\Language@set']);
 });
 
-Route::group(['middleware' => 'cors', 'prefix' => 'api'], function() {
+Route::group(['middleware' => 'cors', 'prefix' => 'api'], function () {
     Route::post('customer/new', 'CustomerController@store');
 });
 
@@ -69,7 +75,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
 
     // Password Reset Routes...
-    Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
-    Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-    Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+    Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\ResetPasswordController@showResetForm']);
+    Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\ResetPasswordController@sendResetLinkEmail']);
+    Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
 });

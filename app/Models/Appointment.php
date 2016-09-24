@@ -23,13 +23,13 @@ class Appointment extends Model
      */
     protected $hidden = ['deleted_at'];
 
-	/**
-	 * A belongsTo relation
-	 *
-	 * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
-	 */
-	public function appointmentType()
-	{
-		return $this->belongsTo(AppointmentType::class);
-	}
+    /**
+     * A belongsTo relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function appointmentType()
+    {
+        return $this->belongsTo(AppointmentType::class);
+    }
 }

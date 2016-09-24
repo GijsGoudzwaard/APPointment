@@ -17,14 +17,14 @@ class Subdomain
      */
     public function handle($request, Closure $next)
     {
-		// Check if we can get a subdomain from the url
-		// Also check if the subdomain is equal to your subdomain
-		if (UrlParser::getSubdomain($request->fullUrl()) == get_company()->subdomain) {
-			// We can let them through
-			return $next($request);
-		}
+        // Check if we can get a subdomain from the url
+        // Also check if the subdomain is equal to your subdomain
+        if (UrlParser::getSubdomain($request->fullUrl()) == get_company()->subdomain) {
+            // We can let them through
+            return $next($request);
+        }
 
-		// We can't set it.
-		return UrlParser::setSubdomain($request->fullUrl());
-	}
+        // We can't set it.
+        return UrlParser::setSubdomain($request->fullUrl());
+    }
 }

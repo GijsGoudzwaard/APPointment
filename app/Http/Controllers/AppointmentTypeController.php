@@ -41,7 +41,9 @@ class AppointmentTypeController extends Controller
         }
 
         return view('pages.appointmenttypes.edit', compact(
-            'appointment_type', 'employees', 'active_employees'
+            'appointment_type',
+            'employees',
+            'active_employees'
         ));
     }
 
