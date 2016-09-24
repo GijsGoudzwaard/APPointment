@@ -12,19 +12,21 @@
 */
 
 Route::group(['middleware' => ['web']], function () {
-	Route::auth();
+    Route::auth();
 });
 
 Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function () {
 
-    Route::get('api/income', 'AppointmentController@income');
-    Route::get('api/appointments', 'AppointmentController@getStats');
-    Route::get('api/appointmenttypes', 'AppointmentTypeController@getStats');
+    Route::group(['prefix' => 'api'], function () {
+        Route::get('income', 'AppointmentController@income');
+        Route::get('appointments', 'AppointmentController@getStats');
+        Route::get('appointmenttypes', 'AppointmentTypeController@getStats');
+    });
 
     Route::get('/', ['as' => 'dashboard', 'uses' => 'PageController@dashboard']);
 
     // This middleware is to prevent people from getting into the restricted area's
-    Route::group(['middleware' => ['admin']], function() {
+    Route::group(['middleware' => ['admin']], function () {
         Route::resource('companies', 'CompanyController');
 
         Route::resource('companies/{company_id}/users', 'Auth\UserController', ['except' => [
@@ -53,17 +55,21 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function ()
     Route::get('language/set/{locale}', ['as' => 'setlanguage', 'uses' => '\App\Http\Language@set']);
 });
 
+Route::group(['middleware' => 'cors', 'prefix' => 'api'], function() {
+    Route::post('customer/new', 'CustomerController@store');
+});
+
 Route::group(['middleware' => ['web']], function () {
-	Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
-	Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
-	Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
+    Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
+    Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
+    Route::get('logout', ['as' => 'auth.logout', 'uses' => 'Auth\AuthController@logout']);
 
-	// Registration Routes...
-	Route::get('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
-	Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
+    // Registration Routes...
+    Route::get('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@showRegistrationForm']);
+    Route::post('register', ['as' => 'auth.register', 'uses' => 'Auth\AuthController@register']);
 
-	// Password Reset Routes...
-	Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
-	Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
-	Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
+    // Password Reset Routes...
+    Route::get('password/reset/{token?}', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@showResetForm']);
+    Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\PasswordController@sendResetLinkEmail']);
+    Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\PasswordController@reset']);
 });

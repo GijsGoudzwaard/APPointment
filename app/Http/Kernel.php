@@ -50,6 +50,7 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
 		'subdomain' => \App\Http\Middleware\Subdomain::class,
 		'admin' => \App\Http\Middleware\Admin::class,
-		'lang' => \App\Http\Middleware\Language::class
+		'lang' => \App\Http\Middleware\Language::class,
+        'cors' => \App\Http\Middleware\Cors::class,
     ];
 }
