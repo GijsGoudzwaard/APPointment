@@ -4,7 +4,7 @@
 
 	<h1>{{ trans('forms.modify') }} '{{ $company->name }}'</h1>
 
-	{{ Form::open(['url' => request()->path() . '/' . $company->id, 'method' => 'put', 'files' => true]) }}
+	{{ Form::open(['url' => route('company.update', $company->id), 'method' => 'put', 'files' => true]) }}
 
 		<ul class="nav nav-tabs" id="guide-tabs">
 			<li class="active">
