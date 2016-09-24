@@ -1,7 +1,7 @@
 @extends('layouts.layout', ['page' => trans('base.accounts')])
 @section('content')
 
-	<a href="{{ route($company_id ? 'companies.{company_id}.users.create' : 'users.create', $company_id) }}" class="btn btn-default create">{{ trans('forms.create_a_new') }} {{ trans('forms.account') }}</a>
+	<a href="{{ route($company_id ? 'companies.users.create' : 'users.create', $company_id) }}" class="btn btn-default create">{{ trans('forms.create_a_new') }} {{ trans('forms.account') }}</a>
 	<div class="table-responsive">
 		<table class="table-responsive table table-hover">
 			<h1>{{ trans('base.accounts') }}</h1>
