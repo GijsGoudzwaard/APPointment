@@ -54,6 +54,28 @@ class CustomerController extends Controller
     }
 
     /**
+     * See if the credentials are correct
+     * Send back the user if it is
+     *
+     * @param  Request $request
+     * @return string|User
+     */
+    public function login(Request $request)
+    {
+        if (! \Auth::validate($request->all())) {
+            return 'Invalid user credentials';
+        }
+
+        // Only check by email, since it is a unique field
+        return User::where('email', $request->get('email'))->select([
+            'firstname',
+            'surname',
+            'phonenumber',
+            'email'
+        ])->first();
+    }
+
+    /**
      * Create a new Validor instance
      *
      * @param  Request $request

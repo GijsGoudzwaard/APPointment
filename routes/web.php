@@ -61,10 +61,6 @@ Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function ()
     Route::get('language/set/{locale}', ['as' => 'setlanguage', 'uses' => '\App\Http\Language@set']);
 });
 
-Route::group(['middleware' => 'cors', 'prefix' => 'api'], function () {
-    Route::post('customer/new', 'CustomerController@store');
-});
-
 Route::group(['middleware' => ['web']], function () {
     Route::get('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@showLoginForm']);
     Route::post('login', ['as' => 'auth.login', 'uses' => 'Auth\AuthController@login']);
