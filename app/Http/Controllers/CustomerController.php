@@ -46,6 +46,7 @@ class CustomerController extends Controller
         $user->save();
 
         return [
+            'id' => $user->id,
             'firstname' => $user->firstname,
             'surname' => $user->surname,
             'email' => $user->email,
@@ -68,6 +69,7 @@ class CustomerController extends Controller
 
         // Only check by email, since it is a unique field
         return User::where('email', $request->get('email'))->select([
+            'id',
             'firstname',
             'surname',
             'phonenumber',

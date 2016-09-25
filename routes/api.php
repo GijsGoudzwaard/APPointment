@@ -20,4 +20,6 @@ Route::get('/user', function (Request $request) {
 Route::group(['middleware' => 'cors'], function () {
     Route::post('customer/new', 'CustomerController@store');
     Route::post('customer/login', 'CustomerController@login');
+
+    Route::post('appointment', 'AppointmentController@book');
 });

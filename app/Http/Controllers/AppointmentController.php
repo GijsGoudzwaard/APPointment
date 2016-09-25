@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\AppointmentType;
+use App\Models\Company;
 use Cache;
 use Carbon\Carbon;
 use Validator;
@@ -107,7 +109,7 @@ class AppointmentController extends Verify
      * Update the record by it's $id
      *
      * @param  Request $request
-     * @param  int $id
+     * @param  int     $id
      * @return mixed
      */
     public function update(Request $request, $id)
@@ -206,5 +208,29 @@ class AppointmentController extends Verify
         return collect($appointment_types->map(function ($appointment_type) {
             return str_replace(',', '.', $appointment_type->price) * $appointment_type->appointments->count();
         }));
+    }
+
+    /**
+     * Book a new appointment
+     * This method is only accessed through the api
+     *
+     * @param  Request $request
+     * @return string
+     */
+    public function book(Request $request)
+    {
+        $appointment = new Appointment;
+        $appointment->name = $request->input('user.firstname') . ' ' . $request->input('user.surname') . ' - ' . $request->input('appointment.appointmentType.name');
+        $appointment->user_id = $request->input('appointment.employee.id');
+        $appointment->appointment_type_id = $request->input('appointment.appointmentType.id');
+
+        $date = Carbon::parse($request->input('appointment.date'));
+        $time = explode(':', $request->input('appointment.from'));
+        $date->setTime($time[0], $time[1]);
+
+        $appointment->scheduled_at = $date->toDateTimeString();
+        $appointment->save();
+
+        return 'Succesfully booked';
     }
 }
