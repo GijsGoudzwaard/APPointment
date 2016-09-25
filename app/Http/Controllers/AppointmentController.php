@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UrlParser;
 use App\Models\AppointmentType;
 use App\Models\Company;
 use Cache;
@@ -232,5 +233,26 @@ class AppointmentController extends Verify
         $appointment->save();
 
         return 'Succesfully booked';
+    }
+
+    public function booked(Request $request)
+    {
+        $booked_days = [];
+        $date = Carbon::parse($request->get('timestamp'));
+        $company = Company::where('subdomain', UrlParser::getSubdomain())->first();
+        $closed_days = array_diff_key($company->days, (array) $company->openingHours());
+
+        for ($i = 0; $i < $date->daysInMonth; $i++) {
+            $day = $date->addDays($i + 1);
+
+            if (in_array($day->format('l'), $closed_days)) {
+                $booked_days[] = [
+                    'start_time' => $day->startOfDay()->toDateTimeString(),
+                    'end_time' => $day->endOfDay()->toDateTimeString()
+                ];
+            }
+        }
+
+        return $booked_days;
     }
 }
