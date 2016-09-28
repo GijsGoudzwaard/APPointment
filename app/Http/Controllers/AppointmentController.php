@@ -242,8 +242,8 @@ class AppointmentController extends Verify
         $company = Company::where('subdomain', UrlParser::getSubdomain())->first();
         $closed_days = array_diff_key($company->days, (array) $company->openingHours());
 
-        for ($i = 0; $i < $date->daysInMonth; $i++) {
-            $day = $date->addDays($i + 1);
+        for ($i = 1; $i < $date->daysInMonth; $i++) {
+            $day = $date->addDays(1);
 
             if (in_array($day->format('l'), $closed_days)) {
                 $booked_days[] = [
