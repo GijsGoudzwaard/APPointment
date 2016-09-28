@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\AppointmentType;
 use Auth;
 use Validator;
 use App\Http\File;
@@ -63,7 +64,7 @@ class UserController extends Controller
      * Update the user information
      *
      * @param  Request $request
-     * @param  int $user_id
+     * @param  int     $user_id
      * @return mixed
      */
     public function update(Request $request, $user_id)
@@ -151,7 +152,7 @@ class UserController extends Controller
     /**
      * Create a new Validor instance
      *
-     * @param  Request $request
+     * @param  Request   $request
      * @param  User|null $user
      * @return Validator
      */
@@ -178,5 +179,19 @@ class UserController extends Controller
         Auth::loginUsingId($user_id);
 
         return redirect()->route('dashboard');
+    }
+
+    /**
+     * Get the employees based on the appointment type id
+     *
+     * @param  Request $request
+     * @return mixed
+     */
+    public function getEmployee(Request $request)
+    {
+        $appointment_type = AppointmentType::find($request->get('appointment_type'));
+        $users = $appointment_type->users()->select(['id', 'firstname', 'surname'])->get();
+
+        return $users->pluck('attributes');
     }
 }

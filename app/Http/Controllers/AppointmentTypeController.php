@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UrlParser;
+use App\Models\Company;
 use Cache;
 use Validator;
 use App\Models\User;
@@ -164,6 +166,18 @@ class AppointmentTypeController extends Controller
             'amount' => $appointment_type->countAppointments(),
             'price' => $appointment_type->price
         ];
+    }
+
+    /**
+     * Get all the appointment types based on this company
+     *
+     * @return mixed
+     */
+    public function get()
+    {
+        $company = Company::where('subdomain', UrlParser::getSubdomain())->select('id')->first();
+
+        return $company->appointmentTypes()->select(['id', 'name', 'time'])->get();
     }
 
     /**
