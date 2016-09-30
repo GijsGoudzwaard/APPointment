@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -97,5 +98,26 @@ class Company extends Model
         }
 
         return $appointments;
+    }
+
+    /**
+     * Get the start and end time from the given date
+     *
+     * @param  Carbon $date
+     * @return array
+     */
+    public function dayTimes($date)
+    {
+        $day = strtolower($date->format('D'));
+        $opening_hours = $this->openingHours()->$day;
+        $times = [];
+
+        foreach ($opening_hours as $key => $opening_hour) {
+            // This array consists of the hour and minutes
+            $arr = explode(':', $opening_hours->$key);
+            $times[$key] = Carbon::parse($date)->setTime($arr[0], $arr[1]);
+        }
+
+        return $times;
     }
 }

@@ -235,6 +235,12 @@ class AppointmentController extends Verify
         return 'Succesfully booked';
     }
 
+    /**
+     * Get all booked dates
+     *
+     * @param  Request $request
+     * @return array
+     */
     public function booked(Request $request)
     {
         $booked_days = [];
@@ -254,5 +260,31 @@ class AppointmentController extends Verify
         }
 
         return $booked_days;
+    }
+
+    /**
+     * Get all available timeblocks
+     *
+     * @param  Request $request
+     * @return array
+     */
+    public function timeblocks(Request $request)
+    {
+        $timeblocks = [];
+        $appointment_type = json_decode($request->get('appointmentType'), true);
+        $company = Company::where('subdomain', UrlParser::getSubdomain())->first();
+        $company_hours = $company->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
+        $current_time = $company_hours['from'];
+
+        while ($current_time->lt($company_hours['to'])) {
+            $timeblocks[] = [
+                'from' => $current_time->format('H:i'),
+                'to' => $current_time->addMinutes($appointment_type['time'])->format('H:i')
+            ];
+
+            $current_time = $current_time->addMinutes($appointment_type['time']);
+        }
+
+        return $timeblocks;
     }
 }

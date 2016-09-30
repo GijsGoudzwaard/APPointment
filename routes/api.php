@@ -23,6 +23,7 @@ Route::group(['middleware' => 'cors'], function () {
 
     Route::post('appointment', 'AppointmentController@book');
     Route::get('appointments/booked', 'AppointmentController@booked');
+    Route::get('appointments/timeblocks', 'AppointmentController@timeblocks');
 
     Route::get('appointmenttypes/get', 'AppointmentTypeController@get');
     Route::get('employees/get', 'Auth\UserController@getEmployee');
