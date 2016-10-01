@@ -276,12 +276,17 @@ class AppointmentController extends Verify
         $current_time = $company_hours['from'];
 
         while ($current_time->lt($company_hours['to']) && $current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours['to'])) {
+            $appointment = Appointment::with('appointmentType')->whereBetween('scheduled_at', [$current_time, $current_time->copy()->addMinutes($appointment_type['time'])])->first();
+
+            if ($appointment) {
+                $current_time = Carbon::parse($appointment->scheduled_at)->addMinutes($appointment->appointmentType->time);
+                continue;
+            }
+
             $timeblocks[] = [
                 'from' => $current_time->format('H:i'),
                 'to' => $current_time->addMinutes($appointment_type['time'])->format('H:i')
             ];
-
-            $current_time = $current_time->addMinutes($appointment_type['time']);
         }
 
         return $timeblocks;
