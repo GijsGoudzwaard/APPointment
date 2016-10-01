@@ -2,7 +2,7 @@
 
 return [
     'mo' => 'Monday',
-    'tu' => 'Tuesday',
+    'tue' => 'Tuesday',
     'wed' => 'Wednesday',
     'thu' => 'Thursday',
     'fr' => 'Friday',
