@@ -1,6 +1,7 @@
 <?php
 use Carbon\Carbon;
 use App\Models\Company;
+use App\Http\Requests\UrlParser;
 
 if (! function_exists('get_company')) {
     /**
@@ -10,7 +11,7 @@ if (! function_exists('get_company')) {
      */
     function get_company()
     {
-        return Auth::user()->company;
+        return Auth::user()->company ?? Company::where('subdomain', UrlParser::getSubdomain())->first();
     }
 }
 

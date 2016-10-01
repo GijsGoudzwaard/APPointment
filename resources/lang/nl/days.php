@@ -3,7 +3,7 @@
 return [
     'mo' => 'Maandag',
     'tu' => 'Dinsdag',
-    'we' => 'Woensdag',
+    'wed' => 'Woensdag',
     'thu' => 'Donderdag',
     'fr' => 'Vrijdag',
     'sa' => 'Zaterdag',

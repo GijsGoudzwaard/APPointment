@@ -39,7 +39,7 @@ class Company extends Model
     public $days = [
         'mo' => 'Monday',
         'tu' => 'Tuesday',
-        'we' => 'Wednesday',
+        'wed' => 'Wednesday',
         'thu' => 'Thursday',
         'fr' => 'Friday',
         'sa' => 'Saturday',

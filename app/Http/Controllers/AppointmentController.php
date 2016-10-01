@@ -272,11 +272,10 @@ class AppointmentController extends Verify
     {
         $timeblocks = [];
         $appointment_type = json_decode($request->get('appointmentType'), true);
-        $company = Company::where('subdomain', UrlParser::getSubdomain())->first();
-        $company_hours = $company->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
+        $company_hours = get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
         $current_time = $company_hours['from'];
 
-        while ($current_time->lt($company_hours['to'])) {
+        while ($current_time->lt($company_hours['to']) && $current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours['to'])) {
             $timeblocks[] = [
                 'from' => $current_time->format('H:i'),
                 'to' => $current_time->addMinutes($appointment_type['time'])->format('H:i')
