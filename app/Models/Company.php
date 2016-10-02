@@ -37,13 +37,13 @@ class Company extends Model
      * @var array
      */
     public $days = [
-        'mo' => 'Monday',
+        'mon' => 'Monday',
         'tue' => 'Tuesday',
         'wed' => 'Wednesday',
         'thu' => 'Thursday',
-        'fr' => 'Friday',
-        'sa' => 'Saturday',
-        'su' => 'Sunday'
+        'fri' => 'Friday',
+        'sat' => 'Saturday',
+        'sun' => 'Sunday'
     ];
 
     /**
