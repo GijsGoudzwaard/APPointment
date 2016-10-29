@@ -19,6 +19,7 @@ return [
     'email' => 'E-mail',
     'phonenumber' => 'Telefoonnummer',
     'password' => 'Wachtwoord',
+    'password_confirmation' => 'Wachtwoord bevestiging',
     'avatar' => 'Avatar',
     'active' => 'Actief',
     'company' => 'Bedrijf',

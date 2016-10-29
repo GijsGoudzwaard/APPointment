@@ -1,37 +1,36 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1, maximum-scale=1">
-	<title>APPointment login</title>
-	<link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
-	<link rel="stylesheet" href="{{ url('assets/dist/login.css') }}" />
-</head>
-<body>
+@extends('layouts.app')
 
-	{!! Form::open() !!}
-		<input type="email" name="email" placeholder="{{ trans('forms.email') }}" class="{{ (session('error')) ? 'error' : '' }}" value="{{ old('email') }}" required autofocus />
+@section('content')
 
-		@if (session('error'))
-			<small>{{ session('error') }}</small>
-		@endif
+    <form role="form" method="POST" action="{{ url('/login') }}" class="login">
+        {{ csrf_field() }}
 
-		<input type="password" name="password" placeholder="{{ trans('forms.password') }}"  class="{{ (session('error')) ? 'error' : '' }}" required />
+        <div class="form-group{{ $errors->has('email') ? ' has-error' : '' }}">
+            <input type="email" name="email" value="{{ old('email') }}" class="{{ (session('error')) ? 'error' : '' }}" placeholder="{{ trans('forms.email') }}" required autofocus />
 
-		@if (session('error'))
-			<small>{{ session('error') }}</small>
-		@endif
+            @if ($errors->has('email'))
+                <small>{{ $errors->first('email') }}</small>
+            @endif
+        </div>
 
-		<label for="remember">{{ trans('auth.remember_me') }}
-			<input type="checkbox" name="remember">
-		</label>
+        <div class="form-group{{ $errors->has('password') ? ' has-error' : '' }}">
+            <input type="password" name="password" class="{{ (session('error')) ? 'error' : '' }}" placeholder="{{ trans('forms.password') }}" required />
 
+            @if ($errors->has('password'))
+                <small>{{ $errors->first('password') }}</small>
+            @endif
+        </div>
 
-		<button>{{ trans('forms.submit') }}</button>
+        <div class="form-group">
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox" name="remember"> {{ trans('auth.remember_me') }}
+                </label>
+            </div>
+        </div>
 
-		<a href="{{ url('password/reset') }}" class="forgot-password">{{ trans('auth.forgot_password') }}</a>
+        <button>{{ trans('forms.submit') }}</button>
 
-	{!! Form::close() !!}
-
-</body>
-</html>
+        <a href="{{ route('auth.password.reset') }}">{{ trans('auth.forgot_password') }}</a>
+    </form>
+@endsection

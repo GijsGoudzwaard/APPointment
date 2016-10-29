@@ -19,6 +19,7 @@ return [
     'email' => 'E-mail',
     'phonenumber' => 'Phonenumber',
     'password' => 'Password',
+    'password_confirmation' => 'Password confirmation',
     'avatar' => 'Avatar',
     'active' => 'Active',
     'company' => 'Company',
