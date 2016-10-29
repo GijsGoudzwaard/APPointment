@@ -40,8 +40,12 @@ form {
 	margin: auto;
 	padding: 45px 35px 35px 35px;
 
-	input[type='email'], input[type='password'] {
+	.form-group {
 		margin: 30px 0;
+	}
+
+	> :nth-child(2) {
+		margin-top: 0;
 	}
 
 	input[required] {
@@ -122,7 +126,7 @@ form {
 	}
 }
 
-.email {
+.email:not(.has-error) {
 	height: 200px;
 
 	h4 {
@@ -142,4 +146,9 @@ form {
 
 .login input[type='email'] {
 	margin-top: 0;
+}
+
+.alert.alert-success {
+	color: green;
+	margin-bottom: 5px;
 }

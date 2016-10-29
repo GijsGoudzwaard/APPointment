@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-    {!! Form::open(['method' => 'POST', 'url' => 'password/email', 'class' => 'email']) !!}
+    {!! Form::open(['method' => 'POST', 'url' => 'password/email', 'class' => session('status') ? ' has-error email' : 'email']) !!}
 
     @if (session('status'))
         <div class="alert alert-success">
