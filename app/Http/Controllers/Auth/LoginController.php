@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UrlParser;
+use App\Models\Company;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class LoginController extends Controller
@@ -25,7 +27,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/';
 
     /**
      * Create a new controller instance.
@@ -35,5 +37,23 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest', ['except' => 'logout']);
+    }
+
+    /**
+     * Show the login form
+     * If we are already on a subdomain, redirect to the host
+     *
+     * @return mixed
+     */
+    public function showLoginForm()
+    {
+        $url = UrlParser::getSubdomain();
+        $company = Company::where('subdomain', $url)->get();
+
+        if ($url !== false && ! $company->isEmpty()) {
+            return redirect(str_replace($company->first()->subdomain . '.', '', url('')));
+        }
+
+        return view('auth.login');
     }
 }

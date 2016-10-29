@@ -215,6 +215,8 @@ class AppointmentController extends Verify
      * Book a new appointment
      * This method is only accessed through the api
      *
+     * TODO: clean this up
+     *
      * @param  Request $request
      * @return string
      */
@@ -264,6 +266,8 @@ class AppointmentController extends Verify
 
     /**
      * Get all available timeblocks
+     *
+     * TODO: clean this up
      *
      * @param  Request $request
      * @return array

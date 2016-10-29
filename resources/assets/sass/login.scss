@@ -40,8 +40,12 @@ form {
 	margin: auto;
 	padding: 45px 35px 35px 35px;
 
-	> :nth-child(3) {
-	    margin: 30px 0;
+	.form-group {
+		margin: 30px 0;
+	}
+
+	> :nth-child(2) {
+		margin-top: 0;
 	}
 
 	input[required] {
@@ -122,11 +126,29 @@ form {
 	}
 }
 
-.password-reset {
+.email:not(.has-error) {
 	height: 200px;
 
 	h4 {
 		margin: 0;
 		color: $purple;
 	}
+}
+
+.reset {
+	height: 335px;
+}
+
+.email h4, .reset h4 {
+	margin: 0;
+	color: $purple;
+}
+
+.login input[type='email'] {
+	margin-top: 0;
+}
+
+.alert.alert-success {
+	color: green;
+	margin-bottom: 5px;
 }

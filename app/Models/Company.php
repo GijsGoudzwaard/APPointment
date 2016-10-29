@@ -115,6 +115,8 @@ class Company extends Model
         foreach ($opening_hours as $key => $opening_hour) {
             // This array consists of the hour and minutes
             $arr = explode(':', $opening_hours->$key);
+
+            // TODO: Clean this up: No usage of [0] and [1]
             $times[$key] = Carbon::parse($date)->setTime($arr[0], $arr[1]);
         }
 
