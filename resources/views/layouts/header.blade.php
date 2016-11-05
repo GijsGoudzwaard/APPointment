@@ -8,7 +8,7 @@
 		<ul>
 			<li><a href="{{ route('users.edit', Auth::user()->id) }}">{{ trans('base.account_settings') }}</a></li>
 			<li class="language-switcher">
-				<a href="javascript:;">{{ trans('base.language') }}: <strong>{{ strtoupper(app()->getLocale()) }}</strong></a>
+				<a href="javascript:;">{{ trans('base.language') }}: <strong>{{ strtoupper(app()->getLocale() ?? \Cookie::get('lang')) }}</strong></a>
 				<ul>
 					@foreach (get_locales() as $locale)
 						<li><a href="{{ route('setlanguage', $locale) }}">{{ trans('languages.' . $locale) }}</a></li>
