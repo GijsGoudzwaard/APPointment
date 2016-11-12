@@ -215,7 +215,7 @@ class AppointmentController extends Verify
      * Book a new appointment
      * This method is only accessed through the api
      *
-     * TODO: clean this up
+     * @TODO: clean this up
      *
      * @param  Request $request
      * @return string
@@ -228,8 +228,8 @@ class AppointmentController extends Verify
         $appointment->appointment_type_id = $request->input('appointment.appointmentType.id');
 
         $date = Carbon::parse($request->input('appointment.date'));
-        $time = explode(':', $request->input('appointment.from'));
-        $date->setTime($time[0], $time[1]);
+        list($hour, $minute) = explode(':', $request->input('appointment.from'));
+        $date->setTime($hour, $minute);
 
         $appointment->scheduled_at = $date->toDateTimeString();
         $appointment->save();
@@ -267,7 +267,8 @@ class AppointmentController extends Verify
     /**
      * Get all available timeblocks
      *
-     * TODO: clean this up
+     * @TODO: clean this up
+     * @TODO: Remove the json arrays from the request
      *
      * @param  Request $request
      * @return array
