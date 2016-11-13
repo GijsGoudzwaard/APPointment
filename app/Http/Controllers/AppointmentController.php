@@ -14,6 +14,8 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Verify
 {
+    private $current_time;
+
     /**
      * Show the calendar
      *
@@ -199,12 +201,14 @@ class AppointmentController extends Verify
      */
     public function income()
     {
-        $appointment_types = get_company()->appointmentTypes->load(['appointments' => function ($appointments) {
-            return $appointments->whereBetween('scheduled_at', [
-                Carbon::now()->startOfMonth()->toDateTimeString(),
-                Carbon::now()->toDateTimeString()
-            ]);
-        }]);
+        $appointment_types = get_company()->appointmentTypes->load([
+            'appointments' => function ($appointments) {
+                return $appointments->whereBetween('scheduled_at', [
+                    Carbon::now()->startOfMonth()->toDateTimeString(),
+                    Carbon::now()->toDateTimeString()
+                ]);
+            }
+        ]);
 
         return collect($appointment_types->map(function ($appointment_type) {
             return str_replace(',', '.', $appointment_type->price) * $appointment_type->appointments->count();
@@ -265,9 +269,19 @@ class AppointmentController extends Verify
     }
 
     /**
+     * Check if the current time is occupied.
+     *
+     * @param  Request $request
+     * @return boolean
+     */
+    public function check(Request $request)
+    {
+        return ['exists' => (boolean) Appointment::check((object) $request->all(), $this->current_time)];
+    }
+
+    /**
      * Get all available timeblocks
      *
-     * @TODO: clean this up
      * @TODO: Remove the json arrays from the request
      *
      * @param  Request $request
@@ -277,24 +291,20 @@ class AppointmentController extends Verify
     {
         $timeblocks = [];
         $appointment_type = json_decode($request->get('appointmentType'), true);
-        $employee = json_decode($request->get('employee'), true);
-        $company_hours = get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
-        $current_time = $company_hours['from'];
+        $company_hours = (object) get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
+        $this->current_time = $company_hours->from;
 
-        while ($current_time->lt($company_hours['to']) && $current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours['to'])) {
-            $appointment = Appointment::with('appointmentType')
-                ->whereBetween('scheduled_at', [$current_time, $current_time->copy()->addMinutes($appointment_type['time'])])
-                ->where('user_id', $employee['id'])
-                ->first();
+        while ($this->current_time->lt($company_hours->to) && $this->current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours->to)) {
+            $appointment = Appointment::check((object) $request->all(), $this->current_time);
 
             if ($appointment) {
-                $current_time = Carbon::parse($appointment->scheduled_at)->addMinutes($appointment->appointmentType->time);
+                $this->current_time = Carbon::parse($appointment->scheduled_at)->addMinutes($appointment->appointmentType->time);
                 continue;
             }
 
             $timeblocks[] = [
-                'from' => $current_time->format('H:i'),
-                'to' => $current_time->addMinutes($appointment_type['time'])->format('H:i')
+                'from' => $this->current_time->format('H:i'),
+                'to' => $this->current_time->addMinutes($appointment_type['time'])->format('H:i')
             ];
         }
 
