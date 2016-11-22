@@ -10,6 +10,8 @@ var lineChart = new Chart(elem('#line'), {
     },
     options: {
         defaultFontSize: 0,
+        responsive: true,
+        maintainAspectRatio: false,
         scales: {
             yAxes: [{
                 ticks: {

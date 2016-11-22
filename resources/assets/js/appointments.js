@@ -68,6 +68,8 @@ $(function() {
 		});
 	}
 
+	// Refresh the appointments every 5 minutes
+	// Do not show the load indicator seeing as it is a 'background' process
 	setInterval(function() {
 		getAppointments(start_date, end_date, false);
 	}, 3000000);

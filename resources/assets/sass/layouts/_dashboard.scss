@@ -10,14 +10,32 @@
         border: 2px solid #eee;
         padding: 15px;
 
+        &.col-lg-12 {
+            height: 70%;
+        }
+
         &.earnings {
             background-color: $light-purple;
             color: #fff;
             text-align: center;
+            height: 30%;
         }
     }
 
     .wrapper {
         padding: 0;
     }
+}
+
+.charts {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.charts > [class*='col-'] {
+    display: flex;
+    flex-direction: column;
 }

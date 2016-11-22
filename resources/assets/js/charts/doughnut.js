@@ -3,6 +3,10 @@ var doughnutChart = new Chart(elem('#doughnut'), {
     data: {
         labels: ["data"],
         datasets: [{data: [100]}]
+    },
+    options: {
+        responsive: true,
+        maintainAspectRatio: false,
     }
 });
 

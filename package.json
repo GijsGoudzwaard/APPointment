@@ -4,7 +4,7 @@
     "gulp": "^3.9.1"
   },
   "dependencies": {
-    "chart.js": "^2.2.0-rc.1",
-    "laravel-elixir": "^6.0.0-9"
+    "chart.js": "^2.4.0",
+    "laravel-elixir": "^6.0.0-15"
   }
 }

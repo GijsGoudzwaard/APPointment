@@ -6,7 +6,7 @@
 
     <div class="charts clearfix">
         <div class="item col-lg-8 col-md-12">
-            <canvas id="line" height="160"></canvas>
+            <canvas id="line"></canvas>
         </div>
 
         <div class="wrapper col-lg-4 col-md-12">
