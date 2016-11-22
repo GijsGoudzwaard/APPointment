@@ -1,5 +1,6 @@
 $(function() {
 	var calendar = $('#calendar');
+	var start_date, end_date;
 
 	// To prevent errors when the element doesn't exist
 	if (calendar.length > 0) {
@@ -29,20 +30,25 @@ $(function() {
 				window.location.href = "/appointments/" + date.id + "/edit";
 			},
 			viewRender: function(view, element) {
-				// Remove all events so we won't get any duplicates
-				calendar.fullCalendar('removeEvents');
-				getAppointments(moment(view.start).unix(), moment(view.end).unix());
+				start_date = moment(view.start).unix();
+				end_date = moment(view.end).unix();
+
+				getAppointments(moment(view.start).unix(), moment(view.end).unix(), true);
 			}
 		});
 	}
 
-	function getAppointments(start, end) {
+	function getAppointments(start, end, loader) {
 		ajax({
 			destination: '/appointments/get?start=' + start + '&end=' + end,
 			method: 'GET',
-			loader: true,
+			loader: loader,
 		}, function(res) {
 			var data = JSON.parse(res);
+
+			// Remove all events so we won't get any duplicates
+			calendar.fullCalendar('removeEvents');
+
 			for (var i = 0; i < data.length; i++) {
 				var event = {
 					id: data[i].id,
@@ -61,4 +67,8 @@ $(function() {
 			}
 		});
 	}
+
+	setInterval(function() {
+		getAppointments(start_date, end_date, false);
+	}, 5000000);
 });

@@ -89,16 +89,16 @@ function ajax(options, callback) {
     xhr.open(options.method, options.destination, true);
     xhr.send();
 
-    // After request is done remove the loader
-    if (options.loader) {
-        elem('#loader').className = '';
-    }
-
     xhr.onreadystatechange = function () {
         if (xhr.readyState == 4) {
+            // After request is done remove the loader
+            if (options.loader) {
+                elem('#loader').className = '';
+            }
+
             return callback(xhr.response);
         }
-    }
+    };
 }
 
 /**
