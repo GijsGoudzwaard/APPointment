@@ -2,7 +2,7 @@ nav {
     height: 100%;
     width: 225px;
     background-color: $primary-purple;
-    transition: width .1s linear;
+    transition: all 0.25s;
     overflow: auto;
     width: 100px;
 
@@ -17,7 +17,7 @@ nav {
     a span {
         display: inline-block;
         opacity: 0;
-        transition: opacity .1s linear;
+        transition: opacity .25s linear;
         vertical-align: 7px;
     }
 
