@@ -1,173 +1,180 @@
 nav {
-	height: 100%;
-	width: 225px;
-	background-color: $primary-purple;
-	transition: width .1s linear;
-	overflow: auto;
+    height: 100%;
+    width: 225px;
+    background-color: $primary-purple;
+    transition: width .1s linear;
+    overflow: auto;
+    width: 100px;
 
-	&.expanded {
-		width: 100px;
+    &:hover {
+        width: 225px;
 
-		a span {
-			display: none;
-		}
+        a span {
+            opacity: 1;
+        }
+    }
 
-		li.sidebar-brand svg {
-			width: 50px;
-		}
-	}
+    a span {
+        display: inline-block;
+        opacity: 0;
+        transition: opacity .1s linear;
+        vertical-align: 7px;
+    }
 
-	ul {
-		text-align: center;
+    ul {
+        text-align: center;
 
-		li {
-			display: block;
-			margin-bottom: 15px;
+        li {
+            display: block;
+            margin-bottom: 15px;
+            text-align: left;
 
-			&.sidebar-brand {
-				background-color: $purple;
-				height: 115px;
-				margin-bottom: 15px;
+            &.sidebar-brand {
+                background-color: $purple;
+                height: 115px;
+                margin-bottom: 15px;
+                text-align: center;
 
-				svg {
-					transition: width .1s linear;
-					width: 65px;
-					height: 100%;
+                svg {
+                    transition: width .1s linear;
+                    width: 50px;
+                    height: 100%;
 
-					#bell {
-						transition: all .1s linear;
-					}
-				}
+                    #bell {
+                        transition: all .1s linear;
+                    }
+                }
 
-				&:hover svg #bell {
-					fill: #fff;
-				}
+                &:hover svg #bell {
+                    fill: #fff;
+                }
 
-				a {
-					width: 100%;
-					height: 100%;
-				}
-			}
+                a {
+                    width: 100%;
+                    height: 100%;
+                    cursor: pointer;
+                    padding: 10px 15px !important;
+                }
+            }
 
-			a {
-				transition: all .1s linear;
-				color: $light-purple;
+            a {
+                transition: all .1s linear;
+                color: $light-purple;
+                padding: 10px 35px !important;
+                white-space: nowrap;
 
-				&:hover, &:focus {
-					background: none !important;
-					color: #fff;
+                &:hover, &:focus {
+                    background: none !important;
+                    color: #fff;
 
-					.material-icons {
-						color: #fff;
-					}
-				}
+                    .material-icons {
+                        color: #fff;
+                    }
+                }
 
-				.material-icons {
-					margin-bottom: 10px;
-					display: block;
-				}
-			}
-		}
-	}
+                .material-icons {
+                    margin-bottom: 10px;
+                    display: inline-block;
+                    margin-right: 15px;
+                }
+            }
+        }
+    }
 }
 
 .topbar {
-	height: 115px;
-	background-color: #fff;
-	width: calc(100% - 225px);
-	position: fixed;
-	right: 0;
-	top: 0;
-	transition: width .1s linear;
-	z-index: 6;
+    height: 115px;
+    background-color: #fff;
+    width: calc(100% - 100px);
+    position: fixed;
+    right: 0;
+    top: 0;
+    transition: width .1s linear;
+    z-index: 6;
 
-	&.expanded {
-		width: calc(100% - 100px);
-	}
+    .hamburger-menu {
+        color: $grey;
+        position: relative;
+        top: 40px;
+        left: 50px;
+        transition: all .1s linear;
 
-	.hamburger-menu {
-		color: $grey;
-		position: relative;
-		top: 40px;
-		left: 50px;
-		transition: all .1s linear;
+        &:hover {
+            color: $light-purple;
+        }
 
-		&:hover {
-			color: $light-purple;
-		}
+        i {
+            font-size: 32px;
+        }
+    }
 
-		i {
-			font-size: 32px;
-		}
-	}
+    .user {
+        position: absolute;
+        right: 50px;
+        top: 32px;
 
-	.user {
-		position: absolute;
-		right: 50px;
-		top: 32px;
+        &:hover > ul {
+            display: block;
+        }
 
-		&:hover > ul {
-			display: block;
-		}
+        span {
+            vertical-align: 20px;
+            display: inline-block;
+            margin-left: 12px;
+        }
 
-		span {
-			vertical-align: 20px;
-			display: inline-block;
-			margin-left: 12px;
-		}
+        > ul {
+            display: none;
+            background-color: #fff;
+            box-shadow: 3px 3px 4px #ccc;
+            padding: 0;
+            position: relative;
+            top: 28px;
 
-		> ul {
-			display: none;
-			background-color: #fff;
-			box-shadow: 3px 3px 4px #ccc;
-		    padding: 0;
-			position: relative;
-		    top: 28px;
+            > :first-child {
+                border-bottom: 1px solid rgba(#eee, 0.4);
+            }
 
-			> :first-child {
-				border-bottom: 1px solid rgba(#eee, 0.4);
-			}
+            li {
+                cursor: pointer;
+                list-style-type: none;
 
-			li {
-				cursor: pointer;
-				list-style-type: none;
+                &:hover {
+                    background-color: rgba(#eee, 0.4);
+                }
 
-				&:hover {
-					background-color: rgba(#eee, 0.4);
-				}
+                a {
+                    color: #000;
+                    display: block;
+                    padding: 12px;
+                    text-decoration: none;
 
-				a {
-					color: #000;
-					display: block;
-					padding: 12px;
-					text-decoration: none;
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
 
-					&:hover {
-						text-decoration: none;
-					}
-				}
+                &.language-switcher {
+                    ul {
+                        padding: 0;
+                        max-height: 0;
+                        overflow-y: hidden;
+                        -webkit-transition: max-height .15s linear;
+                        -moz-transition: max-height .15s linear;
+                        -ms-transition: max-height .15s linear;
+                        -o-transition: max-height .15s linear;
+                        transition: max-height .15s linear;
 
-				&.language-switcher {
-					ul {
-						padding: 0;
-						max-height: 0;
-						overflow-y: hidden;
-						-webkit-transition: max-height .15s linear;
-						-moz-transition: max-height .15s linear;
-						-ms-transition: max-height .15s linear;
-						-o-transition: max-height .15s linear;
-						transition: max-height .15s linear;
+                        li {
+                            padding-left: 10px;
+                        }
+                    }
 
-						li {
-							padding-left: 10px;
-						}
-					}
-
-					&.active ul {
-						max-height: 100px;
-					}
-				}
-			}
-		}
-	}
+                    &.active ul {
+                        max-height: 100px;
+                    }
+                }
+            }
+        }
+    }
 }

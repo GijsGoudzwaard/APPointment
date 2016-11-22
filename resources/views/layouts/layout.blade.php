@@ -19,7 +19,7 @@
 		@include('layouts.nav')
 		@include('layouts.header')
 
-		<div id="content" class="{{ (isset($page) && strtolower($page) == 'appointments') ? 'calendar' : '' }} {{ \Cookie::has('smallMenu') ? 'expanded' : '' }}">
+		<div id="content" class="{{ (isset($page) && strtolower($page) == 'appointments') ? 'calendar' : '' }}">
 			@include('layouts.message')
 			@yield('content')
 		</div>

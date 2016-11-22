@@ -12,7 +12,7 @@ return [
     'loading' => 'Laden...',
 
     'dashboard' => 'Dashboard',
-    'appointments' => 'Afspraak',
+    'appointments' => 'Afspraken',
     'appointment_types' => 'Afspraak types',
     'companies' => 'Bedrijven',
     'accounts' => 'Accounts',

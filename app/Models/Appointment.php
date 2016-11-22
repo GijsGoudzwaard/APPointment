@@ -37,8 +37,8 @@ class Appointment extends Model
     /**
      * Check if the current time is occupied.
      *
-     * @param  object $data
-     * @param  null|Carbon   $current_time
+     * @param  object      $data
+     * @param  null|Carbon $current_time
      * @return mixed
      */
     public static function check($data, $current_time = null)

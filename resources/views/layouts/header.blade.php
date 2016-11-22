@@ -1,6 +1,4 @@
-<div class="topbar {{ \Cookie::has('smallMenu') ? 'expanded' : '' }}">
-
-	<a href="javascript:;" class="hamburger-menu"><i class="material-icons">menu</i></a>
+<div class="topbar">
 
 	<div class="user">
 		<div class="avatar" style="background-image: url({{ url(Auth::user()->avatar ?: 'assets/img/default_avatar.png') }})"></div>

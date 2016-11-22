@@ -18,21 +18,14 @@ input[type='checkbox'] {
     margin-top: 160px;
     margin-right: 50px;
     position: relative;
+    margin-left: 150px;
 
     &.animate {
         transition: margin .1s linear;
     }
 
     &.calendar {
-        margin: 135px 0 0 225px;
-    }
-
-    &.expanded {
-        margin-left: 150px;
-
-        &.calendar {
-            margin: 135px 0 0 100px;
-        }
+        margin: 135px 0 0 100px;
     }
 }
 
