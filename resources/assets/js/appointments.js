@@ -70,5 +70,5 @@ $(function() {
 
 	setInterval(function() {
 		getAppointments(start_date, end_date, false);
-	}, 5000000);
+	}, 3000000);
 });
