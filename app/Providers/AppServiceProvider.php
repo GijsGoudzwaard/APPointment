@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Cookie;
 use Illuminate\Support\ServiceProvider;
 use Barryvdh\Debugbar\LaravelDebugbar as Debugbar;
 
