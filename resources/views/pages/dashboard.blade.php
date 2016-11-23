@@ -11,7 +11,7 @@
 
         <div class="wrapper col-lg-4 col-md-12">
             <div class="item col-lg-12 col-md-12 col-sm-12">
-                <canvas id="doughnut" height="250"></canvas>
+                <canvas id="doughnut"></canvas>
             </div>
 
             <div class="item earnings col-md-12 col-sm-12">

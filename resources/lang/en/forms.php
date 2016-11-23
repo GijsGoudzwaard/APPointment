@@ -34,6 +34,7 @@ return [
     'select_employees' => 'Select employees',
     'scheduled_at' => 'Scheduled at',
     'time' => 'Time',
+    'buffer' => 'Buffer',
     'minutes' => 'Minutes',
     'price' => 'Price',
     'eligable_employees' => 'Eligable employees',

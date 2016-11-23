@@ -34,6 +34,7 @@ return [
     'select_employees' => 'Selecteer werknemers',
     'scheduled_at' => 'Gepland op',
     'time' => 'Tijd',
+    'buffer' => 'Buffer',
     'minutes' => 'Minuten',
     'price' => 'Prijs',
     'eligable_employees' => 'Beschikbare werknemers',

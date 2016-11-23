@@ -1,5 +1,7 @@
 <?php
+
 use Carbon\Carbon;
+use App\Http\Language;
 use App\Models\Company;
 use App\Http\Requests\UrlParser;
 
@@ -53,7 +55,7 @@ if (! function_exists('get_url')) {
      */
     function get_url()
     {
-        return \App\Http\Requests\UrlParser::getHost(null, false, false, false);
+        return UrlParser::getHost(null, false, false, false);
     }
 }
 
@@ -65,6 +67,6 @@ if (! function_exists('get_locales')) {
      */
     function get_locales()
     {
-        return \App\Http\Language::$locales;
+        return Language::$locales;
     }
 }

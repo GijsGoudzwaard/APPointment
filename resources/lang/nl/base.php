@@ -23,5 +23,7 @@ return [
     'no' => 'Nee',
 
     'monthly_income' => 'Maandinkomen',
-    'currency' => '&euro;'
+    'currency' => '&euro;',
+
+    'buffer_guide' => '* De buffer wordt toegevoegd na elke 2de afspraak.'
 ];

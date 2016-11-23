@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UrlParser;
 use App\Models\AppointmentType;
 use App\Models\Company;
+use App\Models\User;
 use Cache;
 use Carbon\Carbon;
 use Validator;
@@ -14,6 +15,11 @@ use Illuminate\Http\Request;
 
 class AppointmentController extends Verify
 {
+    /**
+     * Keep track of the current time.
+     *
+     * @var Carbon
+     */
     private $current_time;
 
     /**
@@ -36,11 +42,9 @@ class AppointmentController extends Verify
     {
         $start = date('Y-m-d H:i:s', $request->get('start'));
         $end = date('Y-m-d H:i:s', $request->get('end'));
-        $appointments = get_company()->appointments([$start, $end])->get();
+        $appointments = get_company()->appointments([$start, $end])->with('appointmentType')->get();
 
-        return $appointments->map(function ($appointment) {
-            return collect($appointment, $appointment->appointmentType);
-        });
+        return $appointments;
     }
 
     /**
@@ -272,7 +276,7 @@ class AppointmentController extends Verify
      * Check if the current time is occupied.
      *
      * @param  Request $request
-     * @return boolean
+     * @return array
      */
     public function check(Request $request)
     {
@@ -294,6 +298,8 @@ class AppointmentController extends Verify
         $company_hours = (object) get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
         $this->current_time = $company_hours->from;
 
+        $counter = 0;
+
         while ($this->current_time->lt($company_hours->to) && $this->current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours->to)) {
             $appointment = Appointment::check((object) $request->all(), $this->current_time);
 
@@ -302,10 +308,21 @@ class AppointmentController extends Verify
                 continue;
             }
 
+            if ($counter === 2) {
+                $this->current_time->addMinutes($appointment_type['buffer']);
+            }
+
             $timeblocks[] = [
                 'from' => $this->current_time->format('H:i'),
                 'to' => $this->current_time->addMinutes($appointment_type['time'])->format('H:i')
             ];
+
+            if ($counter === 2) {
+                $counter = 0;
+                continue;
+            }
+
+            $counter++;
         }
 
         return $timeblocks;

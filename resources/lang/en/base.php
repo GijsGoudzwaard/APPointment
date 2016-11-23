@@ -23,5 +23,7 @@ return [
     'no' => 'No',
 
     'monthly_income' => 'Monthly income',
-    'currency' => '&#36;'
+    'currency' => '&#36;',
+
+    'buffer_guide' => '* The buffer is added after every second appointment.'
 ];

@@ -13,7 +13,13 @@
 
 		<div class="form-group">
 			<label for="time">{{ trans('forms.time') }} ({{ trans('forms.minutes') }}) *</label>
-			<input type="text" class="form-control" id="time" name="time" value="{{ old('time') ?? $appointment_type->time }}" placeholder="{{ trans('forms.time') }}" required>
+			<input type="number" class="form-control" id="time" name="time" value="{{ old('time') ?? $appointment_type->time }}" placeholder="{{ trans('forms.time') }}" required>
+		</div>
+
+		<div class="form-group">
+			<label for="time">{{ trans('forms.buffer') }} ({{ trans('forms.minutes') }}) *</label>
+			<input type="number" class="form-control" id="buffer" name="buffer" value="{{ old('buffer') ?? $appointment_type->buffer }}" placeholder="{{ trans('forms.buffer') }}" required>
+			<p class="help-block">{{ trans('base.buffer_guide') }}</p>
 		</div>
 
 		<div class="form-group">
