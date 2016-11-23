@@ -9,11 +9,11 @@ if (! function_exists('get_company')) {
     /**
      * Get the company based on the user that is logged in
      *
-     * @return App\Models\Company
+     * @return Company
      */
     function get_company()
     {
-        return Auth::user()->company ?? Company::where('subdomain', UrlParser::getSubdomain())->first();
+        return (new Company)->get();
     }
 }
 

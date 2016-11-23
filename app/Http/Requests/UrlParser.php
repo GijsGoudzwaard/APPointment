@@ -7,14 +7,13 @@ class UrlParser
     /**
      * Get the host of the given url
      *
-     * @param String $url
-     * @param Boolean $getPort
-     * @param Boolean $getUrlScheme
-     * @param Boolean $getSubdomain
-     * @return String
+     * @param  string  $url
+     * @param  bool $getPort
+     * @param  bool $getUrlScheme
+     * @param  bool $getSubdomain
+     * @return string
      */
-    public static function getHost(String $url = null, Bool $getPort = false, Bool $getUrlScheme = false, Bool $getSubdomain = true)
-    {
+    public static function getHost(string $url = null, bool $getPort = false, bool $getUrlScheme = false, bool $getSubdomain = true) {
         $url = $url ?? url('');
 
         // Retrieve the host of the url
@@ -46,11 +45,11 @@ class UrlParser
      * Check if we can find a subdomain in the given url
      * If we can, return it otherwise return false
      *
-     * @param  String $url
-     * @param  Bool $getPort
-     * @return String|Boolean
+     * @param  string $url
+     * @param  bool   $getPort
+     * @return string|bool
      */
-    public static function getSubdomain(String $url = null, Bool $getPort = false)
+    public static function getSubdomain(string $url = null, bool $getPort = false)
     {
         // Check if the url starts with http
         if ($url && substr($url, 0, 4) == 'http') {
@@ -73,10 +72,10 @@ class UrlParser
      * Set the domain, redirect to that url after we are done
      * At this moment we only support url's like this: subdomain.domain.com
      *
-     * @param String $url
+     * @param  string $url
      * @return mixed
      */
-    public static function setSubdomain(String $url = null)
+    public static function setSubdomain(string $url = null)
     {
         $url = $url ?? url('');
         $host = self::getHost($url, env('APP_DEBUG', false));

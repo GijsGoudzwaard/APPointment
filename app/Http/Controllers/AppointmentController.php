@@ -255,7 +255,7 @@ class AppointmentController extends Verify
     {
         $booked_days = [];
         $date = Carbon::parse($request->get('timestamp'));
-        $company = Company::where('subdomain', UrlParser::getSubdomain())->first();
+        $company = get_company();
         $closed_days = array_diff_key($company->days, (array) $company->openingHours());
 
         for ($i = 1; $i < $date->daysInMonth; $i++) {

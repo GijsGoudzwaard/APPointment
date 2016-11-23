@@ -2,13 +2,22 @@
 
 namespace App\Models;
 
+use Auth;
 use Carbon\Carbon;
+use App\Http\Requests\UrlParser;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
 class Company extends Model
 {
     use SoftDeletes;
+
+    /**
+     * The current company.
+     *
+     * @var Company
+     */
+    private $company;
 
     /**
      * The database table used by the model.
@@ -45,6 +54,21 @@ class Company extends Model
         'sat' => 'Saturday',
         'sun' => 'Sunday'
     ];
+
+    /**
+     * Get and return the current company.
+     *
+     * @return Company
+     */
+    public function get()
+    {
+        // If we already have the company, return it.
+        if ($this->company) {
+            return $this->company;
+        }
+
+        return $this->company = Auth::user()->company ?? Company::where('subdomain', UrlParser::getSubdomain())->first();
+    }
 
     /**
      * Get users

@@ -11,11 +11,9 @@
 |
 */
 
-Route::group(['middleware' => ['web']], function () {
-    Route::auth();
-});
+Route::auth();
 
-Route::group(['middleware' => ['web', 'auth', 'subdomain', 'lang']], function () {
+Route::group(['middleware' => ['subdomain', 'lang']], function () {
 
     Route::group(['prefix' => 'api'], function () {
         Route::get('income', 'AppointmentController@income');

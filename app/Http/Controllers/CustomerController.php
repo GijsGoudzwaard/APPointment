@@ -37,7 +37,7 @@ class CustomerController extends Controller
             return $validator->errors()->all();
         }
 
-        $company = Company::where('subdomain', UrlParser::getSubdomain())->select('id')->first();
+        $company = get_company()->id;
 
         $user = new User;
         $user->fill($request->all());

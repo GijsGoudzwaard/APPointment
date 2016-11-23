@@ -175,7 +175,7 @@ class AppointmentTypeController extends Controller
      */
     public function get()
     {
-        $company = Company::where('subdomain', UrlParser::getSubdomain())->select('id')->first();
+        $company = get_company()->id;
 
         return $company->appointmentTypes()->select(['id', 'name', 'time', 'buffer'])->get();
     }
