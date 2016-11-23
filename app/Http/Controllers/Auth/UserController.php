@@ -54,7 +54,7 @@ class UserController extends Controller
     {
         $user = User::find($user_id);
 
-        return view('pages.users.edit', compact('user', 'company_id'));
+        return view('pages.users.edit', compact('user'));
     }
 
     /**
