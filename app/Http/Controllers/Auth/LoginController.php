@@ -51,7 +51,11 @@ class LoginController extends Controller
         $company = Company::where('subdomain', $url)->get();
 
         if ($url !== false && ! $company->isEmpty()) {
-            return redirect(str_replace($company->first()->subdomain . '.', '', url('')));
+            $pieces = explode('.', url(''));
+
+            unset($pieces[0]);
+
+            return redirect(get_protocol() . implode('.', $pieces));
         }
 
         return view('auth.login');

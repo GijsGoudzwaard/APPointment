@@ -70,3 +70,19 @@ if (! function_exists('get_locales')) {
         return Language::$locales;
     }
 }
+
+if (! function_exists('get_protocol')) {
+    /**
+     * Get the http protocol
+     *
+     * @return string
+     */
+    function get_protocol()
+    {
+        if (isset($_SERVER['HTTPS'])) {
+            return 'https://';
+        }
+
+        return 'http://';
+    }
+}
