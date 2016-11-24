@@ -5,6 +5,8 @@ return [
     'info' => 'Info',
     'opening_hours' => 'Openingstijden',
     'to' => 'Tot',
+    'end' => 'Eind datum',
+    'repeat' => 'Herhalend',
 
     'create_a_new' => 'Creëer een nieuw',
     'edit_an' => 'Pas aan',

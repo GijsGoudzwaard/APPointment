@@ -55,6 +55,23 @@
 			</div>
 		</div>
 
+		<div class="form-group">
+			<label for="repeat">{{ trans('forms.repeat') }}</label>
+			<input type="checkbox" class="form-control" id="repeat" name="repeat" value="1" {{ old('repeat') || $appointment->repeat_id ? 'checked' : '' }} />
+		</div>
+
+		<div class="repeat {{ $appointment->repeated_id ? '' : 'hide' }}">
+			<div class="form-group">
+				<label for="end">{{ trans('forms.end') }} *</label>
+				<div class="input-group repeat_date form-group">
+					<input type="text" class="form-control" name="end" id="end" />
+					<span class="input-group-addon">
+						<span class="glyphicon glyphicon-calendar"></span>
+					</span>
+				</div>
+			</div>
+		</div>
+
 		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>
 		<a href="{{ route('appointments.index') }}" class="btn btn-default">{{ trans('forms.back') }}</a>
 		<a href="javascript:;" data-toggle="modal" class="open-modal btn btn-danger right" data-target="#delete-modal" data-title="{{ $appointment->name }}" data-url="{{ route('appointments.destroy', $appointment->id) }}">{{ trans('forms.delete') }}</a>
@@ -87,6 +104,16 @@
 			}
 		});
 
+		$('.repeat .repeat_date').datetimepicker({
+			format: 'DD-MM-YYYY',
+			defaultDate: moment("{{ date('d/m/Y H:i', $appointment->to ? strtotime($appointment->to) : strtotime('+30 minutes', strtotime($appointment->repeat->end))) }}", 'DD/MM/YYYY HH:mm'),
+			allowInputToggle: true,
+			widgetPositioning: {
+				vertical: 'bottom',
+				horizontal: 'left'
+			}
+		});
+
 		$('input[name="closed"]').on('change', function() {
 			var context;
 
@@ -110,6 +137,10 @@
 			} else {
 				context.toggle();
 			}
+		});
+
+		$('input[name="repeat"]').on('change', function() {
+			$('.repeat').toggleClass('hide');
 		});
 	</script>
 @stop

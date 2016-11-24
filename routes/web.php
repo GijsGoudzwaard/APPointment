@@ -13,7 +13,7 @@
 
 Route::auth();
 
-Route::group(['middleware' => ['subdomain', 'lang']], function () {
+Route::group(['middleware' => ['auth', 'subdomain', 'lang']], function () {
 
     Route::group(['prefix' => 'api'], function () {
         Route::get('income', 'AppointmentController@income');

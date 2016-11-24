@@ -35,6 +35,16 @@ class Appointment extends Model
     }
 
     /**
+     * A belongsTo relation.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function repeat()
+    {
+        return $this->belongsTo(Repeat::class, 'repeated_id');
+    }
+
+    /**
      * Check if the current time is occupied.
      *
      * @param  object      $data

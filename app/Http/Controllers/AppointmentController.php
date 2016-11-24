@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UrlParser;
 use App\Models\AppointmentType;
 use App\Models\Company;
+use App\Models\Repeat;
 use App\Models\User;
 use Cache;
 use Carbon\Carbon;
@@ -101,11 +102,12 @@ class AppointmentController extends Verify
      */
     public function edit($id)
     {
-        $appointment = Appointment::find($id);
-        $appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
+        $appointment = Appointment::with('repeat')->find($id);
+        $company = get_company()->load(['appointmentTypes', 'users']);
+        $appointment_types = $company->appointmentTypes->pluck('name', 'id');
         $users = [];
 
-        foreach (get_company()->users as $user) {
+        foreach ($company->users as $user) {
             $users[$user->id] = $user->firstname . ' ' . $user->surname;
         }
 
@@ -131,10 +133,21 @@ class AppointmentController extends Verify
             $request->request->add(['closed' => 0]);
         }
 
-        $appointment = Appointment::find($id);
+        $appointment = Appointment::with('repeat')->find($id);
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->get('scheduled_at'));
         $appointment->to = $this->formatDate($request->to);
+
+        if ($request->get('repeat')) {
+            $repeat = new Repeat;
+
+            $repeat->start = Carbon::parse($appointment->scheduled_at)->toDateString();
+            $repeat->end = $request->get('end') ? Carbon::parse($request->get('end'))->toDateString() : null;
+            $repeat->save();
+
+            $appointment->repeated_id = $repeat->id;
+        }
+
         $appointment->save();
 
         return redirect()->back()->with('success', 'Successfully updated');

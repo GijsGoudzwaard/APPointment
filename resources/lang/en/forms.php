@@ -5,6 +5,8 @@ return [
     'info' => 'Info',
     'opening_hours' => 'Opening hours',
     'to' => 'To',
+    'end' => 'End',
+    'repeat' => 'Repeat',
 
     'create_a_new' => 'Create a new',
     'edit_an' => 'Edit an',
