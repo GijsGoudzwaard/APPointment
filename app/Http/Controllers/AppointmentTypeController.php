@@ -175,7 +175,7 @@ class AppointmentTypeController extends Controller
      */
     public function get()
     {
-        $company = get_company()->id;
+        $company = get_company();
 
         return $company->appointmentTypes()->select(['id', 'name', 'time', 'buffer'])->get();
     }
