@@ -16,7 +16,7 @@ class Admin
      */
     public function handle($request, Closure $next)
     {
-        if (Auth::user()->role != Auth::user()->role('admin')) {
+        if (! Auth::user()->isAdmin()) {
             return redirect('/')->with('errors', 'You\'re not allowed there!');
         }
 

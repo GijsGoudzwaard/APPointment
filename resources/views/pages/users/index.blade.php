@@ -11,7 +11,9 @@
 					<th>{{ trans('forms.avatar') }}</th>
 					<th>{{ trans('forms.name') }}</th>
 					<th>{{ trans('forms.email') }}</th>
-					{!! ($company_id) ? '<th>' . trans('forms.login') . '</th>' : '' !!}
+					@if ($company_id && auth()->user()->isAdmin())
+						<th>{{ trans('forms.login') }}</th>
+					@endif
 					<th>{{ trans('forms.active') }}</th>
 					<th>{{ trans('forms.company') }}</th>
 					<th>{{ trans('forms.actions') }}</th>
@@ -25,7 +27,11 @@
 						</td>
 						<td>{{ $user->firstname . ' ' . $user->surname }}</td>
 						<td>{{ $user->email }}</td>
-						{!! ($company_id) ? '<td><a href="' . action('Auth\UserController@loginUsingId', [$company_id, $user->id]) . '" class="btn btn-default">' . trans('forms.login') . '</a></td>' : '' !!}
+						@if ($company_id && auth()->user()->isAdmin())
+							<td>
+								<a href="{{ action('Auth\UserController@loginUsingId', [$company_id, $user->id]) }}" class="btn btn-default"> {{ trans('forms.login') }}</a>
+							</td>
+						@endif
 						<td>{{ $user->active == 1 ? trans('base.yes') : trans('base.no') }}</td>
 						<td>{{ $company->name }}</td>
 						<td>

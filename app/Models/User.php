@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Auth;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -35,6 +36,16 @@ class User extends Authenticatable
         'employee' => 1,
         'customer' => 2,
     ];
+
+    /**
+     * Check if the current user is an admin.
+     *
+     * @return bool
+     */
+    public function isAdmin()
+    {
+        return Auth::user()->role === Auth::user()->role('admin');
+    }
 
     /**
      * Get the company of the user
