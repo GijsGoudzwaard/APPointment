@@ -1,7 +1,12 @@
+html {
+    height: 100%;
+}
+
 body {
     font-family: 'Roboto', sans-serif;
     font-weight: 400;
     background-color: #eee;
+    height: calc(100% - 250px);
 }
 
 h1 {
@@ -19,6 +24,7 @@ input[type='checkbox'] {
     margin-right: 50px;
     position: relative;
     margin-left: 150px;
+    height: 100%;
 
     &.animate {
         transition: margin .1s linear;

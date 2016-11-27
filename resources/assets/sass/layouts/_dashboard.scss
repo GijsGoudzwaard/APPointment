@@ -4,6 +4,7 @@
     -khtml-user-select: none;
     -webkit-user-select: none;
     -o-user-select: none;
+    height: 100%;
 
     .item {
         background-color: #fff;
@@ -19,6 +20,18 @@
             color: #fff;
             text-align: center;
             height: 30%;
+
+            .vertical-center {
+                @include vertical-align;
+
+                h2, h3 {
+                    margin: 0;
+                }
+
+                h2 {
+                    margin-bottom: 15px;
+                }
+            }
         }
     }
 
@@ -38,4 +51,19 @@
 .charts > [class*='col-'] {
     display: flex;
     flex-direction: column;
+}
+
+@media all and(max-width: 992px) {
+    .charts > [class*='col-'] {
+        width: 100%;
+    }
+}
+@media all and(max-width: 1199px) {
+    .charts .item.col-lg-12 {
+        height: 400px;
+    }
+
+    .charts .item.earnings {
+        height: 200px;
+    }
 }
