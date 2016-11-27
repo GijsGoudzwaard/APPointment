@@ -24,7 +24,7 @@ if (! function_exists('get_day_name')) {
      * @param  string $day
      * @return string
      */
-    function get_day_name(String $day = '')
+    function get_day_name(string $day = '')
     {
         $days = (new Company)->days;
 
