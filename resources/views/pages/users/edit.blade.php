@@ -51,7 +51,7 @@
 		@endif
 
 		<button type="submit" class="btn btn-primary">{{ trans('forms.submit') }}</button>
-		<a href="{{ route($user->company_id == get_company()->id ? 'users.index' : 'companies.{company_id}.users.index', $user->company_id) }}" class="btn btn-default">{{ trans('forms.back') }}</a>
+		<a href="{{ route($user->company_id == get_company()->id ? 'users.index' : 'companies.users.index', $user->company_id) }}" class="btn btn-default">{{ trans('forms.back') }}</a>
 
 	{{ Form::close() }}
 
