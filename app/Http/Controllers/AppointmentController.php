@@ -190,10 +190,11 @@ class AppointmentController extends Verify
     public function getStats()
     {
         $appointments = [];
+        $cache = 'appointment_stats_' . get_company()->subdomain;
 
         // See if we already have a cache file
-        if (Cache::has('appointment_stats')) {
-            return Cache::get('appointment_stats');
+        if (Cache::has($cache)) {
+            return Cache::get($cache);
         }
 
         for ($i = 1; $i <= 12; $i++) {
@@ -206,7 +207,7 @@ class AppointmentController extends Verify
         }
 
         // Store the appointment stats in a cache file for a day
-        Cache::store('file')->put('appointment_stats', collect($appointments)->flatten(), 1440);
+        Cache::put($cache, collect($appointments)->flatten(), 1440);
 
         return collect($appointments)->flatten();
     }

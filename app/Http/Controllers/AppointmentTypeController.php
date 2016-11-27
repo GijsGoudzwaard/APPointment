@@ -138,9 +138,11 @@ class AppointmentTypeController extends Controller
      */
     public function getStats()
     {
+        $cache = 'appointment_type_stats_' . get_company()->subdomain;
+
         // See if we already have a cache file
-        if (Cache::has('appointment_type_stats')) {
-            return Cache::get('appointment_type_stats');
+        if (Cache::has($cache)) {
+            return Cache::get($cache);
         }
 
         $appointment_types = get_company()->appointmentTypes;
@@ -148,7 +150,7 @@ class AppointmentTypeController extends Controller
         $stats = collect($appointment_types->map([$this, 'getAppointments']));
 
         // Store the appointment stats in a cache file for a day
-        Cache::store('file')->put('appointment_type_stats', $stats, 1440);
+        Cache::put($cache, $stats, 1440);
 
         return $stats;
     }
