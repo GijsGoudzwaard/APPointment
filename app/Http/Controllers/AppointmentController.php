@@ -182,6 +182,8 @@ class AppointmentController extends Verify
             $repeat->save();
 
             $appointment->repeated_id = $repeat->id;
+        } else {
+            $appointment->repeated_id = null;
         }
 
         $appointment->save();

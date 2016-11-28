@@ -53,21 +53,21 @@
 					</span>
 				</div>
 			</div>
-		</div>
 
-		<div class="form-group">
-			<label for="repeat">{{ trans('forms.repeat') }}</label>
-			<input type="checkbox" class="form-control" id="repeat" name="repeat" {{ (old('repeat') || $appointment->repeated_id) ? 'checked' : '' }} />
-		</div>
-
-		<div class="repeat {{ $appointment->repeated_id ? '' : 'hide' }}">
 			<div class="form-group">
-				<label for="end">{{ trans('forms.end') }}</label>
-				<div class="input-group repeat_date form-group">
-					<input type="text" class="form-control" name="end" id="end" />
-					<span class="input-group-addon">
+				<label for="repeat">{{ trans('forms.repeat') }}</label>
+				<input type="checkbox" class="form-control" id="repeat" name="repeat" {{ (old('repeat') || $appointment->repeated_id) ? 'checked' : '' }} />
+			</div>
+
+			<div class="repeat {{ $appointment->repeated_id ? '' : 'hide' }}">
+				<div class="form-group">
+					<label for="end">{{ trans('forms.end') }}</label>
+					<div class="input-group repeat_date form-group">
+						<input type="text" class="form-control" name="end" id="end" />
+						<span class="input-group-addon">
 						<span class="glyphicon glyphicon-calendar"></span>
 					</span>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -106,7 +106,7 @@
 
 		$('.repeat .repeat_date').datetimepicker({
 			format: 'DD-MM-YYYY',
-			@if ($appointment->repeat->end)
+			@if ($appointment->repeat && $appointment->repeat->end)
 				defaultDate: moment("{{ date('d/m/Y H:i', strtotime($appointment->repeat->end)) }}", 'DD/MM/YYYY HH:mm'),
 			@endif
 			allowInputToggle: true,
