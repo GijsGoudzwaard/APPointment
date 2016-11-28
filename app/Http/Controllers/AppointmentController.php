@@ -43,9 +43,34 @@ class AppointmentController extends Verify
     {
         $start = date('Y-m-d H:i:s', $request->get('start'));
         $end = date('Y-m-d H:i:s', $request->get('end'));
-        $appointments = get_company()->appointments([$start, $end])->with('appointmentType')->get();
+        $appointments = get_company()->appointments([$start, $end])->with('appointmentType')
+            ->where('repeated_id', null)->get();
 
-        return $appointments;
+        $repeated_appointments = Repeat::with('appointment')
+            ->where('start', '<', $end)->get()->map(function ($repeat) use ($end) {
+                if (! $repeat->appointment) {
+                    return;
+                }
+
+                $appointments = [];
+
+                $days = Carbon::parse($repeat->start)->diff(Carbon::parse($end))->days;
+
+                for ($i = 0; $i <  $days; $i++) {
+                    $append = clone $repeat->appointment;
+                    $append->scheduled_at = Carbon::parse($append->scheduled_at)->addDay($i)->format('Y-m-d H:i:s');
+                    $append->to = Carbon::parse($append->to)->addDay($i)->format('Y-m-d H:i:s');
+                    $appointments[] = $append;
+
+                    if ($repeat->end && Carbon::parse($append->scheduled_at)->gt(Carbon::parse($repeat->end))) {
+                        break;
+                    }
+                }
+
+                return $appointments;
+            })->filter()->flatten();
+
+        return $repeated_appointments->merge($appointments);
     }
 
     /**
@@ -89,6 +114,17 @@ class AppointmentController extends Verify
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->scheduled_at);
         $appointment->to = $this->formatDate($request->to);
+
+        if ($request->get('repeat')) {
+            $repeat = new Repeat;
+
+            $repeat->start = Carbon::parse($appointment->scheduled_at)->toDateString();
+            $repeat->end = $request->get('end') ? Carbon::parse($request->get('end'))->toDateString() : null;
+            $repeat->save();
+
+            $appointment->repeated_id = $repeat->id;
+        }
+
         $appointment->save();
 
         return redirect()->route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
@@ -133,13 +169,13 @@ class AppointmentController extends Verify
             $request->request->add(['closed' => 0]);
         }
 
-        $appointment = Appointment::with('repeat')->find($id);
+        $appointment = Appointment::find($id);
         $appointment->fill($request->all());
         $appointment->scheduled_at = $this->formatDate($request->get('scheduled_at'));
         $appointment->to = $this->formatDate($request->to);
 
         if ($request->get('repeat')) {
-            $repeat = new Repeat;
+            $repeat = $appointment->repeated_id ? Repeat::find($appointment->repeated_id) : new Repeat;
 
             $repeat->start = Carbon::parse($appointment->scheduled_at)->toDateString();
             $repeat->end = $request->get('end') ? Carbon::parse($request->get('end'))->toDateString() : null;

@@ -22,4 +22,14 @@ class Repeat extends Model
      * @var string
      */
     protected $table = 'repeated_appointments';
+
+    /**
+     * A belongsTo relation
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasOne
+     */
+    public function appointment()
+    {
+        return $this->hasOne(Appointment::class, 'repeated_id');
+    }
 }
