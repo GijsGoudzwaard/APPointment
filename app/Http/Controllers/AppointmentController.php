@@ -332,7 +332,9 @@ class AppointmentController extends Verify
      */
     public function check(Request $request)
     {
-        return ['exists' => (boolean) Appointment::check((object) $request->all(), $this->current_time)];
+        $current_time = $this->current_time ?: Carbon::parse($request->get('date'))->setTime(...explode(':', $request->get('from')));
+
+        return ['exists' => (boolean) Appointment::check((object) $request->all(), $current_time)];
     }
 
     /**
