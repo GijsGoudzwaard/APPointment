@@ -127,7 +127,7 @@ class AppointmentController extends Verify
 
         $appointment->save();
 
-        return redirect()->route('appointments.edit', $appointment->id)->with('success', 'Successfully created');
+        return redirect()->route('appointments.index')->with('success', 'Successfully created');
     }
 
     /**
@@ -359,13 +359,6 @@ class AppointmentController extends Verify
 
             $counter++;
 
-            if ($counter > 2 && ! $appointment) {
-                $this->current_time->addMinutes($appointment_type['buffer']);
-                $counter = 0;
-
-                continue;
-            }
-
             if ($appointment) {
                 if ($appointment->closed) {
                     $diff = Carbon::parse($appointment->scheduled_at)->diff(Carbon::parse($appointment->to));
@@ -374,7 +367,14 @@ class AppointmentController extends Verify
                     $counter = 0;
                 }
 
-                $this->current_time = $this->current_time->addMinutes($minutes ?? $appointment->appointmentType->time);
+                $this->current_time = $this->current_time->addMinutes($appointment->closed ? $minutes : $appointment->appointmentType->time);
+                continue;
+            }
+
+            if ($counter > 2) {
+                $this->current_time->addMinutes($appointment_type['buffer']);
+                $counter = 0;
+
                 continue;
             }
 
