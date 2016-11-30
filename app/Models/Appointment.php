@@ -61,10 +61,34 @@ class Appointment extends Model
             ->whereBetween('scheduled_at',
                 [
                     ($current_time ?: $company_hours->from),
-                    $company_hours->from->copy()->addMinutes($appointment_type['time'])
+                    $current_time->copy()->addMinutes($appointment_type['time'])
                 ])
             ->where('user_id', $employee['id'])
             ->first();
+
+
+        if (! $appointment) {
+            $repeated = Repeat::with('appointment')
+                ->where('start', '<', $current_time)
+                ->where('end', '>', $current_time)
+                ->orWhereNull('end')->get();
+
+            foreach ($repeated as $repeat) {
+                if ($current_time->format('H:i') == Carbon::parse($repeat->appointment->scheduled_at)->format('H:i')) {
+                    $appointment = $repeat->appointment;
+
+                    $new_date = Carbon::parse($appointment->scheduled_at);
+                    $days = $new_date->diff($current_time)->days;
+                    $appointment->scheduled_at = $new_date->addDays($days)->format('Y-m-d H:i');
+                    $appointment->to = Carbon::parse($appointment->to)->addDays($days)->format('Y-m-d H:i');
+
+                }
+            }
+        }
+
+        if ($appointment && $appointment->name == 'Pauze 2') {
+//            dd($current_time, $appointment);
+        }
 
         return $appointment;
     }

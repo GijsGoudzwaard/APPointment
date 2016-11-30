@@ -354,29 +354,34 @@ class AppointmentController extends Verify
 
         $counter = 0;
 
-        while ($this->current_time->lt($company_hours->to) && $this->current_time->copy()->addMinutes($appointment_type['time'])->lt($company_hours->to)) {
+        while ($this->current_time->lte($company_hours->to) && $this->current_time->copy()->addMinutes($appointment_type['time'])->lte($company_hours->to)) {
             $appointment = Appointment::check((object) $request->all(), $this->current_time);
 
-            if ($appointment) {
-                $this->current_time = Carbon::parse($appointment->scheduled_at)->addMinutes($appointment->appointmentType->time);
+            $counter++;
+
+            if ($counter > 2 && ! $appointment) {
+                $this->current_time->addMinutes($appointment_type['buffer']);
+                $counter = 0;
+
                 continue;
             }
 
-            if ($counter === 2) {
-                $this->current_time->addMinutes($appointment_type['buffer']);
+            if ($appointment) {
+                if ($appointment->closed) {
+                    $diff = Carbon::parse($appointment->scheduled_at)->diff(Carbon::parse($appointment->to));
+                    $minutes = $diff->i ? $diff->i : $diff->h * 60;
+
+                    $counter = 0;
+                }
+
+                $this->current_time = $this->current_time->addMinutes($minutes ?? $appointment->appointmentType->time);
+                continue;
             }
 
             $timeblocks[] = [
                 'from' => $this->current_time->format('H:i'),
                 'to' => $this->current_time->addMinutes($appointment_type['time'])->format('H:i')
             ];
-
-            if ($counter === 2) {
-                $counter = 0;
-                continue;
-            }
-
-            $counter++;
         }
 
         return $timeblocks;
