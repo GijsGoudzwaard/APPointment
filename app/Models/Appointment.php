@@ -74,7 +74,7 @@ class Appointment extends Model
                 ->orWhereNull('end')->get();
 
             foreach ($repeated as $repeat) {
-                if ($current_time->format('H:i') == Carbon::parse($repeat->appointment->scheduled_at)->format('H:i')) {
+                if ($repeat->appointment && $current_time->format('H:i') == Carbon::parse($repeat->appointment->scheduled_at)->format('H:i')) {
                     $appointment = $repeat->appointment;
 
                     $new_date = Carbon::parse($appointment->scheduled_at);
@@ -84,10 +84,6 @@ class Appointment extends Model
 
                 }
             }
-        }
-
-        if ($appointment && $appointment->name == 'Pauze 2') {
-//            dd($current_time, $appointment);
         }
 
         return $appointment;
