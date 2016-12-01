@@ -313,7 +313,7 @@ class AppointmentController extends Verify
         for ($i = 1; $i < $date->daysInMonth; $i++) {
             $day = $date->addDays(1);
 
-            if (in_array($day->format('l'), $closed_days)) {
+            if (in_array($day->format('l'), $closed_days) || $this->available($request, $day)) {
                 $booked_days[] = [
                     'start_time' => $day->startOfDay()->toDateTimeString(),
                     'end_time' => $day->endOfDay()->toDateTimeString()
@@ -322,6 +322,20 @@ class AppointmentController extends Verify
         }
 
         return $booked_days;
+    }
+
+    /**
+     * Check if the current date is available.
+     *
+     * @param  Request $request
+     * @param  Carbon $date
+     * @return bool
+     */
+    public function available(Request $request, $date)
+    {
+        $request->replace($request->all() + ['date' => $date]);
+
+        return count($this->timeblocks($request)) === 0;
     }
 
     /**
