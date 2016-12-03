@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 Route::group(['middleware' => 'cors'], function () {
     Route::post('customer/new', 'CustomerController@store');
     Route::post('customer/login', 'CustomerController@login');
+    Route::post('customer/sociallogin', 'CustomerController@socialLogin');
 
     Route::post('appointment', 'AppointmentController@book');
     Route::get('appointments/check', 'AppointmentController@check');

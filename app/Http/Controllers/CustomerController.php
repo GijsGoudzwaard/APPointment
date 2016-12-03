@@ -78,6 +78,31 @@ class CustomerController extends Controller
     }
 
     /**
+     * Check if a user exists using the email and user id from either google or facebook as password.
+     * Create a new user if we can't find one.
+     *
+     * @param  Request $request
+     * @return User|array
+     */
+    public function socialLogin(Request $request)
+    {
+        // Use the user id from either google or facebook as password
+        $request->replace(['password' => $request->get('id')]);
+
+        // See if we can find a user.
+        $user = $this->login($request);
+
+        // We couldn't fetch the user.
+        if (gettype($user) === 'string') {
+            // Create one.
+            $user = $this->store($request);
+        }
+
+        // We already have a user, return it.
+        return $user;
+    }
+
+    /**
      * Create a new Validor instance
      *
      * @param  Request $request
