@@ -25,12 +25,8 @@ var lineChart = new Chart(elem('#line'), {
     }
 });
 
-ajax({
-    method: 'GET',
-    destination: '/api/appointments',
-    loader: false,
-}, function(res) {
-    setLineData(JSON.parse(res));
+$.get('/api/appointments').done(function(res) {
+    setLineData(res);
 });
 
 function setLineData(data) {

@@ -1,13 +1,13 @@
-ajax({
-    method: 'GET',
-    destination: '/api/income',
-    loader: false,
-}, function(res) {
+$.get('/api/income').done(function(res) {
     var total = 0;
     var data = JSON.parse(res);
 
-    for (var i = 0; i < data.length; i++) {
-        total += data[i];
+    if (typeof data === 'number') {
+        total = data;
+    } else {
+        for (var i = 0; i < data.length; i++) {
+            total += data[i];
+        }
     }
 
     total = total.toString().replace('.', ',');

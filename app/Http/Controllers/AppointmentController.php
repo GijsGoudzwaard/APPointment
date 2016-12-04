@@ -257,18 +257,30 @@ class AppointmentController extends Verify
      */
     public function income()
     {
-        $appointment_types = get_company()->appointmentTypes->load([
+        $cache = 'monthly_income_' . get_company()->subdomain;
+
+        // See if we already have a cache file
+        if (Cache::has($cache)) {
+            return Cache::get($cache);
+        }
+
+        $appointment_types = get_company()->appointmentTypes()->with([
             'appointments' => function ($appointments) {
                 return $appointments->whereBetween('scheduled_at', [
                     Carbon::now()->startOfMonth()->toDateTimeString(),
                     Carbon::now()->toDateTimeString()
                 ]);
             }
-        ]);
+        ])->get();
 
-        return collect($appointment_types->map(function ($appointment_type) {
-            return str_replace(',', '.', $appointment_type->price) * $appointment_type->appointments->count();
+        $total_income = collect($appointment_types->map(function ($appointment_type) {
+            return str_replace(',', '.', $appointment_type->price) * $appointment_type->countAppointments();
         }));
+
+        // Store the appointment stats in a cache file for a day
+        Cache::put($cache, collect($total_income)->flatten(), 1440);
+
+        return $total_income;
     }
 
     /**

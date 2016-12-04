@@ -10,12 +10,8 @@ var doughnutChart = new Chart(elem('#doughnut'), {
     }
 });
 
-ajax({
-    method: 'GET',
-    destination: '/api/appointmenttypes',
-    loader: false,
-}, function(res) {
-    setDoughnutData(JSON.parse(res));
+$.get('/api/appointmenttypes').done(function(res) {
+    setDoughnutData(res);
 });
 
 function setDoughnutData(data) {
