@@ -38,11 +38,10 @@ class CustomerController extends Controller
         }
 
         $company = get_company()->id;
-
         $user = new User;
         $user->fill($request->all());
         $user->role = User::role('customer');
-        $user->company_id = $company->id;
+        $user->company_id = $company;
         $user->save();
 
         return [
