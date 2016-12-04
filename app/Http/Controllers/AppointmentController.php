@@ -403,7 +403,7 @@ class AppointmentController extends Verify
             $current_time = $this->current_time->copy();
             $appointment = $appointments->filter(function ($appointment) use ($current_time) {
                 if (Carbon::parse($appointment->scheduled_at) == $current_time->format('Y-m-d H:i:s') &&
-                    (Carbon::parse($appointment->scheduled_at) >= $current_time->copy()->addMinutes($appointment->appointmentType->time)->format('Y-m-d H:i:s') || Carbon::parse($appointment->to) > $current_time)
+                    (Carbon::parse($appointment->scheduled_at) <= $current_time->copy()->addMinutes($appointment->appointmentType->time)->format('Y-m-d H:i:s') || Carbon::parse($appointment->to) > $current_time)
                 ) {
                     return $appointment;
                 }
