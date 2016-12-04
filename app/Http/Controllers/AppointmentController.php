@@ -241,7 +241,7 @@ class AppointmentController extends Verify
             $appointments[] = get_company()->appointments([
                 $date->startOfMonth()->toDateTimeString(),
                 $date->endOfMonth()->toDateTimeString()
-            ])->selectRaw('count(*) as amount')->where('closed', 0)->get()->pluck('amount')->sum();
+            ])->selectRaw('count(*) as amount')->where('closed', 0)->where('repeated_id', null)->get()->pluck('amount')->sum();
         }
 
         // Store the appointment stats in a cache file for a day
@@ -269,7 +269,7 @@ class AppointmentController extends Verify
                 return $appointments->whereBetween('scheduled_at', [
                     Carbon::now()->startOfMonth()->toDateTimeString(),
                     Carbon::now()->toDateTimeString()
-                ]);
+                ])->where('repeated_id', null);
             }
         ])->get();
 

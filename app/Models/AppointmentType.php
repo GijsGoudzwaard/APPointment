@@ -57,7 +57,7 @@ class AppointmentType extends Model
      */
     public function countAppointments()
     {
-        return $this->appointments()->selectRaw('count(*) as amount')->where('closed', 0)->get()->first()->amount;
+        return $this->appointments()->selectRaw('count(*) as amount')->where('closed', 0)->where('repeated_id', null)->get()->first()->amount;
     }
 
     /**
