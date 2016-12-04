@@ -40,6 +40,7 @@ class CustomerController extends Controller
         $company = get_company()->id;
         $user = new User;
         $user->fill($request->all());
+        $user->password = bcrypt($request->get('password'));
         $user->role = User::role('customer');
         $user->company_id = $company;
         $user->save();
