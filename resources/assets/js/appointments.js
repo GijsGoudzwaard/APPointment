@@ -45,11 +45,14 @@ $(function() {
 	}
 
 	function getAppointments(start, end, loader) {
-		ajax({
-			destination: '/appointments/get?start=' + start + '&end=' + end,
-			method: 'GET',
-			loader: loader,
-		}, function(res) {
+		if (loader) {
+            elem('#loader').className = 'active';
+        }
+
+		$.get({
+            url: '/appointments/get?start=' + start + '&end=' + end,
+            dataType: 'html',
+        }).done(function (res) {
 			var data = JSON.parse(res);
 
 			// Remove all events so we won't get any duplicates
@@ -66,11 +69,15 @@ $(function() {
 				}
 
 				if (data[i].closed) {
-				    event.className.push('closed');
+					event.className.push('closed');
 				}
 
 				calendar.fullCalendar('renderEvent', event);
+
+				if (loader) {
+					elem('#loader').className = '';
+				}
 			}
-		});
+        });
 	}
 });

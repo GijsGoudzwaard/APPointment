@@ -56,7 +56,7 @@ class AppointmentController extends Verify
 
                 $days = Carbon::parse($repeat->start)->diff(Carbon::parse($end))->days;
 
-                for ($i = 0; $i <  $days; $i++) {
+                for ($i = 0; $i < $days; $i++) {
                     $append = clone $repeat->appointment;
                     $append->scheduled_at = Carbon::parse($append->scheduled_at)->addDay($i)->format('Y-m-d H:i:s');
                     $append->to = Carbon::parse($append->to)->addDay($i)->format('Y-m-d H:i:s');
@@ -310,7 +310,7 @@ class AppointmentController extends Verify
         $company = get_company();
         $closed_days = array_diff_key($company->days, (array) $company->openingHours());
 
-        for ($i = 1; $i < $date->daysInMonth; $i++) {
+        for ($i = 1; $i <= $date->daysInMonth; $i++) {
             $day = $date->addDays(1);
 
             if (in_array($day->format('l'), $closed_days) || $this->available($request, $day)) {
@@ -328,7 +328,7 @@ class AppointmentController extends Verify
      * Check if the current date is available.
      *
      * @param  Request $request
-     * @param  Carbon $date
+     * @param  Carbon  $date
      * @return bool
      */
     public function available(Request $request, $date)
@@ -346,7 +346,9 @@ class AppointmentController extends Verify
      */
     public function check(Request $request)
     {
-        $current_time = $this->current_time ?: Carbon::parse($request->get('date'))->setTime(...explode(':', $request->get('from')));
+        $current_time = $this->current_time ?: Carbon::parse($request->get('date'))->setTime(
+            ...explode(':', $request->get('from'))
+        );
 
         return ['exists' => (boolean) Appointment::check((object) $request->all(), $current_time)];
     }
@@ -355,6 +357,7 @@ class AppointmentController extends Verify
      * Get all available timeblocks
      *
      * @TODO: Remove the json arrays from the request
+     * @TODO: Clean this up
      *
      * @param  Request $request
      * @return array
@@ -363,14 +366,48 @@ class AppointmentController extends Verify
     {
         $timeblocks = [];
         $appointment_type = json_decode($request->get('appointmentType'), true);
+        $employee = json_decode($request->get('employee'), true);
         $company_hours = (object) get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
-        $this->current_time = $company_hours->from;
+        $this->current_time = $company_hours->from->copy();
 
         $counter = 0;
+        $appointments = Appointment::with('appointmentType')
+            ->where(function ($q) use ($company_hours) {
+                $q->where(function ($q) use ($company_hours) {
+                    $q->where('scheduled_at', '>=', $company_hours->from->copy()->startOfDay());
+                    $q->where('scheduled_at', '<=', $company_hours->to->copy()->endOfDay());
+                });
+
+                $q->orWhereBetween('scheduled_at', [
+                    $company_hours->from,
+                    $company_hours->to
+                ]);
+            })
+            ->where(function ($q) use ($employee) {
+                $q->where(function ($q) use ($employee) {
+                    $q->where('user_id', $employee['id']);
+                    $q->where('closed', 0);
+                });
+
+                $q->orWhere('closed', 1);
+            })
+            ->get();
+        $repeated_appointments = Repeat::with('appointment')
+            ->where('start', '<', $company_hours->from)
+            ->where('end', '>', $company_hours->to)
+            ->orWhereNull('end')->get()->map([Appointment::class, 'repeatedAppointments'])->filter();
+
+        $appointments = $repeated_appointments->merge($appointments);
 
         while ($this->current_time->lte($company_hours->to) && $this->current_time->copy()->addMinutes($appointment_type['time'])->lte($company_hours->to)) {
-            $appointment = Appointment::check((object) $request->all(), $this->current_time);
-
+            $current_time = $this->current_time->copy();
+            $appointment = $appointments->filter(function ($appointment) use ($current_time) {
+                if (Carbon::parse($appointment->scheduled_at) == $current_time->format('Y-m-d H:i:s') &&
+                    (Carbon::parse($appointment->scheduled_at) >= $current_time->copy()->addMinutes($appointment->appointmentType->time)->format('Y-m-d H:i:s') || Carbon::parse($appointment->to) > $current_time)
+                ) {
+                    return $appointment;
+                }
+            })->first();
             $counter++;
 
             if ($appointment) {

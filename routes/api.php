@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Http\Request;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,7 +11,8 @@ use Illuminate\Http\Request;
 |
 */
 
-Route::group(['middleware' => 'cors'], function () {
+// Enable 'json_profiler' as middleware here if you want to check performance
+Route::group(['middleware' => ['cors']], function () {
     Route::post('customer/new', 'CustomerController@store');
     Route::post('customer/login', 'CustomerController@login');
     Route::post('customer/sociallogin', 'CustomerController@socialLogin');

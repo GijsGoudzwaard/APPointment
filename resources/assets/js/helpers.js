@@ -1,13 +1,13 @@
 /**
  * Get cookie by name
  *
- * @param {String} name
+ * @param  {String} name
  * @return {String}
  */
 function getCookie(name) {
-	var value = "; " + document.cookie;
-	var parts = value.split("; " + name + "=");
-	if (parts.length == 2) return parts.pop().split(";").shift();
+    var value = "; " + document.cookie;
+    var parts = value.split("; " + name + "=");
+    if (parts.length == 2) return parts.pop().split(";").shift();
 }
 
 /**
@@ -33,7 +33,7 @@ function createCookie(name, value, days) {
  * @param {String} name
  */
 function deleteCookie(name) {
-	document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=." + getHost();
+    document.cookie = name + "=; expires=Thu, 01 Jan 1970 00:00:01 GMT; domain=." + getHost();
 }
 
 /**
@@ -42,9 +42,9 @@ function deleteCookie(name) {
  * @return {String}
  */
 function getHost() {
-	var host = window.location.hostname;
+    var host = window.location.hostname;
 
-	return host.split('.').splice(1).join('.');
+    return host.split('.').splice(1).join('.');
 }
 
 /**
@@ -75,8 +75,8 @@ function elem(selector, context) {
 /**
  * An ajax request helper function
  *
- * @param {Object} options
- * @param {Function} callback
+ * @param   {Object} options
+ * @param   {Function} callback
  * @returns {Function}
  */
 function ajax(options, callback) {
@@ -104,11 +104,11 @@ function ajax(options, callback) {
 /**
  * List an element from the array
  *
- * @param {string} element
+ * @param   {String} element
  * @returns {Array}
  */
-Array.prototype.list = function(element) {
-    return this.map(function(ctx) {
+Array.prototype.list = function (element) {
+    return this.map(function (ctx) {
         return ctx[element];
     });
 };

@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\ProfileApiResponse;
 use Illuminate\Foundation\Http\Kernel as HttpKernel;
 
 class Kernel extends HttpKernel
@@ -55,5 +56,6 @@ class Kernel extends HttpKernel
         'admin' => \App\Http\Middleware\Admin::class,
         'lang' => \App\Http\Middleware\Language::class,
         'cors' => \App\Http\Middleware\Cors::class,
+        'json_profiler' => ProfileApiResponse::class
     ];
 }

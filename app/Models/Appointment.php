@@ -47,26 +47,12 @@ class Appointment extends Model
     /**
      * Check if the current time is occupied.
      *
-     * @param  object      $data
+     * @param  null|array  $appointment
      * @param  null|Carbon $current_time
      * @return mixed
      */
-    public static function check($data, $current_time = null)
+    public static function check($appointment, $current_time)
     {
-        $appointment_type = json_decode($data->appointmentType, true);
-        $employee = json_decode($data->employee, true);
-        $company_hours = (object) get_company()->dayTimes(Carbon::parse($data->date)->startOfDay());
-
-        $appointment = Appointment::with('appointmentType')
-            ->whereBetween('scheduled_at',
-                [
-                    ($current_time ?: $company_hours->from),
-                    $current_time->copy()->addMinutes($appointment_type['time'])
-                ])
-            ->where('user_id', $employee['id'])
-            ->first();
-
-
         if (! $appointment) {
             $repeated = Repeat::with('appointment')
                 ->where('start', '<', $current_time)
@@ -85,6 +71,27 @@ class Appointment extends Model
                 }
             }
         }
+
+        return $appointment;
+    }
+
+    /**
+     * Get the repeated appointments and set their date to the correct date
+     *
+     * @param  Repeat $repeat
+     * @return Appointment
+     */
+    public static function repeatedAppointments($repeat)
+    {
+        if (! $repeat->appointment) {
+            return;
+        }
+
+        $appointment = $repeat->appointment;
+        $new_date = Carbon::parse($appointment->scheduled_at);
+        $days = $new_date->diff(Carbon::parse(request()->get('date'))->startOfDay())->days + 1;
+        $appointment->scheduled_at = $new_date->addDays($days)->format('Y-m-d H:i');
+        $appointment->to = Carbon::parse($appointment->to)->addDays($days)->format('Y-m-d H:i');
 
         return $appointment;
     }
