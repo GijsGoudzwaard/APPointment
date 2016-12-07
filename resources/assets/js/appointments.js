@@ -54,8 +54,11 @@ $(function() {
             dataType: 'html',
         }).done(function (res) {
 			var data = JSON.parse(res);
-			var events = [];
 
+			// Remove all events so we won't get any duplicates
+			calendar.fullCalendar('removeEvents');
+
+			var events = [];
 			for (var i = 0; i < data.length; i++) {
 				var event = {
 					id: data[i].id,
