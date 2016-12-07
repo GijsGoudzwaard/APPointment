@@ -12,7 +12,8 @@ var elixir = require("laravel-elixir");
  */
 
 var excluded_css = [
-	"!../bower_components/**/bootstrap-theme.min.css"
+	"!../bower_components/**/bootstrap-theme.min.css",
+	"!../bower_components/**/fullcalendar.print.min.css"
 ];
 
 var css = [

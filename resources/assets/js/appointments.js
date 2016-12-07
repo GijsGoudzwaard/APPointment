@@ -7,9 +7,9 @@ $(function() {
 		calendar.fullCalendar({
 			nowIndicator: true,
 			header: {
-				left: 'prev, today, next',
+				left: 'prev,today,next',
 				center: 'title',
-				right: 'agendaDay, agendaWeek, month'
+				right: 'agendaDay,agendaWeek,month'
 			},
 			defaultView: 'agendaWeek',
 			axisFormat: 'HH:mm',
@@ -54,16 +54,14 @@ $(function() {
             dataType: 'html',
         }).done(function (res) {
 			var data = JSON.parse(res);
-
-			// Remove all events so we won't get any duplicates
-			calendar.fullCalendar('removeEvents');
+			var events = [];
 
 			for (var i = 0; i < data.length; i++) {
 				var event = {
 					id: data[i].id,
 					title: data[i].name,
 					allDay: false,
-					start: data[i].scheduled_at,
+					start: moment(data[i].scheduled_at),
 					end: data[i].closed ? moment(data[i].to) : moment(data[i].scheduled_at).add(data[i].appointment_type.time, 'minutes'),
 					className: ['event']
 				}
@@ -72,12 +70,14 @@ $(function() {
 					event.className.push('closed');
 				}
 
-				calendar.fullCalendar('renderEvent', event);
+				events.push(event);
+            }
 
-				if (loader) {
-					elem('#loader').className = '';
-				}
-			}
+            calendar.fullCalendar('renderEvents', events);
+
+            if (loader) {
+                elem('#loader').className = '';
+            }
         });
 	}
 });

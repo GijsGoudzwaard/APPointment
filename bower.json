@@ -8,7 +8,7 @@
   "dependencies": {
     "bootstrap": "~3.3.6",
     "font-awesome": "fontawesome#~4.5.0",
-    "fullcalendar": "~2.6.1",
+    "fullcalendar": "~3.1.0",
     "eonasdan-bootstrap-datetimepicker": "^4.17.37",
     "jquery": "^2.2.1",
     "select2": "^4.0.3"
