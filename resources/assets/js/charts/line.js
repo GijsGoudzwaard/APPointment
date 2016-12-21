@@ -16,7 +16,6 @@ var lineChart = new Chart(elem('#line'), {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    stepSize: 10,
                     suggestedMax: 100,
                     beginAtZero: true
                 }
