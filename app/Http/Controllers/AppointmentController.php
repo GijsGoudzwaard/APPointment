@@ -425,7 +425,7 @@ class AppointmentController extends Verify
             if ($appointment) {
                 if ($appointment->closed) {
                     $diff = Carbon::parse($appointment->scheduled_at)->diff(Carbon::parse($appointment->to));
-                    $minutes = $diff->i ? $diff->i : $diff->h * 60;
+                    $minutes =  $diff->i + ($diff->h * 60);
 
                     $counter = 0;
                 }
