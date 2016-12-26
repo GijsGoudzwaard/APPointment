@@ -27,11 +27,6 @@ class Subdomain
             return $next($request);
         }
 
-        // Remove the old subdomain if it is set.
-        if ($subdomain) {
-            $url = str_replace("{$subdomain}.", '', $url);
-        }
-
         // We can set it.
         return UrlParser::setSubdomain($url);
     }

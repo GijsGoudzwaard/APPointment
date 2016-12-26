@@ -13,7 +13,7 @@
 
 Route::auth();
 
-Route::group(['middleware' => ['auth', 'subdomain', 'lang']], function () {
+Route::group(['middleware' => ['auth', 'lang', 'subdomain']], function () {
 
     Route::group(['prefix' => 'api'], function () {
         Route::get('income', 'AppointmentController@income');
@@ -74,3 +74,7 @@ Route::group(['middleware' => ['web']], function () {
     Route::post('password/email', ['as' => 'auth.password.email', 'uses' => 'Auth\ForgotPasswordController@sendResetLinkEmail']);
     Route::post('password/reset', ['as' => 'auth.password.reset', 'uses' => 'Auth\ResetPasswordController@reset']);
 });
+
+//Route::get('/', function () {
+//    return 'home';
+//});
