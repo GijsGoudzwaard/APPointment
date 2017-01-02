@@ -16,6 +16,7 @@ $(function() {
 			timeFormat: 'HH:mm',
 			height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
             slotDuration: '00:15:00',
+            scrollTime: '07:30:00',
 			views: {
 				week: {
 					titleFormat: 'MMM DD'
