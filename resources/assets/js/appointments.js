@@ -17,6 +17,7 @@ $(function() {
 			height: $(window).height() - $('.topbar').height() - 20 - $('.phpdebugbar').height(),
             slotDuration: '00:15:00',
             scrollTime: '07:30:00',
+            slotLabelFormat: 'HH:mm',
             weekNumbers: true,
 			views: {
 				month: {
