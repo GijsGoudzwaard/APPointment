@@ -268,7 +268,7 @@ class AppointmentController extends Verify
             'appointments' => function ($appointments) {
                 return $appointments->whereBetween('scheduled_at', [
                     Carbon::now()->startOfMonth()->toDateTimeString(),
-                    Carbon::now()->toDateTimeString()
+                    Carbon::now()->endOfMonth()->toDateTimeString()
                 ])->where('repeated_id', null);
             }
         ])->get();

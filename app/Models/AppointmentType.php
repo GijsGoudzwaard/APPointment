@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
@@ -57,7 +58,14 @@ class AppointmentType extends Model
      */
     public function countAppointments()
     {
-        return $this->appointments()->selectRaw('count(*) as amount')->where('closed', 0)->where('repeated_id', null)->get()->first()->amount;
+        return $this->appointments()
+            ->selectRaw('count(*) as amount')
+            ->whereBetween('scheduled_at', [
+                Carbon::now()->startOfMonth()->toDateTimeString(),
+                Carbon::now()->endOfMonth()->toDateTimeString()
+            ])
+            ->where('closed', 0)
+            ->where('repeated_id', null)->get()->first()->amount;
     }
 
     /**
