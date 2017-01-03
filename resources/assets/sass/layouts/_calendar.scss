@@ -27,12 +27,15 @@
     }
 
     .fc-button {
-        color: $primary-purple;
-        background: transparent;
-        box-shadow: none;
-        border: 1px solid #eee;
+        color: #252c32;
+        border: solid 1px #aaa;
+        background: #f1f5f8;
+        box-shadow: 0px 1px 2px #CCC;
+        -webkit-box-shadow: 0px 1px 2px #CCC;
+        -moz-box-shadow: 0px 1px 2px #CCC;
 
-        &.fc-state-down {
+        &.fc-state-down, &.fc-state-active, &.fc-state-disabled {
+            opacity: 1;
             box-shadow: inset 0px 0px 10px #ccc !important;
             -webkit-box-shadow: inset 0px 0px 10px #ccc !important;
             -moz-box-shadow: inset 0px 0px 10px #ccc !important;
@@ -41,5 +44,9 @@
         &:active, &:focus {
             outline: 0;
         }
+    }
+
+    .fc-head thead th.fc-today {
+        border-bottom: 3px solid #000;
     }
 }
