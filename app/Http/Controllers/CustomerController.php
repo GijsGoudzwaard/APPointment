@@ -63,7 +63,7 @@ class CustomerController extends Controller
      */
     public function login(Request $request)
     {
-        if (! \Auth::validate($request->all())) {
+        if (! \Auth::validate(array_merge($request->all(), ['company_id' => get_company()->id]))) {
             return 'Invalid user credentials';
         }
 
