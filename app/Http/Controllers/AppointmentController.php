@@ -358,7 +358,7 @@ class AppointmentController extends Verify
      */
     public function check(Request $request)
     {
-        $current_time = $this->current_time ?: Carbon::parse($request->get('date'))->setTime(
+        $current_time = Carbon::parse($request->get('date'))->setTime(
             ...explode(':', $request->get('from'))
         );
 

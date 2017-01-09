@@ -53,17 +53,15 @@ class Appointment extends Model
      */
     public static function check($data, $current_time = null)
     {
-        $appointment_type = json_decode($data->appointmentType, true);
-        $employee = json_decode($data->employee, true);
         $company_hours = (object) get_company()->dayTimes(Carbon::parse($data->date)->startOfDay());
 
         $appointment = Appointment::with('appointmentType')
             ->whereBetween('scheduled_at',
                 [
                     ($current_time ?: $company_hours->from),
-                    $company_hours->from->copy()->addMinutes($appointment_type['time'])
+                    $company_hours->from->copy()->addMinutes($data->time)
                 ])
-            ->where('user_id', $employee['id'])
+            ->where('user_id', $data->employee_id)
             ->first();
 
         return $appointment;
