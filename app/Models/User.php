@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Auth;
+use Carbon\Carbon;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
@@ -45,6 +46,21 @@ class User extends Authenticatable
     public function isAdmin()
     {
         return Auth::user()->role === Auth::user()->role('admin');
+    }
+
+    /**
+     * Check if the user can book.
+     * A user can book 3 appointments per hour.
+     *
+     * @param  int $id
+     * @return bool
+     */
+    public static function canBook(int $id)
+    {
+        $appointments = Appointment::where('customer_id', $id)->selectRaw('count(*) as amount')
+            ->where('created_at', '>', Carbon::now()->subHour())->get()->pluck('amount')->sum();
+
+        return $appointments <= 3;
     }
 
     /**

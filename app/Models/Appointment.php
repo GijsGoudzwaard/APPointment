@@ -15,7 +15,7 @@ class Appointment extends Model
      *
      * @var array
      */
-    protected $fillable = ['name', 'closed', 'user_id', 'appointment_type_id', 'scheduled_at', 'to'];
+    protected $fillable = ['name', 'closed', 'employee_id', 'appointment_type_id', 'scheduled_at', 'to'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -56,13 +56,9 @@ class Appointment extends Model
         $company_hours = (object) get_company()->dayTimes(Carbon::parse($data->date)->startOfDay());
 
         $appointment = Appointment::with('appointmentType')
-            ->whereBetween('scheduled_at',
-                [
-                    ($current_time ?: $company_hours->from),
-                    $company_hours->from->copy()->addMinutes($data->time)
-                ])
-            ->where('user_id', $data->employee_id)
-            ->first();
+            ->where('scheduled_at', '>=', ($current_time ?: $company_hours->from))
+            ->where('scheduled_at', '<', $company_hours->from->copy()->addMinutes($data->time))
+            ->where('employee_id', $data->employee_id)->first();
 
         return $appointment;
     }

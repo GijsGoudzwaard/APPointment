@@ -26,7 +26,7 @@
 
 			<div class="form-group user_id">
 				<label for="user">{{ trans('forms.employee') }} *</label>
-				{{ Form::select('user_id', $users, $appointment->user_id, [
+				{{ Form::select('user_id', $users, $appointment->employee_id, [
                     'id' => 'user_id',
                     'class' => 'form-control select2'
                 ]) }}

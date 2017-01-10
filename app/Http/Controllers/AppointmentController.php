@@ -296,7 +296,8 @@ class AppointmentController extends Verify
     {
         $appointment = new Appointment;
         $appointment->name = $request->input('user.firstname') . ' ' . $request->input('user.surname') . ' - ' . $request->input('appointment.appointmentType.name');
-        $appointment->user_id = $request->input('appointment.employee.id');
+        $appointment->employee_id = $request->input('appointment.employee.id');
+        $appointment->customer_id = $request->input('user.id');
         $appointment->appointment_type_id = $request->input('appointment.appointmentType.id');
 
         $date = Carbon::parse($request->input('appointment.date'));
@@ -358,11 +359,15 @@ class AppointmentController extends Verify
      */
     public function check(Request $request)
     {
+        if (! User::canBook($request->get('customer_id'))) {
+            return ['error' => 'Je mag per uur maar 3 afspraken maken.'];
+        }
+
         $current_time = Carbon::parse($request->get('date'))->setTime(
             ...explode(':', $request->get('from'))
         );
 
-        return ['exists' => (boolean) Appointment::check((object) $request->all(), $current_time)];
+        return ['error' => 'De gekozen afspraak is niet meer beschikbaar.'];
     }
 
     /**
@@ -397,7 +402,7 @@ class AppointmentController extends Verify
             })
             ->where(function ($q) use ($employee) {
                 $q->where(function ($q) use ($employee) {
-                    $q->where('user_id', $employee['id']);
+                    $q->where('employee_id', $employee['id']);
                     $q->where('closed', 0);
                 });
 
