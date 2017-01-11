@@ -86,9 +86,6 @@ class CustomerController extends Controller
      */
     public function socialLogin(Request $request)
     {
-        // Use the user id from either google or facebook as password
-        $request->replace(['password' => $request->get('id')]);
-
         // See if we can find a user.
         $user = $this->login($request);
 
