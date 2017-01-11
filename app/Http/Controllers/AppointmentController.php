@@ -367,7 +367,13 @@ class AppointmentController extends Verify
             ...explode(':', $request->get('from'))
         );
 
-        return ['error' => 'De gekozen afspraak is niet meer beschikbaar.'];
+        $exists = Appointment::check((object) $request->all(), $current_time);
+
+        if ($exists) {
+            return ['error' => 'De gekozen afspraak is niet meer beschikbaar.'];
+        }
+
+        return ['exists' => false];
     }
 
     /**
