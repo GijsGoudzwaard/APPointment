@@ -114,7 +114,7 @@ class CustomerController extends Controller
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
-            'phonenumber' => 'required|max:255',
+            'phonenumber' => 'max:255',
             'password' => 'min:6',
         ]);
     }
