@@ -90,12 +90,12 @@ class CustomerController extends Controller
         $user = $this->login($request);
 
         // We couldn't fetch the user.
-        if (gettype($user) === 'string') {
+        if (gettype($user) === 'string' || ! $user) {
             // Create one.
             $user = $this->store($request);
         }
 
-        // We already have a user, return it.
+        // We have a user, return it.
         return $user;
     }
 
