@@ -415,6 +415,7 @@ class AppointmentController extends Verify
                 $q->orWhere('closed', 1);
             })
             ->get();
+
         $repeated_appointments = Repeat::with('appointment')
             ->where('start', '<', $company_hours->from)
             ->where('end', '>', $company_hours->to)
@@ -449,6 +450,15 @@ class AppointmentController extends Verify
                 $this->current_time->addMinutes($appointment_type['buffer']);
                 $counter = 0;
 
+                continue;
+            }
+
+            $day = strtolower($this->current_time->format('D'));
+            $from = $this->current_time->format('H:i');
+            $to = $this->current_time->addMinutes($appointment_type['time'])->format('H:i');
+
+            // Remove this
+            if (in_array($day, ['wed', 'fri']) && $from >= '12:00' && $to < '12:30') {
                 continue;
             }
 
