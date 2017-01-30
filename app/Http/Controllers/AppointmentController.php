@@ -346,7 +346,7 @@ class AppointmentController extends Verify
      */
     public function available(Request $request, $date)
     {
-        $request->replace($request->all() + ['date' => $date]);
+        $request->replace(array_merge($request->all(), ['date' => $date]));
 
         return count($this->timeblocks($request)) === 0;
     }
@@ -453,9 +453,9 @@ class AppointmentController extends Verify
                 continue;
             }
 
-            $day = strtolower($this->current_time->format('D'));
-            $from = $this->current_time->format('H:i');
-            $to = $this->current_time->addMinutes($appointment_type['time'])->format('H:i');
+            $day = strtolower($this->current_time->copy()->format('D'));
+            $from = $this->current_time->copy()->format('H:i');
+            $to = $this->current_time->copy()->addMinutes($appointment_type['time'])->format('H:i');
 
             // Remove this
             if (in_array($day, ['wed', 'fri']) && $from >= '12:00' && $to < '12:30') {
