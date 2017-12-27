@@ -7,7 +7,7 @@ use App\Http\Requests\UrlParser;
 
 if (! function_exists('get_company')) {
     /**
-     * Get the company based on the user that is logged in
+     * Get the company based on the user that is logged in.
      *
      * @return Company
      */
@@ -19,7 +19,7 @@ if (! function_exists('get_company')) {
 
 if (! function_exists('get_day_name')) {
     /**
-     * Get the full day name by the short day name
+     * Get the full day name by the short day name.
      *
      * @param  string $day
      * @return string
@@ -34,7 +34,7 @@ if (! function_exists('get_day_name')) {
 
 if (! function_exists('clean_string')) {
     /**
-     * Remove all special characters so it'll be friendly to us in the subdomain
+     * Remove all special characters so it'll be friendly to us as a subdomain.
      *
      * @param  string $string
      * @return string
@@ -49,7 +49,7 @@ if (! function_exists('clean_string')) {
 
 if (! function_exists('get_url')) {
     /**
-     * Get the url without the current subdomain
+     * Get the url without the current subdomain.
      *
      * @return string
      */
@@ -61,7 +61,7 @@ if (! function_exists('get_url')) {
 
 if (! function_exists('get_locales')) {
     /**
-     * Get the supported locales
+     * Get the supported locales.
      *
      * @return array
      */
@@ -73,7 +73,7 @@ if (! function_exists('get_locales')) {
 
 if (! function_exists('get_protocol')) {
     /**
-     * Get the http protocol
+     * Get the http protocol.
      *
      * @return string
      */

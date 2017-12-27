@@ -88,8 +88,8 @@ class CompanyController extends Verify
     /**
      * Show the edit form
      *
-     * @param int     $company_id
-     * @param Request $request
+     * @param  int $company_id
+     * @param  Request $request
      * @return mixed
      */
     public function edit($company_id, Request $request)
@@ -110,7 +110,7 @@ class CompanyController extends Verify
      * Update a company by its $id
      *
      * @param  Request $request
-     * @param  int     $company_id
+     * @param  int $company_id
      * @return mixed
      */
     public function update(Request $request, $company_id)
