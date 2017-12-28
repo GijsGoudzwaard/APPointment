@@ -2,15 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\UrlParser;
-use App\Models\AppointmentType;
-use App\Models\Company;
-use App\Models\Repeat;
-use App\Models\User;
 use Cache;
-use Carbon\Carbon;
 use Validator;
+use Carbon\Carbon;
 use App\Jobs\Verify;
+use App\Models\User;
+use App\Models\Repeat;
 use App\Models\Appointment;
 use Illuminate\Http\Request;
 
@@ -49,7 +46,7 @@ class AppointmentController extends Verify
         $repeated_appointments = Repeat::with('appointment')
             ->where('start', '<', $end)->get()->map(function ($repeat) use ($end) {
                 if (! $repeat->appointment) {
-                    return;
+                    return null;
                 }
 
                 $appointments = [];
@@ -210,7 +207,7 @@ class AppointmentController extends Verify
      *
      * @param  Request $request
      * @param  mixed   $rules
-     * @return Validator
+     * @return \Illuminate\Validation\Validator
      */
     public function validator($request, $rules = null)
     {

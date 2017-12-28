@@ -3,7 +3,7 @@ nav {
     width: 225px;
     background-color: $primary-purple;
     transition: width 0.25s;
-    overflow: auto;
+    overflow: hidden;
     width: 100px;
 
     &:hover {
