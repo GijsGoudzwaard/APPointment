@@ -5,6 +5,11 @@ form {
 	}
 }
 
+.form-control[type=checkbox] {
+	height: auto;
+	width: auto;
+}
+
 .form-inline.datetimepicker {
 	label:first-of-type {
 		margin: 0;
