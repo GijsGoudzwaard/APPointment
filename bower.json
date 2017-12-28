@@ -6,11 +6,11 @@
   ],
   "license": "MIT",
   "dependencies": {
-    "bootstrap": "~3.3.6",
-    "font-awesome": "fontawesome#~4.5.0",
-    "fullcalendar": "~3.1.0",
-    "eonasdan-bootstrap-datetimepicker": "^4.17.37",
-    "jquery": "^2.2.1",
-    "select2": "^4.0.3"
+    "bootstrap": "~3.3.7",
+    "font-awesome": "fontawesome#~4.7.0",
+    "fullcalendar": "~3.8.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.47",
+    "jquery": "^2.2.4",
+    "select2": "^4.0.5"
   }
 }
