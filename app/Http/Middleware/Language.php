@@ -18,7 +18,7 @@ class Language
     public function handle($request, Closure $next, $guard = null)
     {
         if (! Cookie::get('lang')) {
-            Cookie::queue(Cookie::make('lang', 'nl', 1440));
+            Cookie::queue(Cookie::make('lang', 'en', 1440));
         }
 
         if (Cookie::get('lang') != app()->getLocale()) {

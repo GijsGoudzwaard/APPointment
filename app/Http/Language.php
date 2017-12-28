@@ -26,7 +26,7 @@ class Language extends Controller
     public function set($locale)
     {
         if (! Cookie::get('lang')) {
-            Cookie::queue('lang', 'nl');
+            Cookie::queue('lang', 'en');
         }
 
         if ($locale != Cookie::get('lang')) {
