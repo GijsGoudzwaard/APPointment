@@ -19,7 +19,7 @@ class File
     {
         $file = $request->file($name);
 
-        if (! $file->isValid()) {
+        if (!$file->isValid()) {
             return null;
         }
 

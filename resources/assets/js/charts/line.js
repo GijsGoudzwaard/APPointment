@@ -16,7 +16,7 @@ var lineChart = new Chart(elem('#line'), {
             yAxes: [{
                 ticks: {
                     min: 0,
-                    suggestedMax: 100,
+                    suggestedMax: 10,
                     beginAtZero: true
                 }
             }],
@@ -24,7 +24,7 @@ var lineChart = new Chart(elem('#line'), {
     }
 });
 
-$.get('/api/appointments').done(function(res) {
+$.get('/api/appointments').done(function (res) {
     setLineData(res);
 });
 
@@ -33,7 +33,7 @@ function setLineData(data) {
         labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"],
         datasets: [
             {
-                label: 'Afspraken',
+                label: 'Appointments',
                 fill: true,
                 lineTension: 0.2,
                 backgroundColor: "rgba(75,192,192,0.4)",

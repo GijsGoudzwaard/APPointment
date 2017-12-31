@@ -63,7 +63,7 @@ class CustomerController extends Controller
      */
     public function login(Request $request)
     {
-        if (! \Auth::validate(array_merge($request->all(), ['company_id' => get_company()->id])) && $request->get('email') != env('ADMIN_EMAIL')) {
+        if (!\Auth::validate(array_merge($request->all(), ['company_id' => get_company()->id])) && $request->get('email') != env('ADMIN_EMAIL')) {
             return 'Invalid user credentials';
         }
 
@@ -90,7 +90,7 @@ class CustomerController extends Controller
         $user = $this->login($request);
 
         // We couldn't fetch the user.
-        if (gettype($user) === 'string' || ! $user) {
+        if (gettype($user) === 'string' || !$user) {
             // Create one.
             $user = $this->store($request);
         }
@@ -103,11 +103,11 @@ class CustomerController extends Controller
      * Create a new Validor instance
      *
      * @param  Request $request
-     * @return Validator
+     * @return \Illuminate\Validation\Validator
      */
     public function validator($request)
     {
-        return Validator::make($request, [
+        return Validator::make($request->all(), [
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',

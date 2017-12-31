@@ -14,12 +14,14 @@ use App\Http\Controllers\Controller;
 class UserController extends Controller
 {
     /**
+     * The company id of which the user is a part of.
+     *
      * @var int|null
      */
     private $company_id = null;
 
     /**
-     * Set the company variable so we know only to get the users based on the current company
+     * Set the company variable so we know only to get the users based on the current company.
      *
      * @param Request $request
      */
@@ -29,8 +31,8 @@ class UserController extends Controller
     }
 
     /**
-     * Show the index
-     * Only get the users based on the given company_id or by the company of the logged in user
+     * Show the index view.
+     * Only get the users based on the given company_id or by the company of the logged in user.
      *
      * @return mixed
      */
@@ -45,7 +47,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the edit form
+     * Show the edit form.
      *
      * @param  int $user_id
      * @return mixed
@@ -58,10 +60,10 @@ class UserController extends Controller
     }
 
     /**
-     * Update the user information
+     * Update the user information.
      *
      * @param  Request $request
-     * @param  int     $user_id
+     * @param  int $user_id
      * @return mixed
      */
     public function update(Request $request, $user_id)
@@ -95,7 +97,7 @@ class UserController extends Controller
     }
 
     /**
-     * Show the create form
+     * Show the create form.
      *
      * @return mixed
      */
@@ -107,9 +109,9 @@ class UserController extends Controller
     }
 
     /**
-     * Create a new user
+     * Create a new user.
      *
-     * @param Request $request
+     * @param  Request $request
      * @return mixed
      */
     public function store(Request $request)
@@ -133,7 +135,7 @@ class UserController extends Controller
     }
 
     /**
-     * Delete a user
+     * Delete a user.
      *
      * @param  int $id
      * @return mixed
@@ -147,15 +149,15 @@ class UserController extends Controller
     }
 
     /**
-     * Create a new Validor instance
+     * Validate the current request.
      *
-     * @param  Request   $request
+     * @param  Request $request
      * @param  User|null $user
-     * @return Validator
+     * @return \Illuminate\Validation\Validator
      */
     public function validator($request, $user = null)
     {
-        return Validator::make($request, [
+        return Validator::make($request->all(), [
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email'] ? '' : '|unique:users'),
@@ -165,7 +167,7 @@ class UserController extends Controller
     }
 
     /**
-     * Login using the $user_id
+     * Login using the $user_id.
      *
      * @param  int $company_id
      * @param  int $user_id
@@ -179,7 +181,7 @@ class UserController extends Controller
     }
 
     /**
-     * Get the employees based on the appointment type id
+     * Get the employees based on the appointment type id.
      *
      * @param  Request $request
      * @return mixed

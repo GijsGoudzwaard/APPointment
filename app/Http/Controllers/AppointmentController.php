@@ -241,10 +241,12 @@ class AppointmentController extends Verify
             ])->selectRaw('count(*) as amount')->where('closed', 0)->where('repeated_id', null)->get()->pluck('amount')->sum();
         }
 
-        // Store the appointment stats in a cache file for a day
-        Cache::put($cache, collect($appointments)->flatten(), 1440);
+        $appointments = collect($appointments)->flatten();
 
-        return collect($appointments)->flatten();
+        // Store the appointment stats in a cache file for a day
+        Cache::put($cache, $appointments, 1440);
+
+        return $appointments;
     }
 
     /**

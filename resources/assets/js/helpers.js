@@ -2,12 +2,17 @@
  * Get cookie by name
  *
  * @param  {String} name
- * @return {String}
+ * @return {String|boolean}
  */
 function getCookie(name) {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
-    if (parts.length == 2) return parts.pop().split(";").shift();
+
+    if (parts.length !== 2) {
+        return false;
+    }
+
+    return parts.pop().split(";").shift();
 }
 
 /**
@@ -65,7 +70,7 @@ function elem(selector, context) {
 
     var element = document.querySelectorAll(query);
 
-    if (element.length == 1) {
+    if (element.length === 1) {
         return element[0];
     }
 
@@ -82,7 +87,7 @@ function elem(selector, context) {
 function ajax(options, callback) {
     // Set the load animation
     if (options.loader) {
-        elem('#loader').className = 'active';
+        elem('#loader', 'body').className = 'active';
     }
 
     var xhr = new XMLHttpRequest();
@@ -90,13 +95,13 @@ function ajax(options, callback) {
     xhr.send();
 
     xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4) {
+        if (xhr.readyState === 4) {
             // After request is done remove the loader
             if (options.loader) {
-                elem('#loader').className = '';
+                elem('#loader', 'body').className = '';
             }
 
-            return callback(xhr.response);
+            // return callback(xhr.response);
         }
     };
 }

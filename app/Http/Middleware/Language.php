@@ -10,14 +10,14 @@ class Language
     /**
      * Handle an incoming request.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  \Closure  $next
-     * @param  string|null  $guard
+     * @param  \Illuminate\Http\Request $request
+     * @param  \Closure $next
+     * @param  string|null $guard
      * @return mixed
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        if (! Cookie::get('lang')) {
+        if (!Cookie::get('lang')) {
             Cookie::queue(Cookie::make('lang', 'en', 1440));
         }
 

@@ -53,7 +53,7 @@ class AppointmentTypeController extends Controller
      * Update the appointment_type
      *
      * @param  Request $request
-     * @param  int     $appointment_type_id
+     * @param  int $appointment_type_id
      * @return mixed
      */
     public function update(Request $request, $appointment_type_id)
