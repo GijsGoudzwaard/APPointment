@@ -6,6 +6,7 @@
     <title>APPointment login</title>
     <link href="https://fonts.googleapis.com/icon?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="{{ url('assets/dist/login.css') }}" />
+    <link rel="shortcut icon" type="image/png" href="/assets/img/bell.png"/>
 </head>
 <body>
 

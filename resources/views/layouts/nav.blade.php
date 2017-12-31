@@ -2,7 +2,7 @@
 	<ul class="nav sidebar-nav">
 		<li class="sidebar-brand">
 			<a href="{{ route('dashboard') }}">
-				@include('svg.bell')
+				<?php include(resource_path('views/svg/bell.svg')) ?>
 			</a>
 		</li>
 		<li>

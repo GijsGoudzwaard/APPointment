@@ -6,6 +6,7 @@
 		<title>APPointment{{ isset($page) ? ' - ' . $page : '' }}</title>
 		<link href="https://fonts.googleapis.com/icon?family=Material+Icons|Roboto" rel="stylesheet">
 		<link rel="stylesheet" href="{{ asset('assets/dist/all.css') }}">
+		<link rel="shortcut icon" type="image/png" href="/assets/img/favicon.png"/>
 	</head>
 	<body>
 

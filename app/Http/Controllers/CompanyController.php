@@ -174,9 +174,9 @@ class CompanyController extends Verify
     /**
      * Create a new Validor instance
      *
-     * @param  Request $request
-     * @param  Company $company
-     * @return Validator
+     * @param  array $request
+     * @param  null|Company $company
+     * @return \Illuminate\Validation\Validator
      */
     public function validator($request, $company = null)
     {
