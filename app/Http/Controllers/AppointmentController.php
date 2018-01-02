@@ -82,7 +82,7 @@ class AppointmentController extends Verify
         $appointment_types = get_company()->appointmentTypes->pluck('name', 'id');
         $users = [];
 
-        foreach (get_company()->users as $user) {
+        foreach (get_company()->users->where('role', User::role('employee')) as $user) {
             $users[$user->id] = $user->firstname . ' ' . $user->surname;
         }
 
@@ -140,7 +140,7 @@ class AppointmentController extends Verify
         $appointment_types = $company->appointmentTypes->pluck('name', 'id');
         $users = [];
 
-        foreach ($company->users as $user) {
+        foreach ($company->users->where('role', User::role('employee')) as $user) {
             $users[$user->id] = $user->firstname . ' ' . $user->surname;
         }
 
