@@ -14,11 +14,11 @@ class CompaniesTableSeeder extends Seeder
         $company = \App\Models\Company::where('subdomain', 'Goudzwaard')->get();
         if ($company->isEmpty()) {
             DB::table('companies')->insert([
-                'name' => 'Goudzwaard',
-                'subdomain' => 'goudzwaard',
-                'email' => 'gijs.goudzwaard@gmail.com',
-                'address' => 'noorderwalstraat 5a',
-                'phonenumber' => '0642311100'
+                'name' => 'Aperture Laboratories',
+                'subdomain' => 'aperture',
+                'email' => 'root@aperturelabaratories.com',
+                'address' => '-',
+                'phonenumber' => '-'
             ]);
         }
     }

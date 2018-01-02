@@ -16,10 +16,10 @@ class UsersTableSeeder extends Seeder
 
         if ($user->isEmpty()) {
             DB::table('users')->insert([
-                'firstname' => 'Gijs',
-                'surname' => 'Goudzwaard',
-                'email' => 'gijs.goudzwaard@gmail.com',
-                'phonenumber' => '0642311100',
+                'firstname' => 'GLaDOS',
+                'surname' => '',
+                'email' => 'glados@aperturelabaratories.com',
+                'phonenumber' => '-',
                 'password' => bcrypt('changeme'),
                 'role' => User::role('admin'),
                 'active' => 1,
