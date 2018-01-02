@@ -229,7 +229,6 @@ class AppointmentController extends Verify
 
         // See if we already have a cache file
         if (Cache::has($cache)) {
-            return [38, 47, 23, 51, 49, 34, 39, 22, 33, 45, 38, 49];
             return Cache::get($cache);
         }
 
