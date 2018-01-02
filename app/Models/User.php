@@ -50,7 +50,7 @@ class User extends Authenticatable
 
     /**
      * Check if the user can book.
-     * A user can book 3 appointments per hour.
+     * A user can book 3 appointments per hour through the API.
      *
      * @param  int $id
      * @return bool

@@ -45,7 +45,7 @@ class AppointmentController extends Verify
 
         $repeated_appointments = Repeat::with('appointment')
             ->where('start', '<', $end)->get()->map(function ($repeat) use ($end) {
-                if (! $repeat->appointment) {
+                if (!$repeat->appointment) {
                     return null;
                 }
 
@@ -103,7 +103,7 @@ class AppointmentController extends Verify
             return $validator;
         }
 
-        if (! $request->get('closed')) {
+        if (!$request->get('closed')) {
             $request->request->add(['closed' => 0]);
         }
 
@@ -151,7 +151,7 @@ class AppointmentController extends Verify
      * Update the record by it's $id
      *
      * @param  Request $request
-     * @param  int     $id
+     * @param  int $id
      * @return mixed
      */
     public function update(Request $request, $id)
@@ -162,7 +162,7 @@ class AppointmentController extends Verify
             return $validator;
         }
 
-        if (! $request->get('closed')) {
+        if (!$request->get('closed')) {
             $request->request->add(['closed' => 0]);
         }
 
@@ -206,7 +206,7 @@ class AppointmentController extends Verify
      * Create a new Validor instance
      *
      * @param  Request $request
-     * @param  mixed   $rules
+     * @param  mixed $rules
      * @return \Illuminate\Validation\Validator
      */
     public function validator($request, $rules = null)
@@ -320,7 +320,7 @@ class AppointmentController extends Verify
         $booked_days = [];
         $date = Carbon::parse($request->get('timestamp'));
         $company = get_company();
-        $closed_days = array_diff_key($company->days, (array) $company->openingHours());
+        $closed_days = array_diff_key($company->days, (array)$company->openingHours());
 
         for ($i = 1; $i <= $date->daysInMonth; $i++) {
             $day = $date->addDays(1);
@@ -340,7 +340,7 @@ class AppointmentController extends Verify
      * Check if the current date is available.
      *
      * @param  Request $request
-     * @param  Carbon  $date
+     * @param  Carbon $date
      * @return bool
      */
     public function available(Request $request, $date)
@@ -358,18 +358,18 @@ class AppointmentController extends Verify
      */
     public function check(Request $request)
     {
-        if (! User::canBook($request->get('customer_id'))) {
-            return ['error' => 'Je mag per uur maar 3 afspraken maken.'];
+        if (!User::canBook($request->get('customer_id'))) {
+            return ['error' => 'You can only book 3 appointments per hour.'];
         }
 
         $current_time = Carbon::parse($request->get('date'))->setTime(
             ...explode(':', $request->get('from'))
         );
 
-        $exists = Appointment::check((object) $request->all(), $current_time);
+        $exists = Appointment::check((object)$request->all(), $current_time);
 
         if ($exists) {
-            return ['error' => 'De gekozen afspraak is niet meer beschikbaar.'];
+            return ['error' => 'The chosen appointment is not available anymore.'];
         }
 
         return ['exists' => false];
@@ -389,7 +389,7 @@ class AppointmentController extends Verify
         $timeblocks = [];
         $appointment_type = json_decode($request->get('appointmentType'), true);
         $employee = json_decode($request->get('employee'), true);
-        $company_hours = (object) get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
+        $company_hours = (object)get_company()->dayTimes(Carbon::parse($request->get('date'))->startOfDay());
         $this->current_time = $company_hours->from->copy();
 
         $counter = 0;
@@ -436,7 +436,7 @@ class AppointmentController extends Verify
             if ($appointment) {
                 if ($appointment->closed) {
                     $diff = Carbon::parse($appointment->scheduled_at)->diff(Carbon::parse($appointment->to));
-                    $minutes =  $diff->i + ($diff->h * 60);
+                    $minutes = $diff->i + ($diff->h * 60);
 
                     $counter = 0;
                 }
