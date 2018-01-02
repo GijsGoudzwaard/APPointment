@@ -185,8 +185,8 @@ class AppointmentTypeController extends Controller
     /**
      * Create a new Validor instance
      *
-     * @param  Request $request
-     * @return Validator
+     * @param  array $request
+     * @return \Illuminate\Validation\Validator
      */
     private function validator($request)
     {

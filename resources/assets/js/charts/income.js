@@ -1,6 +1,6 @@
 $.get('/api/income').done(function(res) {
     var total = 0;
-    var data = JSON.parse(res);
+    var data = res;
 
     if (typeof data === 'number') {
         total = data;
