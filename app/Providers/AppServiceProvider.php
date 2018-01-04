@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Barryvdh\Debugbar\LaravelDebugbar as Debugbar;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +14,13 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        if (env('APP_ENV', 'local') == 'production') {
+            (new Debugbar)->disable();
+        }
+
+        if (env('APP_ENV', 'local') !== 'local') {
+            \DB::connection()->disableQueryLog();
+        }
     }
 
     /**

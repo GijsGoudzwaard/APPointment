@@ -16,4 +16,10 @@ return [
     'failed' => 'These credentials do not match our records.',
     'throttle' => 'Too many login attempts. Please try again in :seconds seconds.',
 
+    'password_reset' => 'Password reset',
+    'reset_password' => 'Reset Password',
+    'reset_password_link' => 'Send Password Reset Link',
+
+    'remember_me' => 'Remember me',
+    'forgot_password' => 'Forgot password?'
 ];

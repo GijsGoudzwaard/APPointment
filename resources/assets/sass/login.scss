@@ -1,0 +1,154 @@
+$error: #DB4437;
+$purple: #2a3e61;
+$grey: #777;
+
+html {
+	height: 100%;
+	width: 100%;
+}
+
+body {
+	background: url(../img/login_bg.jpeg) center no-repeat;
+	background-size: cover;
+	-webkit-font-smoothing: antialiased;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 300;
+}
+
+::-webkit-input-placeholder {
+    color:    $grey;
+}
+:-moz-placeholder {
+   color:    $grey;
+   opacity:  1;
+}
+::-moz-placeholder {
+   color:    $grey;
+   opacity:  1;
+}
+:-ms-input-placeholder {
+   color:    $grey;
+}
+
+form {
+	width: 240px;
+	height: 250px;
+	position: absolute;
+	background-color: #fff;
+	top:0;bottom:0;
+	left:0;right:0;
+	margin: auto;
+	padding: 45px 35px 35px 35px;
+
+	.form-group {
+		margin: 30px 0;
+	}
+
+	> :nth-child(2) {
+		margin-top: 0;
+	}
+
+	input[required] {
+		border-top:none;
+		border-left:none;
+		border-right:none;
+		font-size: 16px;
+		padding: 10px 10px 10px 5px;
+		-webkit-appearance: none;
+		display: block;
+		background: #fff;
+		width: 225px;
+		border: none;
+		border-radius: 0;
+		border-bottom: 1px solid #d6d6d6;
+		letter-spacing: 1px;
+
+		&.error {
+			border-bottom: 2px solid $error !important;
+		}
+
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	small {
+		color: $error;
+		font-size: 11px;
+	}
+
+	label {
+		display: block;
+		color: #777;
+	    margin: 20px 0;
+
+		input {
+			border: 1px solid #d6d6d6;
+			border-radius:0;
+		}
+	}
+
+	button {
+		padding: 14px 25px;
+		margin: .3em 0 1em 0;
+		width: 100%;
+		color: #fff;
+		font-size: 16px;
+		line-height: 20px;
+		text-align: center;
+		letter-spacing: 1px;
+		background: $purple;
+		border: 0;
+		cursor: pointer;
+		text-transform: uppercase;
+		border-radius: 2px;
+		transition: all .1s linear;
+
+		&:hover {
+			opacity: .9;
+		}
+
+		&:focus {
+			outline: 0;
+		}
+	}
+
+	a {
+		font-size: 13px;
+		position: relative;
+		color: $purple;
+		text-decoration: none;
+		bottom: 10px;
+
+		&:hover {
+			text-decoration: underline;
+		}
+	}
+}
+
+.email:not(.has-error) {
+	height: 200px;
+
+	h4 {
+		margin: 0;
+		color: $purple;
+	}
+}
+
+.reset {
+	height: 335px;
+}
+
+.email h4, .reset h4 {
+	margin: 0;
+	color: $purple;
+}
+
+.login input[type='email'] {
+	margin-top: 0;
+}
+
+.alert.alert-success {
+	color: green;
+	margin-bottom: 5px;
+}

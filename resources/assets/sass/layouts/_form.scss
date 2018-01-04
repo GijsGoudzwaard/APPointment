@@ -1,0 +1,71 @@
+form {
+	.logo {
+		display: block;
+	    width: 300px;
+	}
+}
+
+.form-control[type=checkbox] {
+	height: auto;
+	width: auto;
+}
+
+.form-inline.datetimepicker {
+	label:first-of-type {
+		margin: 0;
+		width: 75px;
+	}
+
+	input[type='checkbox'] {
+		margin: 0 8px;
+	}
+
+	label {
+		margin: 0 8px;
+	}
+}
+
+.multiselect {
+	padding-bottom: 10px;
+
+	label {
+		display: block;
+		height: 20px;
+
+		input[type=checkbox] {
+			display: inline-block;
+			width: 30px;
+			vertical-align: -10px;
+			box-shadow: none;
+
+			&:focus, &:active {
+				outline: none;
+				border: none;
+				box-shadow: none;
+			}
+		}
+	}
+}
+
+.tab-content {
+	padding-top: 20px;
+}
+
+.nav-tabs > li > a {
+	border-bottom: 3px solid transparent;
+}
+
+.nav-tabs > li.active > a {
+	border-bottom: 3px solid $light-purple !important;
+}
+
+.nav-tabs > li, .nav-tabs > li.active {
+	> a, > a:focus, > a:hover {
+		background-color: transparent;
+		border: none;
+	}
+}
+
+.btn.right {
+	float: right;
+}

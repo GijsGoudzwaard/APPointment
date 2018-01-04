@@ -1,1 +1,5 @@
-@import "node_modules/bootstrap-sass/assets/stylesheets/bootstrap";
+@import "base/base";
+@import "layouts/nav";
+@import "layouts/form";
+@import "layouts/calendar";
+@import "layouts/dashboard";

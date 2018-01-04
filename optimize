@@ -1,0 +1,6 @@
+#!/bin/bash
+
+composer dump-autoload
+php artisan clear-compiled
+php artisan route:cache
+php artisan optimize --force

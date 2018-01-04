@@ -1,0 +1,45 @@
+#calendar {
+    padding: 0 25px;
+
+    .event {
+        &.closed {
+            background-color: #f00;
+            border-color: #f00;
+        }
+    }
+
+    .fc-content {
+        cursor: pointer;
+    }
+
+    .fc-center {
+        h2 {
+            font-size: 24px;
+        }
+
+        &:hover .fc-button {
+            border: 1px solid #aaa;
+            background: #f1f5f8;
+            box-shadow: 0px 1px 2px #ccc;
+            -webkit-box-shadow: 0px 1px 2px #ccc;
+            -moz-box-shadow: 0px 1px 2px #ccc;
+        }
+    }
+
+    .fc-button {
+        color: $primary-purple;
+        background: transparent;
+        box-shadow: none;
+        border: 1px solid #eee;
+
+        &.fc-state-down {
+            box-shadow: inset 0px 0px 10px #ccc !important;
+            -webkit-box-shadow: inset 0px 0px 10px #ccc !important;
+            -moz-box-shadow: inset 0px 0px 10px #ccc !important;
+        }
+
+        &:active, &:focus {
+            outline: 0;
+        }
+    }
+}

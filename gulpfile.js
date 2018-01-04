@@ -1,4 +1,4 @@
-var elixir = require('laravel-elixir');
+var elixir = require("laravel-elixir");
 
 /*
  |--------------------------------------------------------------------------
@@ -11,6 +11,52 @@ var elixir = require('laravel-elixir');
  |
  */
 
+var excluded_css = [
+	"!../bower_components/**/bootstrap-theme.min.css",
+	"!../bower_components/**/fullcalendar.print.min.css"
+];
+
+var css = [
+	"../bower_components/**/bootstrap.min.css",
+	"../bower_components/**/*.min.css",
+	"*.css"
+];
+
+var excluded_js = [
+	"!../bower_components/moment-timezone/builds/moment-timezone-with-data-2010-2020.min.js",
+	"!../bower_components/moment-timezone/builds/moment-timezone-with-data.min.js",
+	"!../bower_components/moment-timezone/builds/moment-timezone.min.js",
+	"!../bower_components/select2/docs*",
+	"!../bower_components/select2/dist/js/select2.full.min.js",
+	"!charts/*.js"
+];
+
+var js = [
+	"../bower_components/jquery/dist/jquery.min.js",
+	"../bower_components/moment/min/moment.min.js",
+	"../bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js",
+	"../../../node_modules/chart.js/dist/Chart.min.js",
+	"../bower_components/select2/dist/js/select2.min.js",
+	"../bower_components/**/*.min.js",
+	"**/*.js"
+];
+
 elixir(function(mix) {
-    mix.sass('app.scss');
+	//  Compile sass to css
+	mix.sass(["/app.scss", "!/login.scss"],
+		"resources/assets/css"
+	);
+
+	// Compile login.scss to seperate file
+	mix.sass("/login.scss",
+	    "public/assets/dist/login.css"
+	);
+
+	//  Concat css files and bower components
+	mix.styles(excluded_css.concat(css), "public/assets/dist/all.css");
+
+	// Scripts
+	mix.scripts(excluded_js.concat(js), "public/assets/dist/all.js");
+
+	mix.copy("resources/assets/js/charts", "public/assets/dist/charts");
 });
