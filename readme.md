@@ -1,6 +1,10 @@
-## APPointment
-
+## Introduction
+APPointment is a SaaS with which you can easily keep track of your appointments and those of other departments or companies. 
 ![Screenshot](https://github.com/GijsGoudzwaard/APPointment/blob/develop/screenshot.png)
+
+Default login credentials:  
+Email: `glados@aperturelabaratories.com`  
+Password: `changeme`
 
 ### Prerequisites
  - PHP 7+

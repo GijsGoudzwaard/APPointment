@@ -16,7 +16,7 @@ class CompaniesTableSeeder extends Seeder
             DB::table('companies')->insert([
                 'name' => 'Aperture Laboratories',
                 'subdomain' => 'aperture',
-                'email' => 'root@aperturelabaratories.com',
+                'email' => 'cave@aperturelabaratories.com',
                 'address' => '-',
                 'phonenumber' => '-'
             ]);

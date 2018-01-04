@@ -151,13 +151,13 @@ class UserController extends Controller
     /**
      * Validate the current request.
      *
-     * @param  Request $request
+     * @param  array $request
      * @param  User|null $user
      * @return \Illuminate\Validation\Validator
      */
     public function validator($request, $user = null)
     {
-        return Validator::make($request->all(), [
+        return Validator::make($request, [
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255' . (isset($user) && $user->email == $request['email'] ? '' : '|unique:users'),

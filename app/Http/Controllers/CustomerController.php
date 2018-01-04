@@ -107,7 +107,7 @@ class CustomerController extends Controller
      */
     public function validator($request)
     {
-        return Validator::make($request->all(), [
+        return Validator::make($request, [
             'firstname' => 'required|max:255',
             'surname' => 'required|max:255',
             'email' => 'required|email|max:255|unique:users',
