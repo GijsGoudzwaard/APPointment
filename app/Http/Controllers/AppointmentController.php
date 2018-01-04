@@ -44,7 +44,8 @@ class AppointmentController extends Verify
             ->where('repeated_id', null)->get();
 
         $repeated_appointments = Repeat::with('appointment')
-            ->where('start', '<', $end)->get()->map(function ($repeat) use ($end) {
+            ->where('start', '<', $end)
+            ->where('company_id', get_company()->id)->get()->map(function ($repeat) use ($end) {
                 if (!$repeat->appointment) {
                     return null;
                 }
@@ -117,6 +118,7 @@ class AppointmentController extends Verify
 
             $repeat->start = Carbon::parse($appointment->scheduled_at)->toDateString();
             $repeat->end = $request->get('end') ? Carbon::parse($request->get('end'))->toDateString() : null;
+            $repeat->company_id = get_company()->id;
             $repeat->save();
 
             $appointment->repeated_id = $repeat->id;
@@ -176,6 +178,7 @@ class AppointmentController extends Verify
 
             $repeat->start = Carbon::parse($appointment->scheduled_at)->toDateString();
             $repeat->end = $request->get('end') ? Carbon::parse($request->get('end'))->toDateString() : null;
+            $repeat->company_id = get_company()->id;
             $repeat->save();
 
             $appointment->repeated_id = $repeat->id;
