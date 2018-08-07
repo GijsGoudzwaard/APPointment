@@ -30,7 +30,7 @@ Password: `changeme`
 `$ composer install --no-scripts`  
 `$ npm install`  
 `$ bower install`  
-`$ gulp`
+`$ gulp`  
 `$ cp .env.example .env` and edit the needed variables  
 `$ php artisan generate:key`
   
